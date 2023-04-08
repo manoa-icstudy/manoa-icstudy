@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row, Container, Nav, Form, Button } from 'react-bootstrap';
-import { Discord, Github, Instagram, Link45deg, Linkedin, Share } from 'react-bootstrap-icons';
+import { Discord, Github, Link45deg, Linkedin, Share } from 'react-bootstrap-icons';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => (
