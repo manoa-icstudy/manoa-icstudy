@@ -37,7 +37,7 @@ const NavBar = () => {
                 ) : ''}
                 {!currentUser ? ([
                   <Nav.Link id="guide-nav" as={NavLink} to="/guide" key="add"><h5>Feature Guide</h5></Nav.Link>,
-                  <Nav.Link id="about-us-nav" as={NavLink} to="/about" key="list"><h5>About Us</h5></Nav.Link>,
+                  <Nav.Link id="about-us-nav" as={NavLink} to="/about" key="list"><h5>Contact Us</h5></Nav.Link>,
                 ]) : ''}
               </Nav>
             </Row>
