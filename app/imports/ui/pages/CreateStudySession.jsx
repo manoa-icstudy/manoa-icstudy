@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, DateField, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, DateField, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -16,6 +16,7 @@ const formSchema = new SimpleSchema({
     allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
     defaultValue: 'ICS 101',
   },
+  description: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -25,10 +26,10 @@ const CreateStudySession = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, date, icsclass } = data;
+    const { name, date, icsclass, description } = data;
     const owner = Meteor.user().username;
     Sessions.collection.insert(
-      { name, date, icsclass, owner },
+      { name, date, icsclass, description, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -53,6 +54,7 @@ const CreateStudySession = () => {
                 <TextField name="name" />
                 <DateField name="date" />
                 <SelectField name="icsclass" />
+                <LongTextField name="description" />
                 <SubmitField value="Submit" />
                 <ErrorsField />
               </Card.Body>

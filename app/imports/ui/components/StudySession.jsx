@@ -8,6 +8,7 @@ const StudySession = ({ stuff }) => (
     <td>{stuff.name}</td>
     <td>{stuff.date}</td>
     <td>{stuff.icsclass}</td>
+    <td>{stuff.description}</td>
     <td>
       <Link to={`/edit/${stuff._id}`}>Edit</Link>
     </td>
@@ -20,6 +21,7 @@ StudySession.propTypes = {
     name: PropTypes.string,
     date: PropTypes.string,
     icsclass: PropTypes.string,
+    description: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
