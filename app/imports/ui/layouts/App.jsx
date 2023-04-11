@@ -19,7 +19,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import TopNavBar from '../components/TopNavBar';
 import CreateStudySession from '../pages/CreateStudySession';
-import UserHome from '../pages/UserHome';
+import UserHome from '../pages/user/UserHome';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
