@@ -1,23 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const StudySession = ({ stuff }) => (
+const StudySession = ({ session }) => (
   <tr>
-    <td>{stuff.name}</td>
-    <td>{stuff.date}</td>
-    <td>{stuff.icsclass}</td>
-    <td>{stuff.description}</td>
-    <td>
-      <Link to={`/edit/${stuff._id}`}>Edit</Link>
-    </td>
+    <td>{session.name}</td>
+    <td>{session.date}</td>
+    <td>{session.icsclass}</td>
+    <td>{session.description}</td>
   </tr>
 );
 
 // Require a document to be passed to this component.
 StudySession.propTypes = {
-  stuff: PropTypes.shape({
+  session: PropTypes.shape({
     name: PropTypes.string,
     date: PropTypes.string,
     icsclass: PropTypes.string,
