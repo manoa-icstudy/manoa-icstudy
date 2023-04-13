@@ -31,6 +31,7 @@ const NavBar = () => {
                 {currentUser ? ([
                   <Nav.Link id="create-session-nav" as={NavLink} to="/createstudysession" key="createstudysession"><h5>Create Study Session</h5></Nav.Link>,
                   <Nav.Link id="study-session-list-nav" as={NavLink} to="/studysessionlist" key="studysessionlist"><h5>Study Sessions</h5></Nav.Link>,
+                  <Nav.Link id="calendar-nav" as={NavLink} to="/calendar" key="calendar"><h5>Calendar</h5></Nav.Link>,
                 ]) : ''}
                 {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                   <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin"><h5>Admin</h5></Nav.Link>
