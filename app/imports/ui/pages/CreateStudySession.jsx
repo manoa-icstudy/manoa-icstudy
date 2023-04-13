@@ -14,7 +14,6 @@ const formSchema = new SimpleSchema({
   icsclass: {
     type: String,
     allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
-    defaultValue: 'ICS 101',
   },
   description: String,
 });
