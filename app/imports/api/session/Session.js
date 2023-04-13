@@ -15,6 +15,7 @@ class SessionsCollection {
       name: String,
       date: String,
       owner: String,
+      description: String,
       icsclass: {
         type: String,
         allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],

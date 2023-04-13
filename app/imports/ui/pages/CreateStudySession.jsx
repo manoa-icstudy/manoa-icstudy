@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, DateField, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -52,7 +52,7 @@ const CreateStudySession = () => {
             <Card>
               <Card.Body>
                 <TextField name="name" />
-                <DateField name="date" />
+                <TextField name="date" />
                 <SelectField name="icsclass" />
                 <LongTextField name="description" />
                 <SubmitField value="Submit" />
