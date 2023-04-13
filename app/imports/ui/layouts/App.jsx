@@ -21,6 +21,9 @@ import TopNavBar from '../components/TopNavBar';
 import CreateStudySession from '../pages/CreateStudySession';
 import StudySessionList from '../pages/StudySessionList';
 import Calendar from '../pages/Calendar';
+import UserHome from '../pages/user/UserHome';
+import CreateFeedback from '../pages/CreateFeedback';
+import UserHomeSession from '../pages/user/UserHomeSession';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -45,6 +48,9 @@ const App = () => {
           <Route path="/createstudysession" element={<ProtectedRoute><CreateStudySession /></ProtectedRoute>} />
           <Route path="/studysessionlist" element={<ProtectedRoute><StudySessionList /></ProtectedRoute>} />
           <Route path="/calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
+          <Route path="/user-home" element={<ProtectedRoute><UserHome /></ProtectedRoute>} />
+          <Route path="/user-home-session" element={<ProtectedRoute><UserHomeSession /></ProtectedRoute>} />
+          <Route path="/createfeedback" element={<CreateFeedback />} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />

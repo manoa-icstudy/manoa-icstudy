@@ -4,6 +4,10 @@ import { Sessions } from '../../api/session/Session';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
+Meteor.publish(Sessions.publicPublicationName, function () {
+  return Sessions.collection.find();
+});
+
 Meteor.publish(Sessions.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
