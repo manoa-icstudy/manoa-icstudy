@@ -5,7 +5,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, SelectField, TextField, ListField, ListItemField } from 'uniforms-bootstrap5';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -15,15 +15,21 @@ const SignUp = ({ location }) => {
   const [redirectToReferer, setRedirectToRef] = useState(false);
 
   const schema = new SimpleSchema({
+    name: String,
     email: String,
     password: String,
+    coursesTaking: Array,
+    'coursesTaking.$': {
+      type: String,
+      allowedValues: ['ICS 101', 'ICS 111', 'ICS 141', 'ICS 211', 'ICS 241', 'ICS 311'],
+    },
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { email, password } = doc;
-    Accounts.createUser({ email, username: email, password }, (err) => {
+    const { name, email, password, coursesTaking } = doc;
+    Accounts.createUser({ name, email, username: email, password, coursesTaking }, (err) => {
       if (err) {
         setError(err.reason);
       } else {
@@ -49,8 +55,19 @@ const SignUp = ({ location }) => {
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
+                <TextField name="name" placeholder="Name" />
                 <TextField name="email" placeholder="E-mail address" />
                 <TextField name="password" placeholder="Password" type="password" />
+                <SelectField
+                  name="coursesTaking"
+                  help="Select the courses you are currently taking (required)"
+                  helpClassName="text-danger"
+                  multiple
+                  checkboxes
+                  labelClassName=""
+                  inputClassName="ps-1"
+                  transform={(label) => ` ${label}`}
+                />
                 <ErrorsField />
                 <SubmitField />
               </Card.Body>
