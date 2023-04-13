@@ -20,6 +20,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import TopNavBar from '../components/TopNavBar';
 import CreateStudySession from '../pages/CreateStudySession';
 import StudySessionList from '../pages/StudySessionList';
+import EditStudySession from '../pages/EditStudySession';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/studysessionlist" element={<ProtectedRoute><StudySessionList /></ProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
+          <Route path="/editstudysession/:_id" element={<ProtectedRoute><EditStudySession /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
