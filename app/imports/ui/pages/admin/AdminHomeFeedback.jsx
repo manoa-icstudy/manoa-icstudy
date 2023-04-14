@@ -4,7 +4,6 @@ import { ListGroup, Container, Col, Row, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 import { PersonFillLock } from 'react-bootstrap-icons';
-import StudySession from '../../components/StudySession';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { Feedbacks } from '../../../api/feedback/Feedback';
 import FeedBacks from '../../components/FeedBacks';
