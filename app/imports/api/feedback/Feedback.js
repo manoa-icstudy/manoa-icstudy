@@ -19,15 +19,14 @@ class FeedbackCollection {
       },
       feedback: {
         type: String,
-        allowedValues: ['Sample1', 'Sample2', 'Sample3'],
-        defaultValue: 'Sample1',
+        allowedValues: ['User Home Page', 'Create Study Seesion', 'Landing Page', 'Calendar', 'Study Session List'],
+        defaultValue: 'User Home Page',
       },
       description: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
     // Define names for publications and subscriptions
-    this.userPublicationName = `${this.name}.publication.user`;
     this.adminPublicationName = `${this.name}.publication.admin`;
   }
 }

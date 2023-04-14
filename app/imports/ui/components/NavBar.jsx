@@ -29,17 +29,17 @@ const NavBar = () => {
             <Row>
               <Nav className="me-auto justify-content-start">
                 {currentUser ? ([
-                  <Nav.Link id="create-session-nav" as={NavLink} to="/createstudysession" key="createstudysession"><h5>Create Study Session</h5></Nav.Link>,
-                  <Nav.Link id="study-session-list-nav" as={NavLink} to="/studysessionlist" key="studysessionlist"><h5>Study Sessions</h5></Nav.Link>,
+                  <Nav.Link id="create-session-nav" as={NavLink} to="/create-study-session" key="createstudysession"><h5>Create Study Session</h5></Nav.Link>,
+                  <Nav.Link id="study-session-list-nav" as={NavLink} to="/study-session-list" key="studysessionlist"><h5>Study Sessions</h5></Nav.Link>,
                   <Nav.Link id="calendar-nav" as={NavLink} to="/calendar" key="calendar"><h5>Calendar</h5></Nav.Link>,
-                  <Nav.Link id="feedback-nav" as={NavLink} to="/createfeedback" key="list"><h5>Feedback</h5></Nav.Link>,
+                  <Nav.Link id="feedback-nav" as={NavLink} to="/create-feedback" key="list"><h5>Feedback</h5></Nav.Link>,
                 ]) : ''}
                 {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                   <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin"><h5>Admin</h5></Nav.Link>
                 ) : ''}
                 {!currentUser ? ([
                   <Nav.Link id="guide-nav" as={NavLink} to="/guide" key="add"><h5>Feature Guide</h5></Nav.Link>,
-                  <Nav.Link id="feedback-nav" as={NavLink} to="/createfeedback" key="list"><h5>Feedback</h5></Nav.Link>,
+                  <Nav.Link id="feedback-nav" as={NavLink} to="/create-feedback" key="list"><h5>Feedback</h5></Nav.Link>,
                 ]) : ''}
               </Nav>
             </Row>

@@ -43,7 +43,7 @@ const UserHome = () => {
               <ListGroup.Item>
                 <div><h5>Study Session</h5></div>
                 <div><Link to="/user-home-session">- My study session</Link></div>
-                <div><Link to="/createstudysession">- Create study session</Link></div>
+                <div><Link to="/create-study-session">- Create study session</Link></div>
               </ListGroup.Item>
 
               <ListGroup.Item>
@@ -53,7 +53,7 @@ const UserHome = () => {
 
               <ListGroup.Item>
                 <div><h5>Contact</h5></div>
-                <div><Link to="/createfeedback">- Feedback</Link></div>
+                <div><Link to="/create-feedback">- Feedback</Link></div>
               </ListGroup.Item>
             </ListGroup>
           </Col>

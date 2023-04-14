@@ -37,7 +37,7 @@ const SignIn = () => {
   // console.log('render', error, redirect);
   // if correct authentication, redirect to page instead of login screen
   if (redirect) {
-    return (<Navigate to="/studysessionlist" />);
+    return (<Navigate to="/study-session-list" />);
   }
   // Otherwise return the Login form.
   return (

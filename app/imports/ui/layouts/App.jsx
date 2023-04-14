@@ -24,6 +24,7 @@ import Calendar from '../pages/Calendar';
 import UserHome from '../pages/user/UserHome';
 import CreateFeedback from '../pages/CreateFeedback';
 import UserHomeSession from '../pages/user/UserHomeSession';
+import FeedBacksList from '../pages/FeedBacksList';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -45,12 +46,13 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/home" element={<ProtectedRoute><Landing /></ProtectedRoute>} />
           <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-          <Route path="/createstudysession" element={<ProtectedRoute><CreateStudySession /></ProtectedRoute>} />
-          <Route path="/studysessionlist" element={<ProtectedRoute><StudySessionList /></ProtectedRoute>} />
+          <Route path="/create-study-session" element={<ProtectedRoute><CreateStudySession /></ProtectedRoute>} />
+          <Route path="/study-session-list" element={<ProtectedRoute><StudySessionList /></ProtectedRoute>} />
           <Route path="/calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
           <Route path="/user-home" element={<ProtectedRoute><UserHome /></ProtectedRoute>} />
           <Route path="/user-home-session" element={<ProtectedRoute><UserHomeSession /></ProtectedRoute>} />
-          <Route path="/createfeedback" element={<CreateFeedback />} />
+          <Route path="/create-feedback" element={<CreateFeedback />} />
+          <Route path="/feedback-list" element={<FeedBacksList />} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
