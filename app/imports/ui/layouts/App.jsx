@@ -25,6 +25,11 @@ import UserHome from '../pages/user/UserHome';
 import CreateFeedback from '../pages/CreateFeedback';
 import UserHomeSession from '../pages/user/UserHomeSession';
 import FeedBacksList from '../pages/FeedBacksList';
+import AdminHome from '../pages/admin/AdminHome';
+import AdminHomeSession from '../pages/admin/AdminHomeSession';
+import AdminHomeFeedback from '../pages/admin/AdminHomeFeedback';
+import AdminHomeReport from '../pages/admin/AdminHomeReport';
+import CreateReport from '../pages/CreateReport';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -52,7 +57,12 @@ const App = () => {
           <Route path="/user-home" element={<ProtectedRoute><UserHome /></ProtectedRoute>} />
           <Route path="/user-home-session" element={<ProtectedRoute><UserHomeSession /></ProtectedRoute>} />
           <Route path="/create-feedback" element={<CreateFeedback />} />
-          <Route path="/feedback-list" element={<FeedBacksList />} />
+          <Route path="/create-report" element={<ProtectedRoute><CreateReport /></ProtectedRoute>} />
+          <Route path="/feedback-list" element={<AdminProtectedRoute ready={ready}><FeedBacksList /></AdminProtectedRoute>} />
+          <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
+          <Route path="/admin-home-session" element={<AdminProtectedRoute ready={ready}><AdminHomeSession /></AdminProtectedRoute>} />
+          <Route path="/admin-home-report" element={<AdminProtectedRoute ready={ready}><AdminHomeReport /></AdminProtectedRoute>} />
+          <Route path="/admin-home-feedback" element={<AdminProtectedRoute ready={ready}><AdminHomeFeedback /></AdminProtectedRoute>} />
           <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
           <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
