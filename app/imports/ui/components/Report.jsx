@@ -18,7 +18,6 @@ Report.propTypes = {
     date: PropTypes.string,
     reportUser: PropTypes.string,
     description: PropTypes.string,
-    numberUser: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

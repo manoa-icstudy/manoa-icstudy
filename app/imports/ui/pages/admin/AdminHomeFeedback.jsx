@@ -9,9 +9,9 @@ import { Feedbacks } from '../../../api/feedback/Feedback';
 import FeedBacks from '../../components/FeedBacks';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
-const UserHome = () => {
+const AdminHomeFeedback = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, feedbacks } = useTracker(() => {
+  const { ready, feedbacks, num } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
@@ -20,8 +20,10 @@ const UserHome = () => {
     const rdy = subscription.ready();
     // Get the Stuff documents
     const stuffItems = Feedbacks.collection.find({}).fetch();
+    const numFeedback = Feedbacks.collection.find({}).count();
     return {
       feedbacks: stuffItems,
+      num: numFeedback,
       ready: rdy,
     };
   }, []);
@@ -67,6 +69,7 @@ const UserHome = () => {
                 <Col md={10}>
                   <Col className="text-center">
                     <h2>Feedback List</h2>
+                    <h5>Status: {num} feedbacks available</h5>
                   </Col>
                   <Table striped bordered hover>
                     <thead>
@@ -90,4 +93,4 @@ const UserHome = () => {
   ) : <LoadingSpinner />);
 };
 
-export default UserHome;
+export default AdminHomeFeedback;

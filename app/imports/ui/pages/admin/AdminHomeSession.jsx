@@ -9,8 +9,8 @@ import StudySession from '../../components/StudySession';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
-const UserHome = () => {
-  const { ready, sessions } = useTracker(() => {
+const AdminHomeSession = () => {
+  const { ready, sessions, num } = useTracker(() => {
   // Note that this subscription will get cleaned up
   // when your component is unmounted or deps change.
   // Get access to Stuff documents.
@@ -19,8 +19,10 @@ const UserHome = () => {
     const rdy = subscription.ready();
     // Get the Stuff documents
     const stuffItems = Sessions.collection.find({}).fetch();
+    const numSession = Sessions.collection.find({}).count();
     return {
       sessions: stuffItems,
+      num: numSession,
       ready: rdy,
     };
   }, []);
@@ -66,6 +68,7 @@ const UserHome = () => {
                 <Col md={10}>
                   <Col className="text-center">
                     <h2>Session List</h2>
+                    <h5>Status: {num} sessions available</h5>
                   </Col>
                   <Table striped bordered hover>
                     <thead>
@@ -90,4 +93,4 @@ const UserHome = () => {
   ) : <LoadingSpinner />);
 };
 
-export default UserHome;
+export default AdminHomeSession;

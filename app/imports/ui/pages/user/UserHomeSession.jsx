@@ -9,7 +9,7 @@ import StudySession from '../../components/StudySession';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
-const UserHome = () => {
+const UserHomeSession = () => {
   const { ready, sessions } = useTracker(() => {
   // Note that this subscription will get cleaned up
   // when your component is unmounted or deps change.
@@ -92,4 +92,4 @@ const UserHome = () => {
   ) : <LoadingSpinner />);
 };
 
-export default UserHome;
+export default UserHomeSession;

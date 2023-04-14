@@ -9,8 +9,8 @@ import Report from '../../components/Report';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
-const UserHome = () => {
-  const { ready, reports } = useTracker(() => {
+const AdminHomeReport = () => {
+  const { ready, reports, num } = useTracker(() => {
   // Note that this subscription will get cleaned up
   // when your component is unmounted or deps change.
   // Get access to Stuff documents.
@@ -19,8 +19,10 @@ const UserHome = () => {
     const rdy = subscription.ready();
     // Get the Stuff documents
     const stuffItems = Reports.collection.find({}).fetch();
+    const numReport = Reports.collection.find({}).count();
     return {
       reports: stuffItems,
+      num: numReport,
       ready: rdy,
     };
   }, []);
@@ -66,6 +68,7 @@ const UserHome = () => {
                 <Col md={10}>
                   <Col className="text-center">
                     <h2>Report List</h2>
+                    <h5>Status: {num} reports available</h5>
                   </Col>
                   <Table striped bordered hover>
                     <thead>
@@ -74,11 +77,10 @@ const UserHome = () => {
                         <th>Date</th>
                         <th>Reported User</th>
                         <th>Description</th>
-                        <th>Number</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {reports.map((report) => <Report key={report._id} report={report} />)}
+                      {reports.map((report) => <Report key={report.reportUser} report={report} />)}
                     </tbody>
                   </Table>
                 </Col>
@@ -91,4 +93,5 @@ const UserHome = () => {
   ) : <LoadingSpinner />);
 };
 
-export default UserHome;
+export default AdminHomeReport;
+

@@ -17,7 +17,6 @@ class ReportCollection {
       owner: String,
       reportUser: String,
       description: String,
-      numberUser: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);
