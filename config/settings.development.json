@@ -4,6 +4,11 @@
     { "email": "john@foo.com", "password": "1*pUSGAox$3mq" }
   ],
 
+  "defaultProfiles": [
+    { "firstName": "Admin", "lastName": "Admin", "email": "admin@foo.com", "currentCourses": ["ICS 311"], "mentorCourses": ["ICS 111", "ICS 141"," ICS 241","ICS 211"], "owner": "admin@foo.com" },
+    { "firstName": "John", "lastName": "Doe", "email": "john@foo.com", "currentCourses": ["ICS 111", "ICS 141"], "mentorCourses": ["ICS 101"], "owner": "john@foo.com" }
+  ],
+
   "defaultData": [
     { "name": "John", "date": "03/28/23", "owner": "john@foo.com", "icsclass":  "ICS 311", "description": "Homework 12" }
   ]

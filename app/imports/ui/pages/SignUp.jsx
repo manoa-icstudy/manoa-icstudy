@@ -5,7 +5,9 @@ import { Accounts } from 'meteor/accounts-base';
 import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import { AutoForm, ErrorsField, SubmitField, SelectField, TextField, ListField, ListItemField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SubmitField, SelectField, TextField } from 'uniforms-bootstrap5';
+import swal from 'sweetalert';
+import { Profiles } from '../../api/profile/Profile';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -13,23 +15,29 @@ import { AutoForm, ErrorsField, SubmitField, SelectField, TextField, ListField, 
 const SignUp = ({ location }) => {
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
-
+  const icsCourses = ['ICS 101', 'ICS 111', 'ICS 141', 'ICS 211', 'ICS 241', 'ICS 311'];
   const schema = new SimpleSchema({
-    name: String,
+    firstName: String,
+    lastName: String,
     email: String,
     password: String,
-    coursesTaking: Array,
-    'coursesTaking.$': {
+    currentCourses: { type: Array, optional: true },
+    'currentCourses.$': {
       type: String,
-      allowedValues: ['ICS 101', 'ICS 111', 'ICS 141', 'ICS 211', 'ICS 241', 'ICS 311'],
+      allowedValues: icsCourses,
+    },
+    mentorCourses: { type: Array, optional: true },
+    'mentorCourses.$': {
+      type: String,
+      allowedValues: icsCourses,
     },
   });
   const bridge = new SimpleSchema2Bridge(schema);
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { name, email, password, coursesTaking } = doc;
-    Accounts.createUser({ name, email, username: email, password, coursesTaking }, (err) => {
+    const { firstName, lastName, email, password, currentCourses, mentorCourses } = doc;
+    Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         setError(err.reason);
       } else {
@@ -37,6 +45,14 @@ const SignUp = ({ location }) => {
         setRedirectToRef(true);
       }
     });
+    Profiles.collection.insert(
+      { firstName, lastName, email, currentCourses, mentorCourses, owner: email },
+      (err) => {
+        if (err) {
+          swal('Error', error.message, 'error');
+        }
+      },
+    );
   };
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
@@ -48,26 +64,39 @@ const SignUp = ({ location }) => {
   return (
     <Container id="signup-page" className="py-3">
       <Row className="justify-content-center">
-        <Col xs={5}>
+        <Col xs={10}>
           <Col className="text-center">
             <h2>Register your account</h2>
           </Col>
           <AutoForm schema={bridge} onSubmit={data => submit(data)}>
             <Card>
               <Card.Body>
-                <TextField name="name" placeholder="Name" />
+                <Row>
+                  <Col>
+                    <TextField name="firstName" placeholder="First name" />
+                  </Col>
+                  <Col>
+                    <TextField name="lastName" placeholder="Last name" />
+                  </Col>
+                </Row>
                 <TextField name="email" placeholder="E-mail address" />
                 <TextField name="password" placeholder="Password" type="password" />
-                <SelectField
-                  name="coursesTaking"
-                  help="Select the courses you are currently taking (required)"
-                  helpClassName="text-danger"
-                  multiple
-                  checkboxes
-                  labelClassName=""
-                  inputClassName="ps-1"
-                  transform={(label) => ` ${label}`}
-                />
+                <Row>
+                  <Col>
+                    <SelectField
+                      name="currentCourses"
+                      help="Select the courses you are currently taking (optional)"
+                      showInlineError
+                    />
+                  </Col>
+                  <Col>
+                    <SelectField
+                      name="mentorCourses"
+                      help="Select the courses you are willing to provide help in (optional)"
+                      showInlineError
+                    />
+                  </Col>
+                </Row>
                 <ErrorsField />
                 <SubmitField />
               </Card.Body>
