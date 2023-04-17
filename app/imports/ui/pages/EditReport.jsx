@@ -11,7 +11,6 @@ import { ReportFormSchema as formSchema } from '../forms/ReportFormInfo';
 import { Report } from '../../api/report/Report';
 import { ReportDate } from '../../api/date/ReportDate';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Link } from 'react-router-dom';
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
