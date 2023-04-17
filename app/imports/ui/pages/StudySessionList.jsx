@@ -37,6 +37,7 @@ const ListStuff = () => {
                 <th>Date</th>
                 <th>ICS Class</th>
                 <th>Description</th>
+                <th>Report Session</th>
               </tr>
             </thead>
             <tbody>

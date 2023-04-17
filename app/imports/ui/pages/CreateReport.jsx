@@ -1,40 +1,41 @@
-import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import React, { useState } from 'react';
+import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import { AutoForm, DateField, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
-import SimpleSchema from 'simpl-schema';
-import { Reports } from '../../api/report/Report';
-
-// Create a schema to specify the structure of the data to appear in the form.
-const formSchema = new SimpleSchema({
-  name: String,
-  date: String,
-  reportUser: String,
-  description: String,
-});
+import { ReportFormSchema as formSchema } from '../forms/ReportFormInfo';
+import { Report } from '../../api/report/Report';
+import { ReportDate } from '../../api/date/ReportDate';
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the AddStuff page for adding a document. */
 const CreateReport = () => {
+  const [emailState, setEmailState] = useState('');
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
+    let insertError;
     const { name, date, reportUser, description } = data;
     const owner = Meteor.user().username;
-    Reports.collection.insert(
-      { name, date, reportUser, description, owner },
-      (error) => {
-        if (error) {
-          swal('Error', error.message, 'error');
-        } else {
-          swal('Success', 'Report created successfully', 'success');
-          formRef.reset();
-        }
-      },
+    Report.insert(
+      { name, reportUser, description, owner },
+      (error) => { insertError = error; },
     );
+
+    if (insertError) {
+      swal('Error', insertError.message, 'error');
+    } else {
+      ReportDate.insert({ owner, date }, (error) => { insertError = error; });
+      if (insertError) {
+        swal('Error', insertError.message, 'error');
+      } else {
+        swal('Success', 'Report was created.', 'success');
+        setEmailState(owner);
+        formRef.reset();
+      }
+    }
   };
 
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
@@ -48,7 +49,7 @@ const CreateReport = () => {
             <Card>
               <Card.Body>
                 <TextField name="name" />
-                <TextField name="date" />
+                <DateField name="date" showInlineError type="date" />
                 <TextField name="reportUser" />
                 <LongTextField name="description" />
                 <SubmitField value="Submit" />
@@ -56,6 +57,11 @@ const CreateReport = () => {
               </Card.Body>
             </Card>
           </AutoForm>
+          {emailState ? (
+            <Alert className="py-2">
+              <a href={`/edit-report/${emailState}`}>Edit this data</a>
+            </Alert>
+          ) : ''}
         </Col>
       </Row>
     </Container>

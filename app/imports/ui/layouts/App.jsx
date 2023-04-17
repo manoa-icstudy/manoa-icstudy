@@ -30,6 +30,7 @@ import AdminHomeSession from '../pages/admin/AdminHomeSession';
 import AdminHomeFeedback from '../pages/admin/AdminHomeFeedback';
 import AdminHomeReport from '../pages/admin/AdminHomeReport';
 import CreateReport from '../pages/CreateReport';
+import EditReport from '../pages/EditReport';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -58,6 +59,7 @@ const App = () => {
           <Route path="/user-home-session" element={<ProtectedRoute><UserHomeSession /></ProtectedRoute>} />
           <Route path="/create-feedback" element={<CreateFeedback />} />
           <Route path="/create-report" element={<ProtectedRoute><CreateReport /></ProtectedRoute>} />
+          <Route path="/edit-report/:email" element={<ProtectedRoute><EditReport /></ProtectedRoute>} />
           <Route path="/feedback-list" element={<AdminProtectedRoute ready={ready}><FeedBacksList /></AdminProtectedRoute>} />
           <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/admin-home-session" element={<AdminProtectedRoute ready={ready}><AdminHomeSession /></AdminProtectedRoute>} />

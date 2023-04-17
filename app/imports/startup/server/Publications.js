@@ -3,13 +3,18 @@ import { Roles } from 'meteor/alanning:roles';
 import { Sessions } from '../../api/session/Session';
 import { Profiles } from '../../api/profile/Profile';
 import { Feedbacks } from '../../api/feedback/Feedback';
-import { Reports } from '../../api/report/Report';
+import { Report } from '../../api/report/Report';
+import { ReportDate } from '../../api/date/ReportDate';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
 Meteor.publish(Sessions.publicPublicationName, function () {
   return Sessions.collection.find();
 });
+
+Meteor.publish('ReportDateData', () => ReportDate.find());
+
+Meteor.publish('ReportCollection', () => Report.find());
 
 Meteor.publish(Sessions.userPublicationName, function () {
   if (this.userId) {
@@ -46,13 +51,6 @@ Meteor.publish(Profiles.adminPublicationName, function () {
 Meteor.publish(Feedbacks.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Feedbacks.collection.find();
-  }
-  return this.ready();
-});
-
-Meteor.publish(Reports.adminPublicationName, function () {
-  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Reports.collection.find();
   }
   return this.ready();
 });

@@ -4,8 +4,7 @@ import { ListGroup, Container, Col, Row, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 import { PersonFillLock } from 'react-bootstrap-icons';
-import { Reports } from '../../../api/report/Report';
-import Report from '../../components/Report';
+import { Report } from '../../../api/report/Report';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
@@ -14,12 +13,12 @@ const AdminHomeReport = () => {
   // Note that this subscription will get cleaned up
   // when your component is unmounted or deps change.
   // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Reports.adminPublicationName);
+    const subscription = Meteor.subscribe('ReportCollection');
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
-    const stuffItems = Reports.collection.find({}).fetch();
-    const numReport = Reports.collection.find({}).count();
+    const stuffItems = Report.collection.find({}).fetch();
+    const numReport = Report.collection.find({}).count();
     return {
       reports: stuffItems,
       num: numReport,
@@ -74,9 +73,9 @@ const AdminHomeReport = () => {
                     <thead>
                       <tr>
                         <th>Name</th>
-                        <th>Date</th>
                         <th>Reported User</th>
                         <th>Description</th>
+                        <th>Date</th>
                       </tr>
                     </thead>
                     <tbody>

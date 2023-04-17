@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 const Report = ({ report }) => (
   <tr>
     <td>{report.name}</td>
-    <td>{report.date}</td>
     <td>{report.description}</td>
     <td>{report.reportUser}</td>
   </tr>
@@ -15,7 +14,7 @@ const Report = ({ report }) => (
 Report.propTypes = {
   report: PropTypes.shape({
     name: PropTypes.string,
-    date: PropTypes.string,
+    date: PropTypes.instanceOf(Date),
     reportUser: PropTypes.string,
     description: PropTypes.string,
     _id: PropTypes.string,
