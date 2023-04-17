@@ -43,7 +43,7 @@ const EditReport = () => {
     if (updateError) {
       swal('Error', updateError.message, 'error');
     } else {
-      ReportDate.update(dateId, { $set: { date } }, (error) => {
+      ReportDate.update(dateId, { $set: { name, reportUser, owner, description, date } }, (error) => {
         updateError = error;
       });
       if (updateError) {

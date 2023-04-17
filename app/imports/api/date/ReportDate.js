@@ -6,7 +6,10 @@ const ReportDate = new Mongo.Collection('ReportDateData');
 
 /** Define a schema to specify the structure of each document in the collection. */
 const ReportDateDataSchema = new SimpleSchema({
+  name: String,
   owner: String,
+  reportUser: String,
+  description: String,
   date: Date,
 });
 

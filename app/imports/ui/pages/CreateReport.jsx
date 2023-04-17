@@ -27,7 +27,7 @@ const CreateReport = () => {
     if (insertError) {
       swal('Error', insertError.message, 'error');
     } else {
-      ReportDate.insert({ owner, date }, (error) => { insertError = error; });
+      ReportDate.insert({ name, reportUser, owner, description, date }, (error) => { insertError = error; });
       if (insertError) {
         swal('Error', insertError.message, 'error');
       } else {
