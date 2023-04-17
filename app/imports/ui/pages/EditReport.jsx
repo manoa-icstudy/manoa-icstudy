@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, DateField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { _ } from 'meteor/underscore';
@@ -11,6 +11,7 @@ import { ReportFormSchema as formSchema } from '../forms/ReportFormInfo';
 import { Report } from '../../api/report/Report';
 import { ReportDate } from '../../api/date/ReportDate';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Link } from 'react-router-dom';
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
@@ -20,8 +21,8 @@ const EditReport = () => {
 
   const { ready, reportDoc, dateDoc } = useTracker(() => {
     // Request Reports and Enrollment docs. Won't be locally available until ready() returns true.
-    const reportSubscription = Meteor.subscribe('Reports');
-    const dateSubscription = Meteor.subscribe('ReportDate');
+    const reportSubscription = Meteor.subscribe('ReportCollection');
+    const dateSubscription = Meteor.subscribe('ReportDateData');
     return {
       reportDoc: Report.findOne({ owner }),
       dateDoc: ReportDate.findOne({ owner }),
@@ -62,6 +63,9 @@ const EditReport = () => {
           <Col className="text-center"><h2>Edit User Report</h2></Col>
           <AutoForm schema={bridge} onSubmit={(data) => submit(data)} model={model}>
             <Card>
+              <Col className="m-3 mb-0">
+                <Button href="/create-report" variant="primary">Back</Button>
+              </Col>
               <Card.Body>
                 <TextField name="name" />
                 <DateField name="date" showInlineError type="datetime-local" />

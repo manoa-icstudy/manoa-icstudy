@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, DateField, ErrorsField, LongTextField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -47,6 +47,9 @@ const CreateReport = () => {
           <Col className="text-center"><h2>Create User Report</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
+              <Col className="m-3 mb-0">
+                <Button href="/study-session-list" variant="primary">Back</Button>
+              </Col>
               <Card.Body>
                 <TextField name="name" />
                 <DateField name="date" showInlineError type="date" />
@@ -59,7 +62,7 @@ const CreateReport = () => {
           </AutoForm>
           {emailState ? (
             <Alert className="py-2">
-              <a href={`/edit-report/${emailState}`}>Edit this data</a>
+              <a href={`/edit-report/${emailState}`}>Edit this report</a>
             </Alert>
           ) : ''}
         </Col>

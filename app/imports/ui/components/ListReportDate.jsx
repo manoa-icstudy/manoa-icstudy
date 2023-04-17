@@ -2,23 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const Report = ({ report }) => (
+const ListReportDate = ({ report }) => (
   <tr>
-    <td>{report.name}</td>
-    <td>{report.description}</td>
-    <td>{report.reportUser}</td>
+    <td>{report.date}</td>
   </tr>
 );
 
 // Require a document to be passed to this component.
-Report.propTypes = {
+ListReportDate.propTypes = {
   report: PropTypes.shape({
-    name: PropTypes.string,
     date: PropTypes.instanceOf(Date),
-    reportUser: PropTypes.string,
-    description: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
 
-export default Report;
+export default ListReportDate;

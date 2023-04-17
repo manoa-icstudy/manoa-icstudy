@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 import { PersonFillLock } from 'react-bootstrap-icons';
 import { Sessions } from '../../../api/session/Session';
-import StudySession from '../../components/StudySession';
+import AdminStudySession from '../../components/AdminStudySession';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
@@ -77,10 +77,12 @@ const AdminHomeSession = () => {
                         <th>Date</th>
                         <th>ICS Class</th>
                         <th>Description</th>
+                        <th>Report</th>
+                        <th>Remove</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {sessions.map((session) => <StudySession key={session._id} session={session} />)}
+                      {sessions.map((session) => <AdminStudySession key={session._id} session={session} collection={Sessions.collection} />)}
                     </tbody>
                   </Table>
                 </Col>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Sessions } from '../../api/session/Session';
@@ -38,10 +39,13 @@ const ListStuff = () => {
                 <th>ICS Class</th>
                 <th>Description</th>
                 <th>Report Session</th>
+                {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                  <th>Remove</th>
+                ) : ''}
               </tr>
             </thead>
             <tbody>
-              {sessions.map((session) => <StudySession key={session._id} session={session} />)}
+              {sessions.map((session) => <StudySession key={session._id} session={session} collection={Sessions.collection} />)}
             </tbody>
           </Table>
         </Col>

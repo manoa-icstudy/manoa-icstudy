@@ -59,7 +59,7 @@ const App = () => {
           <Route path="/user-home-session" element={<ProtectedRoute><UserHomeSession /></ProtectedRoute>} />
           <Route path="/create-feedback" element={<CreateFeedback />} />
           <Route path="/create-report" element={<ProtectedRoute><CreateReport /></ProtectedRoute>} />
-          <Route path="/edit-report/:email" element={<ProtectedRoute><EditReport /></ProtectedRoute>} />
+          <Route path="/edit-report/:owner" element={<ProtectedRoute><EditReport /></ProtectedRoute>} />
           <Route path="/feedback-list" element={<AdminProtectedRoute ready={ready}><FeedBacksList /></AdminProtectedRoute>} />
           <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />
           <Route path="/admin-home-session" element={<AdminProtectedRoute ready={ready}><AdminHomeSession /></AdminProtectedRoute>} />

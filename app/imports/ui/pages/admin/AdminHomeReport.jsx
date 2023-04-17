@@ -5,21 +5,28 @@ import { Link } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 import { PersonFillLock } from 'react-bootstrap-icons';
 import { Report } from '../../../api/report/Report';
+import ListReport from '../../components/ListReport';
+import ListReportDate from '../../components/ListReportDate';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { ReportDate } from '../../../api/date/ReportDate';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
+
 const AdminHomeReport = () => {
-  const { ready, reports, num } = useTracker(() => {
-  // Note that this subscription will get cleaned up
-  // when your component is unmounted or deps change.
-  // Get access to Stuff documents.
+  const { ready, reports, num, test } = useTracker(() => {
+    // Note that this subscription will get cleaned up
+    // when your component is unmounted or deps change.
+    // Get access to Stuff documents.
     const subscription = Meteor.subscribe('ReportCollection');
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
-    const stuffItems = Report.collection.find({}).fetch();
-    const numReport = Report.collection.find({}).count();
+    const stuffItems = Report.find({}).fetch();
+    const dateItems = ReportDate.find({}).fetch();
+    const numReport = Report.find({}).count();
+
     return {
+      test: dateItems,
       reports: stuffItems,
       num: numReport,
       ready: rdy,
@@ -76,10 +83,23 @@ const AdminHomeReport = () => {
                         <th>Reported User</th>
                         <th>Description</th>
                         <th>Date</th>
+                        <th>Remove</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {reports.map((report) => <Report key={report.reportUser} report={report} />)}
+                      {reports.map((report) => <ListReport key={report._id} report={report} collection={Report} />)}
+                    </tbody>
+                  </Table>
+
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {test.map((tes) => <ListReportDate key={tes.date} report={tes} />)}
                     </tbody>
                   </Table>
                 </Col>
@@ -93,3 +113,6 @@ const AdminHomeReport = () => {
 };
 
 export default AdminHomeReport;
+
+// {test.map((tes) => <ListReport key={tes.date} report={tes} />)}
+// {reports.map((report) => <ListReport key={report._id} report={report} />)}
