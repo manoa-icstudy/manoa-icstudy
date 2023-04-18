@@ -12,7 +12,7 @@ const Landing = () => (
       <Col className="justify-content-center pb-5 mt-5" id="landing-1">
         <h1 style={{ fontSize: '70px' }}>Welcome to ICStudy</h1>
         <p>Description</p>
-        <Button variant="dark">Learn More</Button>
+        <Button variant="dark" href="#description">Learn More</Button>
         <Container id="container" className="ml-3 mt-4 align-middle justify-content-center">
           <Image src="https://manoa-icstudy.github.io/images/Login.png" />
           <Image src="https://manoa-icstudy.github.io/images/UserProfile.png" />
@@ -23,11 +23,11 @@ const Landing = () => (
 
       <Container className="reveal fade-bottom">
         <Row className="align-content-center p-5" style={{ backgroundColor: 'white' }}>
-          <h1>Our Goals</h1>
+          <h1 id="description">Our Goals</h1>
           <Col style={{ borderColor: 'black', border: 'solid' }} className="m-4 p-4">
             <h3> <PeopleFill /> &nbsp;Engagement</h3>
             <Image className="m-4" src="https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_960_720.jpg" width={400} />
-            <p>The goal of ICStudy is to develop strategies that increase student engagement in the classroom.
+            <p>The goal of ICStudy is to develop strategies that increase student engagement inside and outside the classroom.
               This may involve exploring the use of technology, creating more interactive lessons, and providing opportunities for student-led learning.
               By increasing student engagement, we hope to improve student outcomes and create a more positive learning environment.
             </p>
@@ -37,7 +37,7 @@ const Landing = () => (
             <h3> <ChatRightTextFill /> &nbsp;Collaboration</h3>
             <Image className="m-4" src="https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924_960_720.jpg" width={400} />
             <p>Collaborate on challenging coursework or assignments.
-              By sharing ideas and working together, both parties can learn from each other and potentially improve their understanding of the material.
+              By sharing ideas and working together, both parties can learn from each other and improve their understanding of the material.
             </p>
           </Col>
 
@@ -57,8 +57,8 @@ const Landing = () => (
         <Row className="p-5 reveal fade-left">
           <Col md={4}>
             <h1>We got all</h1>
-            <h1 style={{ paddingLeft: '200px' }}>ICS course</h1>
-            <h1 style={{ paddingLeft: '300px' }}>covered</h1>
+            <h1 style={{ paddingLeft: '125px' }}>ICS courses</h1>
+            <h1 style={{ paddingLeft: '250px' }}>covered</h1>
           </Col>
 
           <Col md={7}>
@@ -212,7 +212,7 @@ const Landing = () => (
           <Col md={1}>
             <h1>Post</h1>
             <p>Description</p>
-            <Button variant="dark">Create Now</Button>
+            <Button href="/create-study-session" variant="dark">Create Now</Button>
           </Col>
           <Col md={8}>
             <Image src="https://manoa-icstudy.github.io/images/CreateStudySessions.png" style={{ marginRight: '20px' }} width={500} />
