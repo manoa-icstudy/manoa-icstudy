@@ -10,6 +10,6 @@
   ],
 
   "defaultData": [
-    { "name": "John", "date": "2023-04-18T02:43:57.854Z", "owner": "john@foo.com", "icsclass":  "ICS 311", "description": "Homework 12", "createDate": "2023-04-18T02:43:57.854Z" }
+    { "name": "John", "date": "2023-04-18T02:43:57.854Z", "owner": "john@foo.com", "icsclass":  "ICS 311", "description": "Homework 12" }
   ]
 }
