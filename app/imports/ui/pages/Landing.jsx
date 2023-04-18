@@ -211,7 +211,7 @@ const Landing = () => (
         <Row className="justify-content-center p-3 reveal fade-right">
           <Col md={1}>
             <h1>Post</h1>
-            <p>Description</p>
+            <p>Post or join a session</p>
             <Button href="/create-study-session" variant="dark">Create Now</Button>
           </Col>
           <Col md={8}>
@@ -227,8 +227,8 @@ const Landing = () => (
           </Col>
           <Col md={1}>
             <h1>Reward</h1>
-            <p>Description</p>
-            <Button variant="dark">Exchange it</Button>
+            <p>Get rewarded for helping</p>
+            <Button variant="dark">Exchange</Button>
           </Col>
         </Row>
 
