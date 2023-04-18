@@ -14,9 +14,10 @@ class SessionsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       name: String,
-      date: String,
+      date: Date,
       owner: String,
       description: String,
+      createDate: Date,
       icsclass: {
         type: String,
         allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],

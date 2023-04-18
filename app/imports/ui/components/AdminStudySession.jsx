@@ -11,7 +11,7 @@ const AdminStudySession = ({ session, collection }) => {
   return (
     <tr>
       <td>{session.name}</td>
-      <td>{session.date}</td>
+      <td>{session.date.toDateString()}</td>
       <td>{session.icsclass}</td>
       <td>{session.description}</td>
       <td><Button href="/create-report" variant="warning" style={{ color: 'black' }}>Report it</Button></td>
@@ -24,7 +24,7 @@ const AdminStudySession = ({ session, collection }) => {
 AdminStudySession.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
-    date: PropTypes.string,
+    date: PropTypes.instanceOf(Date),
     icsclass: PropTypes.string,
     description: PropTypes.string,
     _id: PropTypes.string,
