@@ -5,6 +5,8 @@ import { Alert, Card, Col, Container, Row } from 'react-bootstrap';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { LoginLog } from '../../api/log/LoginLog';
+import swal from 'sweetalert';
 
 /**
  * Signin page overrides the form’s submit event and call Meteor’s loginWithPassword().
@@ -20,9 +22,19 @@ const SignIn = () => {
   const bridge = new SimpleSchema2Bridge(schema);
 
   // Handle Signin submission using Meteor's account mechanism.
-  const submit = (doc) => {
+  const submit = (doc, formRef) => {
     // console.log('submit', doc, redirect);
     const { email, password } = doc;
+    const date = new Date();
+    const owner = email;
+    LoginLog.insert({ owner, date }, (errr) => {
+      if (errr) {
+        swal('Error', errr.message, 'error');
+      } else {
+        swal('Success', 'Login', 'success');
+        formRef.reset();
+      }
+    });
     Meteor.loginWithPassword(email, password, (err) => {
       if (err) {
         setError(err.reason);
