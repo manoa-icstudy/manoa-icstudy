@@ -72,9 +72,9 @@ const UserHomeSession = () => {
                       <thead>
                         <tr>
                           <th>Name</th>
-                          <th>Date</th>
                           <th>ICS Class</th>
                           <th>Description</th>
+                          <th>Date</th>
                           <th>Report</th>
                           <th>Remove</th>
                         </tr>
