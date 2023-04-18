@@ -33,10 +33,11 @@ const CreateStudySession = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, date, icsclass, description } = data;
+    const currDate = new Date();
+    const { name, date, icsclass, description, createDate = currDate } = data;
     const owner = Meteor.user().username;
     Sessions.collection.insert(
-      { name, date, icsclass, description, owner },
+      { name, date, icsclass, description, createDate, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
