@@ -35,9 +35,9 @@ const ListStuff = () => {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Date</th>
                 <th>ICS Class</th>
                 <th>Description</th>
+                <th>Date</th>
                 <th>Report Session</th>
                 {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                   <th>Remove</th>

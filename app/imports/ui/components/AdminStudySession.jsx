@@ -11,9 +11,9 @@ const AdminStudySession = ({ session, collection }) => {
   return (
     <tr>
       <td>{session.name}</td>
-      <td>{session.date.toDateString()}</td>
       <td>{session.icsclass}</td>
       <td>{session.description}</td>
+      <td>{session.date.toDateString()}</td>
       <td><Button href="/create-report" variant="warning" style={{ color: 'black' }}>Report it</Button></td>
       <td><Button variant="danger" onClick={() => removeItem(session._id)}><Trash /></Button></td>
     </tr>
