@@ -10,14 +10,10 @@ import { Sessions } from '../../api/session/Session';
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   name: String,
-<<<<<<< HEAD
   date: {
     type: Date,
     defaultValue: new Date(),
   },
-=======
-  date: String,
->>>>>>> parent of 629380f (change date format)
   icsclass: {
     type: String,
     allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
