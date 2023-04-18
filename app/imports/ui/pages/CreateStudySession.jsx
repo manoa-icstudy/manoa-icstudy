@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, DateField, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -10,10 +10,14 @@ import { Sessions } from '../../api/session/Session';
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   name: String,
+<<<<<<< HEAD
   date: {
     type: Date,
     defaultValue: new Date(),
   },
+=======
+  date: String,
+>>>>>>> parent of 629380f (change date format)
   icsclass: {
     type: String,
     allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
@@ -55,7 +59,7 @@ const CreateStudySession = () => {
             <Card>
               <Card.Body>
                 <TextField name="name" />
-                <DateField name="date" showInlineError type="date" />
+                <TextField name="date" />
                 <SelectField name="icsclass" />
                 <LongTextField name="description" />
                 <SubmitField value="Submit" />

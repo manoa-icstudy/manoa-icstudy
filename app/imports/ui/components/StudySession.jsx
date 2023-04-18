@@ -13,6 +13,10 @@ const StudySession = ({ session, collection }) => {
   return (
     <tr>
       <td>{session.name}</td>
+<<<<<<< HEAD
+=======
+      <td>{session.date}</td>
+>>>>>>> parent of 629380f (change date format)
       <td>{session.icsclass}</td>
       <td>{session.description}</td>
       <td>{session.date.toDateString()}</td>
@@ -28,7 +32,7 @@ const StudySession = ({ session, collection }) => {
 StudySession.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
-    date: PropTypes.instanceOf(Date),
+    date: PropTypes.string,
     icsclass: PropTypes.string,
     description: PropTypes.string,
     _id: PropTypes.string,
