@@ -24,7 +24,7 @@ const AdminStudySession = ({ session, collection }) => {
 AdminStudySession.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
-    date: PropTypes.instanceOf(Date),
+    date: PropTypes.string,
     icsclass: PropTypes.string,
     description: PropTypes.string,
     _id: PropTypes.string,
