@@ -36,7 +36,8 @@ const TopNavBar = () => {
               <NavDropdown id="navbar-current-user" title={currentUser}>
                 <NavDropdown.Item id="login-dropdown-sign-in" as={NavLink} to="/user-home">
                   <PersonFill />
-                  User
+                  {' '}
+                  Profile
                 </NavDropdown.Item>
 
                 {Roles.userIsInRole(Meteor.userId(), 'admin') ? (

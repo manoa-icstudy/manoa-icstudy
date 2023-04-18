@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Button, ListGroup, Container, Card, Col, Row, Image, Badge } from 'react-bootstrap';
-import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { Link } from 'react-router-dom';
 import { Person, PersonFill, PencilFill, X } from 'react-bootstrap-icons';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -166,7 +166,7 @@ const UserHome = () => {
                           </p>
                         </Col>
                       </Row>
-                      { isEditing && <SubmitField value="Submit" />}
+                      { isEditing && (<><ErrorsField /><SubmitField value="Submit" /></>)}
                     </Card.Body>
                   </Card>
                 </AutoForm>
