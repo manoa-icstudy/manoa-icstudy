@@ -13,9 +13,9 @@ const StudySession = ({ session, collection }) => {
   return (
     <tr>
       <td>{session.name}</td>
-      <td>{session.date}</td>
       <td>{session.icsclass}</td>
       <td>{session.description}</td>
+      <td>{session.date.toDateString()}</td>
       <td><Button href="/create-report" variant="warning" style={{ color: 'black' }}>Report it</Button></td>
       {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
         <td><Button variant="danger" onClick={() => removeItem(session._id)}><Trash /></Button></td>
@@ -28,7 +28,7 @@ const StudySession = ({ session, collection }) => {
 StudySession.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
-    date: PropTypes.string,
+    date: PropTypes.instanceOf(Date),
     icsclass: PropTypes.string,
     description: PropTypes.string,
     _id: PropTypes.string,

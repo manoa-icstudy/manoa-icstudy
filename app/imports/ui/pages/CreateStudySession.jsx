@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, DateField, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -10,7 +10,10 @@ import { Sessions } from '../../api/session/Session';
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   name: String,
-  date: String,
+  date: {
+    type: Date,
+    defaultValue: new Date(),
+  },
   icsclass: {
     type: String,
     allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
@@ -26,10 +29,11 @@ const CreateStudySession = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, date, icsclass, description } = data;
+    const currDate = new Date();
+    const { name, date, icsclass, description, createDate = currDate } = data;
     const owner = Meteor.user().username;
     Sessions.collection.insert(
-      { name, date, icsclass, description, owner },
+      { name, date, icsclass, description, createDate, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -52,7 +56,7 @@ const CreateStudySession = () => {
             <Card>
               <Card.Body>
                 <TextField name="name" />
-                <TextField name="date" />
+                <DateField name="date" showInlineError type="datetime-local" />
                 <SelectField name="icsclass" />
                 <LongTextField name="description" />
                 <SubmitField value="Submit" />

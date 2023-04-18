@@ -52,7 +52,7 @@ const CreateReport = () => {
               </Col>
               <Card.Body>
                 <TextField name="name" />
-                <DateField name="date" showInlineError type="date" />
+                <DateField name="date" showInlineError type="datetime-local" />
                 <TextField name="reportUser" />
                 <LongTextField name="description" />
                 <SubmitField value="Submit" />
