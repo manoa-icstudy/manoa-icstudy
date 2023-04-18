@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { ListGroup, Container, Col, Row, Table, Image, Badge } from 'react-bootstrap';
+import { Button, ListGroup, Container, Card, Col, Row, Image, Badge } from 'react-bootstrap';
+import { AutoForm, ErrorsField, HiddenField, NumField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { Link } from 'react-router-dom';
-import { PersonFill } from 'react-bootstrap-icons';
+import { Person, PersonFill, PencilFill, X } from 'react-bootstrap-icons';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import swal from 'sweetalert';
 import { Profiles } from '../../../api/profile/Profile';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
+const bridge = new SimpleSchema2Bridge(Profiles.schema);
+
+/* eslint-disable no-nested-ternary */
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
 const UserHome = () => {
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
@@ -24,80 +29,153 @@ const UserHome = () => {
     };
   }, []);
 
+  const [isEditing, setIsEditing] = useState(false);
+
+  const submit = (data) => {
+    const { firstName, lastName, email, picture, currentCourses, mentorCourses } = data;
+    Profiles.collection.update(profile._id, { $set: { firstName, lastName, email, picture, currentCourses, mentorCourses } }, (error) => (error ?
+      swal('Error', error.message, 'error') :
+      (swal('Success', 'Profile updated successfully', 'success'), setIsEditing(false))));
+  };
+
   return (ready ? (
-    <>
-      <Row className="py-2" style={{ backgroundColor: 'gray' }}>
+    <Container fluid>
+      <Row width="100%" className="py-2" style={{ backgroundColor: 'gray' }}>
         <Col className="m-3">
           <Container>
             <h1><PersonFill /> Manage Account</h1>
           </Container>
         </Col>
       </Row>
-      <Container fluid>
-        <Container id="allUserHome">
-          <Row className="mt-4">
-            <Col md={3}>
-              <ListGroup>
-                <ListGroup.Item>
-                  <Link to="/user-home"><h5>Home</h5></Link>
-                </ListGroup.Item>
+      <Container id="allUserHome">
+        <Row className="my-4">
+          <Col md={3}>
+            <ListGroup>
+              <ListGroup.Item>
+                <Link to="/user-home"><h5>Home</h5></Link>
+              </ListGroup.Item>
 
-                <ListGroup.Item>
-                  <div><h5>Study Session</h5></div>
-                  <div><Link to="/user-home-session">- My study session</Link></div>
-                  <div><Link to="/create-study-session">- Create study session</Link></div>
-                </ListGroup.Item>
+              <ListGroup.Item>
+                <div><h5>Study Session</h5></div>
+                <div><Link to="/user-home-session">- My study session</Link></div>
+                <div><Link to="/create-study-session">- Create study session</Link></div>
+              </ListGroup.Item>
 
-                <ListGroup.Item>
-                  <div><h5>Schedule</h5></div>
-                  <div><Link to="/calendar">- Session calendar</Link></div>
-                </ListGroup.Item>
+              <ListGroup.Item>
+                <div><h5>Schedule</h5></div>
+                <div><Link to="/calendar">- Session calendar</Link></div>
+              </ListGroup.Item>
 
-                <ListGroup.Item>
-                  <div><h5>Contact</h5></div>
-                  <div><Link to="/create-feedback">- Feedback</Link></div>
-                </ListGroup.Item>
-              </ListGroup>
-            </Col>
+              <ListGroup.Item>
+                <div><h5>Contact</h5></div>
+                <div><Link to="/create-feedback">- Feedback</Link></div>
+              </ListGroup.Item>
+            </ListGroup>
+          </Col>
 
-            <Col md={6}>
-              <h3>My Profile</h3>
-              <Image src="/images/meteor-logo.png" className="m-3" />
-              <Table bordered hover>
-                <tbody>
-                  <tr>
-                    <th className="w-25">First Name</th>
-                    <td>{profile.firstName}</td>
-                    <th className="w-25">Last Name</th>
-                    <td>{profile.lastName}</td>
-                  </tr>
-                  <tr>
-                    <th>Email</th>
-                    <td colSpan={3}>{profile.email}</td>
-                  </tr>
-                  <tr>
-                    <th>Current Courses</th>
-                    <td colSpan={3}>
-                      {Object.hasOwn(profile, 'currentCourses')
-                        ? profile.currentCourses.map(course => <Badge className="mx-1" key={course}>{course}</Badge>)
-                        : <i>None</i>}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>Mentor Courses</th>
-                    <td colSpan={3}>
-                      {Object.hasOwn(profile, 'mentorCourses')
-                        ? profile.mentorCourses.map(course => <Badge className="mx-1" key={course}>{course}</Badge>)
-                        : <i>None</i>}
-                    </td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Col>
-          </Row>
-        </Container>
+          <Col md={8}>
+            <h3>My Profile</h3>
+            <Row>
+              <Col md={3}>
+                <Card>
+                  <Card.Body className="d-flex flex-column align-items-center">
+                    { !Object.hasOwn(profile, 'picture' || profile.picture.length === 0)
+                      ? <Person size="lg" />
+                      : <Image width="75%" className="m-3" roundedCircle src={profile.picture} />}
+                    <h5>
+                      <span>{profile.firstName}</span>
+                      <span> {profile.lastName}</span>
+                    </h5>
+                    <Button onClick={() => setIsEditing(!isEditing)}>
+                      { isEditing
+                        ? <span><X />Cancel</span>
+                        : <span><PencilFill /> Edit Profile</span> }
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col>
+                <AutoForm schema={bridge} onSubmit={data => submit(data)} model={profile}>
+                  <Card>
+                    <Card.Body>
+                      <Row>
+                        <Col>
+                          <b>First Name</b>
+                        </Col>
+                        <Col>
+                          { isEditing
+                            ? <TextField name="firstName" labelClassName="d-none" />
+                            : <p>{profile.firstName}</p> }
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <b>Last Name</b>
+                        </Col>
+                        <Col>
+                          { isEditing
+                            ? <TextField name="lastName" labelClassName="d-none" />
+                            : <p>{profile.lastName}</p> }
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <b>Email Address</b>
+                        </Col>
+                        <Col>
+                          { isEditing
+                            ? <TextField name="email" labelClassName="d-none" disabled />
+                            : <p>{profile.email}</p> }
+                        </Col>
+                      </Row>
+                      { isEditing && (
+                        <Row>
+                          <Col>
+                            <b>Picture URL</b>
+                          </Col>
+                          <Col>
+                            <TextField name="picture" labelClassName="d-none" />
+                          </Col>
+                        </Row>
+                      )}
+                      <Row>
+                        <Col>
+                          <b>Current Courses</b>
+                        </Col>
+                        <Col>
+                          <p>
+                            { isEditing
+                              ? <SelectField name="currentCourses" labelClassName="d-none" />
+                              : (!Object.hasOwn(profile, 'currentCourses') || profile.currentCourses.length === 0)
+                                ? <i>None</i>
+                                : profile.currentCourses.map(course => <Badge className="me-1" key={course}>{course}</Badge>) }
+                          </p>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <b>Mentor Courses</b>
+                        </Col>
+                        <Col>
+                          <p>
+                            { isEditing
+                              ? <SelectField name="mentorCourses" labelClassName="d-none" />
+                              : (!Object.hasOwn(profile, 'mentorCourses') || profile.mentorCourses.length === 0)
+                                ? <i>None</i>
+                                : profile.mentorCourses.map(course => <Badge className="me-1" key={course}>{course}</Badge>) }
+                          </p>
+                        </Col>
+                      </Row>
+                      { isEditing && <SubmitField value="Submit" />}
+                    </Card.Body>
+                  </Card>
+                </AutoForm>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </Container>
-    </>
+    </Container>
   ) : <LoadingSpinner />);
 };
 

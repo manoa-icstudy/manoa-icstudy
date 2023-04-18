@@ -21,6 +21,7 @@ const SignUp = ({ location }) => {
     lastName: String,
     email: String,
     password: String,
+    picture: { type: String, label: 'Picture URL', optional: true },
     currentCourses: { type: Array, optional: true },
     'currentCourses.$': {
       type: String,
@@ -36,7 +37,7 @@ const SignUp = ({ location }) => {
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (doc) => {
-    const { firstName, lastName, email, password, currentCourses, mentorCourses } = doc;
+    const { firstName, lastName, email, password, picture, currentCourses, mentorCourses } = doc;
     Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         setError(err.reason);
@@ -46,7 +47,7 @@ const SignUp = ({ location }) => {
       }
     });
     Profiles.collection.insert(
-      { firstName, lastName, email, currentCourses, mentorCourses, owner: email },
+      { firstName, lastName, email, picture, currentCourses, mentorCourses, owner: email },
       (err) => {
         if (err) {
           swal('Error', error.message, 'error');
@@ -79,8 +80,15 @@ const SignUp = ({ location }) => {
                     <TextField name="lastName" placeholder="Last name" />
                   </Col>
                 </Row>
-                <TextField name="email" placeholder="E-mail address" />
-                <TextField name="password" placeholder="Password" type="password" />
+                <Row>
+                  <Col>
+                    <TextField name="email" placeholder="Email address" />
+                  </Col>
+                  <Col>
+                    <TextField name="password" placeholder="Password" type="password" />
+                  </Col>
+                </Row>
+                <TextField name="picture" placeholder="URL to profile picture" />
                 <Row>
                   <Col>
                     <SelectField
