@@ -31,6 +31,7 @@ import AdminHomeFeedback from '../pages/admin/AdminHomeFeedback';
 import AdminHomeReport from '../pages/admin/AdminHomeReport';
 import CreateReport from '../pages/CreateReport';
 import EditReport from '../pages/EditReport';
+import TestPage from '../pages/TestPage';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
         <NavBar />
         <Routes>
           <Route exact path="/" element={<Landing />} />
+          <Route path="/intro" element={<TestPage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
