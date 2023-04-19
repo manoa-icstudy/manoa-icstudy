@@ -10,9 +10,9 @@ const Footer = () => (
         <Col>
           <h5>Support</h5>
           <hr />
-          <Nav.Link><h6>Team</h6></Nav.Link>
-          <Nav.Link><h6>Link</h6></Nav.Link>
-          <Nav.Link><h6>Link</h6></Nav.Link>
+          <Nav.Link href="https://github.com/manoa-icstudy"><h6>ICStudy Team</h6></Nav.Link>
+          <Nav.Link href="https://radgrad2.ics.hawaii.edu/#/"><h6>RADGRAD</h6></Nav.Link>
+          <Nav.Link href="https://manoa-icstudy.github.io/"><h6>Github.io/</h6></Nav.Link>
         </Col>
 
         <Col>
@@ -30,7 +30,7 @@ const Footer = () => (
           <hr />
           <Nav.Link href="https://www.ics.hawaii.edu/"><h6>ICS Home</h6></Nav.Link>
           <Nav.Link href="https://www.ics.hawaii.edu/about/"><h6>About ICS</h6></Nav.Link>
-          <Nav.Link><h6>Link</h6></Nav.Link>
+          <Nav.Link href="http://www.ics.hawaii.edu/news/"><h6>ICS News</h6></Nav.Link>
         </Col>
 
         <Col>
