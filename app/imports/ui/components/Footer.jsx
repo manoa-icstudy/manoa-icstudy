@@ -16,7 +16,6 @@ const Footer = () => (
 
         <Col>
           <h5 className="footerLine pb-3 pt-3">UH MANOA</h5>
-          <hr />
           <Nav.Link href="https://manoa.hawaii.edu/"><h6>UH Mānoa</h6></Nav.Link>
           <Nav.Link href="http://natsci.manoa.hawaii.edu/"><h6>College of Natural Sciences</h6></Nav.Link>
           <Nav.Link href="https://manoa.hawaii.edu/about/visit/"><h6>Visit UH Mānoa</h6></Nav.Link>
@@ -26,7 +25,6 @@ const Footer = () => (
 
         <Col>
           <h5 className="footerLine pb-3 pt-3">ICS Department</h5>
-          <hr />
           <Nav.Link href="https://www.ics.hawaii.edu/"><h6>ICS Home</h6></Nav.Link>
           <Nav.Link href="https://www.ics.hawaii.edu/about/"><h6>About ICS</h6></Nav.Link>
           <Nav.Link href="http://www.ics.hawaii.edu/news/"><h6>ICS News</h6></Nav.Link>
