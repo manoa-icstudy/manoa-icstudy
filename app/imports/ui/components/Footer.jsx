@@ -8,15 +8,14 @@ const Footer = () => (
     <Container className="p-3" style={{ borderBottom: 'solid', borderColor: 'lightgray' }}>
       <Row>
         <Col>
-          <h5>Support</h5>
-          <hr />
+          <h5 className="footerLine pb-3 pt-3">Support</h5>
           <Nav.Link href="https://github.com/manoa-icstudy"><h6>ICStudy Team</h6></Nav.Link>
           <Nav.Link href="https://radgrad2.ics.hawaii.edu/#/"><h6>RADGRAD</h6></Nav.Link>
           <Nav.Link href="https://manoa-icstudy.github.io/"><h6>Github.io/</h6></Nav.Link>
         </Col>
 
         <Col>
-          <h5>UH MANOA</h5>
+          <h5 className="footerLine pb-3 pt-3">UH MANOA</h5>
           <hr />
           <Nav.Link href="https://manoa.hawaii.edu/"><h6>UH Mānoa</h6></Nav.Link>
           <Nav.Link href="http://natsci.manoa.hawaii.edu/"><h6>College of Natural Sciences</h6></Nav.Link>
@@ -26,7 +25,7 @@ const Footer = () => (
         </Col>
 
         <Col>
-          <h5>ICS Department</h5>
+          <h5 className="footerLine pb-3 pt-3">ICS Department</h5>
           <hr />
           <Nav.Link href="https://www.ics.hawaii.edu/"><h6>ICS Home</h6></Nav.Link>
           <Nav.Link href="https://www.ics.hawaii.edu/about/"><h6>About ICS</h6></Nav.Link>
@@ -34,8 +33,7 @@ const Footer = () => (
         </Col>
 
         <Col>
-          <h5>Newsletter</h5>
-          <hr />
+          <h5 className="footerLine pb-3 pt-3">Newsletter</h5>
           <h6>Sign up with your email to join our mailing list.</h6>
           <br />
           <Form className="mb-3">
