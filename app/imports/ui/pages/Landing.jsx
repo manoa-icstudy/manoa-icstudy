@@ -39,43 +39,45 @@ const Landing = () => {
 
             <Container id="container" className="ml-3 mt-4 align-middle justify-content-center">
               <Image src="https://manoa-icstudy.github.io/images/Login.png" />
+              <Image src="https://manoa-icstudy.github.io/images/StudySessions.png" />
               <Image src="https://manoa-icstudy.github.io/images/UserProfile.png" />
               <Image src="https://manoa-icstudy.github.io/images/Calendar.png" />
-              <Image src="https://manoa-icstudy.github.io/images/StudySessions.png" />
             </Container>
 
           </Col>
 
-          <Container className="reveal fade-bottom">
-            <Row className="align-content-center p-5" style={{ backgroundColor: 'white' }}>
-              <h1>Our Goals</h1>
-              <Col style={{ borderColor: 'black', border: 'solid' }} className="m-4 p-4">
-                <h3> <PeopleFill /> &nbsp;Engagement</h3>
-                <Image className="m-4" src="https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_960_720.jpg" width={400} />
-                <p>The goal of ICStudy is to develop strategies that increase student engagement in the classroom.
-                  This may involve exploring the use of technology, creating more interactive lessons, and providing opportunities for student-led learning.
-                  By increasing student engagement, we hope to improve student outcomes and create a more positive learning environment.
-                </p>
-              </Col>
+          <Container className="reveal fade-bottom pt-5 mt-5">
+            <Col>
+              <Row className="align-content-center p-5" style={{ backgroundColor: 'white' }}>
+                <h1>Our Goals</h1>
+                <Col style={{ borderColor: 'black', border: 'solid' }} className="m-4 p-4">
+                  <h3> <PeopleFill /> &nbsp;Engagement</h3>
+                  <Image className="m-4" src="https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_960_720.jpg" width={400} />
+                  <p>The goal of ICStudy is to develop strategies that increase student engagement in the classroom.
+                    This may involve exploring the use of technology, creating more interactive lessons, and providing opportunities for student-led learning.
+                    By increasing student engagement, we hope to improve student outcomes and create a more positive learning environment.
+                  </p>
+                </Col>
 
-              <Col style={{ borderColor: 'black', border: 'solid' }} className="m-4 p-4">
-                <h3> <ChatRightTextFill /> &nbsp;Collaboration</h3>
-                <Image className="m-4" src="https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924_960_720.jpg" width={400} />
-                <p>Collaborate on challenging coursework or assignments.
-                  By sharing ideas and working together, both parties can learn from each other and potentially improve their understanding of the material.
-                </p>
-              </Col>
+                <Col style={{ borderColor: 'black', border: 'solid' }} className="m-4 p-4">
+                  <h3> <ChatRightTextFill /> &nbsp;Collaboration</h3>
+                  <Image className="m-4" src="https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924_960_720.jpg" width={400} />
+                  <p>Collaborate on challenging coursework or assignments.
+                    By sharing ideas and working together, both parties can learn from each other and potentially improve their understanding of the material.
+                  </p>
+                </Col>
 
-              <Col style={{ borderColor: 'black', border: 'solid' }} className="m-4 p-4">
-                <h3> <PuzzleFill /> &nbsp;Diversity and Inclusion</h3>
-                <Image className="m-4" src="https://cdn.pixabay.com/photo/2020/09/30/08/55/unity-in-diversity-5615014_960_720.jpg" width={250} />
-                <p>Promote diversity and inclusion in the classroom.
-                  This may involve exploring ways to create a more diverse student body, developing culturally responsive teaching practices,
-                  and providing resources for teachers to better understand and address issues of diversity and inclusion.
-                  By promoting diversity and inclusion, we hope to create a more equitable and welcoming learning environment for all students.
-                </p>
-              </Col>
-            </Row>
+                <Col style={{ borderColor: 'black', border: 'solid' }} className="m-4 p-4">
+                  <h3> <PuzzleFill /> &nbsp;Diversity and Inclusion</h3>
+                  <Image className="m-4" src="https://cdn.pixabay.com/photo/2020/09/30/08/55/unity-in-diversity-5615014_960_720.jpg" width={250} />
+                  <p>Promote diversity and inclusion in the classroom.
+                    This may involve exploring ways to create a more diverse student body, developing culturally responsive teaching practices,
+                    and providing resources for teachers to better understand and address issues of diversity and inclusion.
+                    By promoting diversity and inclusion, we hope to create a more equitable and welcoming learning environment for all students.
+                  </p>
+                </Col>
+              </Row>
+            </Col>
           </Container>
 
           <Row className=" justify-content-center mx-auto">
