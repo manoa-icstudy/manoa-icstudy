@@ -1,7 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Sessions } from '../../api/session/Session';
 import StudySession from '../components/StudySession';
@@ -27,28 +26,14 @@ const ListStuff = () => {
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col md={7}>
+        <Row md={10}>
           <Col className="text-center">
             <h2>Study Sessions</h2>
           </Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>ICS Class</th>
-                <th>Description</th>
-                <th>Date</th>
-                <th>Report Session</th>
-                {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                  <th>Remove</th>
-                ) : ''}
-              </tr>
-            </thead>
-            <tbody>
-              {sessions.map((session) => <StudySession key={session._id} session={session} collection={Sessions.collection} />)}
-            </tbody>
-          </Table>
-        </Col>
+          <Row xs={1} md={2} className="g-5">
+            {sessions.map((session) => <StudySession key={session._id} session={session} collection={Sessions.collection} />)}
+          </Row>
+        </Row>
       </Row>
     </Container>
   ) : <LoadingSpinner />);

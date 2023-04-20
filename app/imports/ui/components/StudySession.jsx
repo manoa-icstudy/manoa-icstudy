@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { Button } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
@@ -11,16 +11,29 @@ const StudySession = ({ session, collection }) => {
     collection.remove(docID);
   };
   return (
-    <tr>
-      <td>{session.name}</td>
-      <td>{session.icsclass}</td>
-      <td>{session.description}</td>
-      <td>{session.date.toDateString()}</td>
-      <td><Button href="/create-report" variant="warning" style={{ color: 'black' }}>Report it</Button></td>
-      {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-        <td><Button variant="danger" onClick={() => removeItem(session._id)}><Trash /></Button></td>
-      ) : ''}
-    </tr>
+    <Row>
+      <Col className="col-sm-4">
+        <Card className="text-dark bg-light">
+          <Card.Header className="bg-primary text-center text-warning">
+            <Card.Title>{session.icsclass}</Card.Title>
+            <Card.Subtitle><span className="created-by">Created By: {session.name}</span></Card.Subtitle>
+            <Card.Subtitle><span className="date">Date: {session.date.toDateString()}</span></Card.Subtitle>
+          </Card.Header>
+          <Card.Body>
+            <Card.Text>Description:</Card.Text>
+            <Card.Text>{session.description}</Card.Text>
+          </Card.Body>
+          <Card.Footer>
+            <Col >
+              <Button href="/create-report" variant="warning" style={{ color: 'black' }}>Report it</Button>
+              {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                <td><Button variant="danger" onClick={() => removeItem(session._id)}><Trash /></Button></td>
+              ) : ''}
+            </Col>
+          </Card.Footer>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 
