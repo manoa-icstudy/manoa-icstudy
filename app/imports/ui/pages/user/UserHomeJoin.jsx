@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { ListGroup, Container, Col, Row, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -70,7 +71,7 @@ const UserHomeJoin = () => {
             <Col>
               <Container className="py-3">
                 <Row className="justify-content-center">
-                  <Col md={10}>
+                  <Col md={11}>
                     <Col className="text-center">
                       <h2>Join List</h2>
                     </Col>
@@ -83,6 +84,9 @@ const UserHomeJoin = () => {
                           <th>Date</th>
                           <th>Join Session</th>
                           <th>Report</th>
+                          {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                            <th>Remove</th>
+                          ) : ''}
                         </tr>
                       </thead>
                       <tbody>
