@@ -19,6 +19,7 @@ const StudySession = ({ session, collection }) => {
 
   const join = (doc) => {
     if (!(doc.participant.find(user => user === currentUser))) {
+      console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
       doc.participant.push(currentUser);
       const newParticipant = doc.participant;
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
@@ -36,12 +37,23 @@ const StudySession = ({ session, collection }) => {
     }
   };
 
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    weekday: 'short',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'Pacific/Honolulu',
+
+  };
+
   return (
     <tr>
       <td>{session.name}</td>
       <td>{session.icsclass}</td>
       <td>{session.description}</td>
-      <td>{session.date.toDateString()}</td>
+      <td>{new Intl.DateTimeFormat('en-US', options).format(session.date)}</td>
       <td>
         <Container>
           <Row>
