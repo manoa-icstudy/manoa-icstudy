@@ -32,8 +32,9 @@ const CreateStudySession = () => {
     const currDate = new Date();
     const { name, date, icsclass, description, createDate = currDate } = data;
     const owner = Meteor.user().username;
+    const participant = [owner];
     Sessions.collection.insert(
-      { name, date, icsclass, description, createDate, owner },
+      { name, date, icsclass, description, createDate, owner, participant },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');

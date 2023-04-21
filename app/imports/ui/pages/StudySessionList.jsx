@@ -38,6 +38,7 @@ const ListStuff = () => {
                 <th>ICS Class</th>
                 <th>Description</th>
                 <th>Date</th>
+                <th>Join Session</th>
                 <th>Report Session</th>
                 {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                   <th>Remove</th>

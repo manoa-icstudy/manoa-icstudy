@@ -23,6 +23,10 @@ class SessionsCollection {
         allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
         defaultValue: 'ICS 101',
       },
+      participant: Array,
+      'participant.$': {
+        type: String,
+      },
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

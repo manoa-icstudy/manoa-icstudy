@@ -75,6 +75,7 @@ const UserHomeSession = () => {
                           <th>ICS Class</th>
                           <th>Description</th>
                           <th>Date</th>
+                          <th>Join Session</th>
                           <th>Report</th>
                           <th>Remove</th>
                         </tr>
