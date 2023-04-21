@@ -19,7 +19,13 @@ const StudySession = ({ session, collection }) => {
 
   const join = (doc) => {
     if (doc.participant.find(user => user === currentUser)) {
-      swal('Error', 'You have joined', 'error');
+      const index = doc.participant.indexOf(currentUser);
+      if (index > -1) {
+        doc.participant.splice(index, 1);
+      }
+      const newParticipant = doc.participant;
+      Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
+      swal('Success', 'Quit success', 'success');
     } else {
       doc.participant.push(currentUser);
       const newParticipant = doc.participant;
@@ -36,11 +42,12 @@ const StudySession = ({ session, collection }) => {
       <td>{session.date.toDateString()}</td>
       <td>
         <Row>
-          <Col style={{ paddingRight: '0' }}><Button variant="info" onClick={() => join(session)}>Join</Button></Col>
+          <Col style={{ paddingRight: '0' }}><Button variant="info" onClick={() => join(session)}>Join/Leave</Button></Col>
           <Col style={{ paddingLeft: '0' }}>
             <DropdownButton variant="info">
+              <Dropdown.ItemText>Participant:</Dropdown.ItemText>
               {/* eslint-disable-next-line react/prop-types */}
-              {session.participant.map(user => <Dropdown.Item key={user}>{user}</Dropdown.Item>)}
+              <Dropdown.Item>{session.participant.map(user => <Col key={user}>-&nbsp;&nbsp; {user}</Col>)}</Dropdown.Item>
             </DropdownButton>
           </Col>
         </Row>
