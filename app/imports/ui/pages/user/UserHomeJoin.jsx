@@ -5,20 +5,25 @@ import { Link } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 import { PersonFill } from 'react-bootstrap-icons';
 import { Sessions } from '../../../api/session/Session';
-import UserStudySession from '../../components/UserStudySession';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import StudySession from '../../components/StudySession';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
-const UserHomeSession = () => {
+const UserHomeJoin = () => {
+  const { currentUser } = useTracker(() => ({
+    currentUser: Meteor.user() ? Meteor.user().username : '',
+  }), []);
+
   const { ready, sessions } = useTracker(() => {
   // Note that this subscription will get cleaned up
   // when your component is unmounted or deps change.
   // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Sessions.userPublicationName);
+    const subscription = Meteor.subscribe(Sessions.publicPublicationName);
+    console.log(subscription);
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
-    const stuffItems = Sessions.collection.find({}).fetch();
+    const stuffItems = Sessions.collection.find({ participant: currentUser }).fetch();
     return {
       sessions: stuffItems,
       ready: rdy,
@@ -67,7 +72,7 @@ const UserHomeSession = () => {
                 <Row className="justify-content-center">
                   <Col md={10}>
                     <Col className="text-center">
-                      <h2>Session List</h2>
+                      <h2>Join List</h2>
                     </Col>
                     <Table striped bordered hover>
                       <thead>
@@ -78,11 +83,10 @@ const UserHomeSession = () => {
                           <th>Date</th>
                           <th>Join Session</th>
                           <th>Report</th>
-                          <th>Remove</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {sessions.map((session) => <UserStudySession key={session._id} session={session} collection={Sessions.collection} />)}
+                        {sessions.map((session) => <StudySession key={session._id} session={session} />)}
                       </tbody>
                     </Table>
                   </Col>
@@ -96,4 +100,4 @@ const UserHomeSession = () => {
   ) : <LoadingSpinner />);
 };
 
-export default UserHomeSession;
+export default UserHomeJoin;

@@ -27,7 +27,7 @@ const ListStuff = () => {
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col md={7}>
+        <Col md={8}>
           <Col className="text-center">
             <h2>Study Sessions</h2>
           </Col>

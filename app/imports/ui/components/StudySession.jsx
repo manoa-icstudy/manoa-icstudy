@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { Button, Col, Dropdown, DropdownButton, Row } from 'react-bootstrap';
+import { Button, Col, Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
 import swal from 'sweetalert';
 import { Sessions } from '../../api/session/Session';
@@ -18,7 +18,12 @@ const StudySession = ({ session, collection }) => {
   };
 
   const join = (doc) => {
-    if (doc.participant.find(user => user === currentUser)) {
+    if (!(doc.participant.find(user => user === currentUser))) {
+      doc.participant.push(currentUser);
+      const newParticipant = doc.participant;
+      Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
+      swal('Success', 'Join success', 'success');
+    } else if ((doc.participant.find(user => user === currentUser)) && (currentUser !== doc.owner)) {
       const index = doc.participant.indexOf(currentUser);
       if (index > -1) {
         doc.participant.splice(index, 1);
@@ -27,10 +32,7 @@ const StudySession = ({ session, collection }) => {
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
       swal('Success', 'Quit success', 'success');
     } else {
-      doc.participant.push(currentUser);
-      const newParticipant = doc.participant;
-      Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
-      swal('Success', 'Join success', 'success');
+      swal('Error', 'You own this Session', 'error');
     }
   };
 
@@ -41,16 +43,18 @@ const StudySession = ({ session, collection }) => {
       <td>{session.description}</td>
       <td>{session.date.toDateString()}</td>
       <td>
-        <Row>
-          <Col style={{ paddingRight: '0' }}><Button variant="info" onClick={() => join(session)}>Join/Leave</Button></Col>
-          <Col style={{ paddingLeft: '0' }}>
-            <DropdownButton variant="info">
-              <Dropdown.ItemText>Participant:</Dropdown.ItemText>
-              {/* eslint-disable-next-line react/prop-types */}
-              <Dropdown.Item>{session.participant.map(user => <Col key={user}>-&nbsp;&nbsp; {user}</Col>)}</Dropdown.Item>
-            </DropdownButton>
-          </Col>
-        </Row>
+        <Container>
+          <Row>
+            <Col style={{ paddingRight: '0' }}><Button variant="info" onClick={() => join(session)}>Join/Leave</Button></Col>
+            <Col style={{ paddingLeft: '0' }}>
+              <DropdownButton variant="info">
+                <Dropdown.ItemText>Participant:</Dropdown.ItemText>
+                {/* eslint-disable-next-line react/prop-types */}
+                <Dropdown.Item>{session.participant.map(user => <Col key={user}>-&nbsp;&nbsp; {user}</Col>)}</Dropdown.Item>
+              </DropdownButton>
+            </Col>
+          </Row>
+        </Container>
       </td>
       <td><Button href="/create-report" variant="warning" style={{ color: 'black' }}>Report it</Button></td>
       {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
