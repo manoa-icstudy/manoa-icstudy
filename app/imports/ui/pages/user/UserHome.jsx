@@ -47,9 +47,9 @@ const UserHome = () => {
           </Container>
         </Col>
       </Row>
-      <Container id="allUserHome">
-        <Row className="my-4">
-          <Col md={3}>
+      <Container id="allUserHome" fluid>
+        <Row className="my-4 justify-content-start">
+          <Col md={2}>
             <ListGroup>
               <ListGroup.Item>
                 <Link to="/user-home"><h5>Home</h5></Link>

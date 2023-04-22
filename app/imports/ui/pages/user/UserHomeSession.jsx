@@ -35,8 +35,8 @@ const UserHomeSession = () => {
         </Col>
       </Row>
       <Container fluid>
-        <Container id="allUserHome">
-          <Row className="mt-4">
+        <Container id="allUserHome" fluid>
+          <Row className="my-4 justify-content-start">
             <Col md={3}>
               <ListGroup>
                 <ListGroup.Item>
