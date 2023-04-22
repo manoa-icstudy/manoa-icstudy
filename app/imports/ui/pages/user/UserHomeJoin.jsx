@@ -41,7 +41,7 @@ const UserHomeJoin = () => {
         </Col>
       </Row>
       <Container fluid>
-        <Container id="allUserHome" fluid>
+        <Container id="allUserHome" fluid className="mx-5">
           <Row className="my-4 justify-content-start">
             <Col md={2}>
               <ListGroup>
