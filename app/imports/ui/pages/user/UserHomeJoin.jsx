@@ -71,7 +71,7 @@ const UserHomeJoin = () => {
             <Col>
               <Container className="py-3">
                 <Row className="justify-content-center">
-                  <Col md={11}>
+                  <Col>
                     <Col className="text-center">
                       <h2>Join List</h2>
                     </Col>
@@ -79,6 +79,7 @@ const UserHomeJoin = () => {
                       <thead>
                         <tr>
                           <th>Name</th>
+                          <th>Location</th>
                           <th>ICS Class</th>
                           <th>Description</th>
                           <th>Date</th>

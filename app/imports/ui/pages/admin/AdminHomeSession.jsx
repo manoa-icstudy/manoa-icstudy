@@ -65,7 +65,7 @@ const AdminHomeSession = () => {
           <Col>
             <Container className="py-3">
               <Row className="justify-content-center">
-                <Col md={11}>
+                <Col>
                   <Col className="text-center">
                     <h2>Session List</h2>
                     <h5>Status: {num} sessions available</h5>
@@ -74,6 +74,7 @@ const AdminHomeSession = () => {
                     <thead>
                       <tr>
                         <th>Name</th>
+                        <th>Location</th>
                         <th>ICS Class</th>
                         <th>Description</th>
                         <th>Date</th>

@@ -51,6 +51,7 @@ const StudySession = ({ session, collection }) => {
   return (
     <tr>
       <td>{session.name}</td>
+      <td>{session.location}</td>
       <td>{session.icsclass}</td>
       <td>{session.description}</td>
       <td>{new Intl.DateTimeFormat('en-US', options).format(session.date)}</td>
@@ -80,6 +81,7 @@ const StudySession = ({ session, collection }) => {
 StudySession.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
+    location: PropTypes.string,
     date: PropTypes.instanceOf(Date),
     icsclass: PropTypes.string,
     description: PropTypes.string,

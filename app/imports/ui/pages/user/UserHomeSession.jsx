@@ -65,7 +65,7 @@ const UserHomeSession = () => {
             <Col>
               <Container className="py-3">
                 <Row className="justify-content-center">
-                  <Col md={11}>
+                  <Col>
                     <Col className="text-center">
                       <h2>Session List</h2>
                     </Col>
@@ -73,6 +73,7 @@ const UserHomeSession = () => {
                       <thead>
                         <tr>
                           <th>Name</th>
+                          <th>Location</th>
                           <th>ICS Class</th>
                           <th>Description</th>
                           <th>Date</th>

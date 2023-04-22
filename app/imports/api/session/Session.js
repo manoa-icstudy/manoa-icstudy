@@ -14,6 +14,7 @@ class SessionsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       name: String,
+      location: String,
       date: Date,
       owner: String,
       description: String,
