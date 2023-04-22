@@ -51,8 +51,8 @@ const addProfile = (profile) => {
 
 // Initialize the ProfilesCollection if empty.
 if (Profiles.collection.find().count() === 0) {
-  if (Meteor.settings.defaultData) {
-    console.log('Creating default data.');
+  if (Meteor.settings.defaultProfiles) {
+    console.log('Creating default profiles.');
     Meteor.settings.defaultProfiles.forEach(profile => addProfile(profile));
   }
 }
