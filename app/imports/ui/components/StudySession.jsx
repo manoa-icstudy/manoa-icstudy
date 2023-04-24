@@ -1,39 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
-import { Button, Card, Col, Row } from 'react-bootstrap';
-import { Trash } from 'react-bootstrap-icons';
+import { Button, Card, CardGroup, Container, ListGroup, Modal } from 'react-bootstrap';
+import { Calendar2, Trash, PeopleFill } from 'react-bootstrap-icons';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const StudySession = ({ session, collection }) => {
   const removeItem = (docID) => {
     collection.remove(docID);
   };
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
-    <Row>
-      <Col className="col-sm-4">
-        <Card className="text-dark bg-light">
-          <Card.Header className="bg-primary text-center text-warning">
-            <Card.Title>{session.icsclass}</Card.Title>
-            <Card.Subtitle><span className="created-by">Created By: {session.name}</span></Card.Subtitle>
-            <Card.Subtitle><span className="date">Date: {session.date.toDateString()}</span></Card.Subtitle>
-          </Card.Header>
+    <Container>
+      <CardGroup>
+        <Card>
           <Card.Body>
-            <Card.Text>Description:</Card.Text>
-            <Card.Text>{session.description}</Card.Text>
+            <Card.Title>{session.icsclass}</Card.Title>
+            <ListGroup>
+              <ListGroup.Item><PeopleFill /><Card.Text className="d-inline-block">{session.name}</Card.Text></ListGroup.Item>
+              <ListGroup.Item><Calendar2 /><Card.Text className="d-inline-block">{session.date.toDateString()}</Card.Text></ListGroup.Item>
+            </ListGroup>
           </Card.Body>
           <Card.Footer>
-            <Col >
-              <Button href="/create-report" variant="warning" style={{ color: 'black' }}>Report it</Button>
-              {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                <td><Button variant="danger" onClick={() => removeItem(session._id)}><Trash /></Button></td>
-              ) : ''}
-            </Col>
+            <Button id="left-panel-link" href="/create-report" variant="warning" style={{ color: 'black' }}>Report it</Button>
+            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+              <td><Button id="left-panel-link" onClick={() => removeItem(session._id)}><Trash /></Button></td>
+            ) : ''}
+            <>
+              <Button id="right-panel-link" onClick={handleShow}>Learn More</Button>
+              <Modal show={show} onHide={handleClose} animation={false}>
+                <Modal.Header closeButton>
+                  <Modal.Title>{session.icsclass}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{session.description}</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </>
           </Card.Footer>
         </Card>
-      </Col>
-    </Row>
+      </CardGroup>
+    </Container>
   );
 };
 

@@ -37,10 +37,35 @@ body {
   --bs-alert-bg: var(--matr-navbar-bg);
 }
 
-/* Define custom styles */
-.gray-background {
-  background-color: var(--matr-navbar-bg);
-  color: var(--bs-dark);
-  padding-top: 10px;
-  padding-bottom: 20px;
+
+
+body {
+  font-family: 'Montserrat';
+  font-style: Italic;
+  background-image: url("https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
+
+#left-panel-link {
+  position: relative;
+  left: 5%;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#right-panel-link {
+  position: absolute;
+  right: 10%;
+  background-color: #555;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
