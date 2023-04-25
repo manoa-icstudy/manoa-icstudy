@@ -27,7 +27,7 @@ const ListStuff = () => {
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
-        <Col md={7}>
+        <Col>
           <Col className="text-center">
             <h2>Study Sessions</h2>
           </Col>
@@ -35,9 +35,11 @@ const ListStuff = () => {
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Location</th>
                 <th>ICS Class</th>
                 <th>Description</th>
                 <th>Date</th>
+                <th>Join Session</th>
                 <th>Report Session</th>
                 {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                   <th>Remove</th>

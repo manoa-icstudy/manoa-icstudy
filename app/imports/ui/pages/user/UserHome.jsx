@@ -47,9 +47,9 @@ const UserHome = () => {
           </Container>
         </Col>
       </Row>
-      <Container id="allUserHome">
-        <Row className="my-4">
-          <Col md={3}>
+      <Container id="allUserHome" fluid className="mx-5">
+        <Row className="my-4 justify-content-start">
+          <Col md={2}>
             <ListGroup>
               <ListGroup.Item>
                 <Link to="/user-home"><h5>Home</h5></Link>
@@ -58,6 +58,7 @@ const UserHome = () => {
               <ListGroup.Item>
                 <div><h5>Study Session</h5></div>
                 <div><Link to="/user-home-session">- My study session</Link></div>
+                <div><Link to="/user-home-join">- My Joined session</Link></div>
                 <div><Link to="/create-study-session">- Create study session</Link></div>
               </ListGroup.Item>
 

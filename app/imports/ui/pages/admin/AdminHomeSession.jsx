@@ -36,9 +36,9 @@ const AdminHomeSession = () => {
           </Container>
         </Col>
       </Row>
-      <Container id="allUserHome">
-        <Row className="mt-4">
-          <Col md={3}>
+      <Container id="allUserHome" fluid className="mx-5">
+        <Row className="my-4 justify-content-start">
+          <Col md={2}>
             <ListGroup>
               <ListGroup.Item>
                 <Link to="/admin-home"><h5>Home</h5></Link>
@@ -65,7 +65,7 @@ const AdminHomeSession = () => {
           <Col>
             <Container className="py-3">
               <Row className="justify-content-center">
-                <Col md={10}>
+                <Col>
                   <Col className="text-center">
                     <h2>Session List</h2>
                     <h5>Status: {num} sessions available</h5>
@@ -74,9 +74,11 @@ const AdminHomeSession = () => {
                     <thead>
                       <tr>
                         <th>Name</th>
+                        <th>Location</th>
                         <th>ICS Class</th>
                         <th>Description</th>
                         <th>Date</th>
+                        <th>Join Session</th>
                         <th>Report</th>
                         <th>Remove</th>
                       </tr>
