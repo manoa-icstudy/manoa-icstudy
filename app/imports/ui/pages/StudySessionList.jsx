@@ -8,7 +8,7 @@ import StudySession from '../components/StudySession';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-const ListStuff = () => {
+const StudySessionList = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, sessions } = useTracker(() => {
     // Note that this subscription will get cleaned up
@@ -25,7 +25,7 @@ const ListStuff = () => {
     };
   }, []);
   return (ready ? (
-    <Container className="py-3">
+    <Container className="py-3" id="study-session-list">
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
@@ -56,4 +56,4 @@ const ListStuff = () => {
   ) : <LoadingSpinner />);
 };
 
-export default ListStuff;
+export default StudySessionList;

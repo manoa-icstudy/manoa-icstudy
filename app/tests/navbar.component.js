@@ -52,6 +52,14 @@ class NavBar {
     await testController.click('#login-dropdown-sign-up');
   }
 
+  async gotoStudySessionPage(testController) {
+    await testController.click('#study-session-list-nav');
+  }
+
+  async gotoCreateStudySessionPage(testController) {
+    await testController.click('#create-session-nav');
+  }
+
   /** Pull down login menu, go to profile page. */
   async gotoProfilePage(testController) {
     const visible = await Selector('#basic-navbar-nav').visible;

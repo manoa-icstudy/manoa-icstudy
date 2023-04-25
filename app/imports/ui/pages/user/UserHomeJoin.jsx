@@ -51,9 +51,9 @@ const UserHomeJoin = () => {
 
                 <ListGroup.Item>
                   <div><h5>Study Session</h5></div>
-                  <div><Link to="/user-home-session">- My study session</Link></div>
-                  <div><Link to="/user-home-join">- My Joined session</Link></div>
-                  <div><Link to="/create-study-session">- Create study session</Link></div>
+                  <div><Link to="/user-home-session" id="goto-user-home-session">- My study session</Link></div>
+                  <div><Link to="/user-home-join" id="goto-user-home-join">- My Joined session</Link></div>
+                  <div><Link to="/create-study-session" id="goto-create-study-session">- Create study session</Link></div>
                 </ListGroup.Item>
 
                 <ListGroup.Item>

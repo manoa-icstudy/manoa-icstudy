@@ -58,7 +58,7 @@ const StudySession = ({ session, collection }) => {
       <td>
         <Container>
           <Row>
-            <Col style={{ paddingRight: '0' }}><Button variant="info" onClick={() => join(session)}>Join/Leave</Button></Col>
+            <Col style={{ paddingRight: '0' }}><Button variant="info" onClick={() => join(session)} id={session._id}>Join/Leave</Button></Col>
             <Col style={{ paddingLeft: '0' }}>
               <DropdownButton variant="info">
                 <Dropdown.ItemText>Participant:</Dropdown.ItemText>
@@ -69,9 +69,9 @@ const StudySession = ({ session, collection }) => {
           </Row>
         </Container>
       </td>
-      <td><Button href="/create-report" variant="warning" style={{ color: 'black' }}>Report it</Button></td>
+      <td><Button href="/create-report" variant="warning" style={{ color: 'black' }} id={session._id}>Report it</Button></td>
       {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-        <td><Button variant="danger" onClick={() => removeItem(session._id)}><Trash /></Button></td>
+        <td><Button variant="danger" onClick={() => removeItem(session._id)} id={session._id}><Trash /></Button></td>
       ) : ''}
     </tr>
   );

@@ -50,19 +50,19 @@ const CreateStudySession = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container className="py-3" id="create-study-session">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create Study Session</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="name" />
-                <TextField name="location" />
-                <DateField name="date" showInlineError type="datetime-local" />
-                <SelectField name="icsclass" />
-                <LongTextField name="description" />
-                <SubmitField value="Submit" />
+                <TextField name="name" id="create-study-session-name" />
+                <TextField name="location" id="create-study-session-location" />
+                <DateField name="date" showInlineError type="datetime-local" id="create-study-session-date" />
+                <SelectField name="icsclass" id="create-study-session-icsclass" />
+                <LongTextField name="description" id="create-study-session-description" />
+                <SubmitField value="Submit" id="create-study-session-submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>
