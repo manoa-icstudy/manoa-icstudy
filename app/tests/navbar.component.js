@@ -53,7 +53,7 @@ class NavBar {
     await testController.click('#login-dropdown-sign-up');
   }
 
-  async gotoListStuffPage(testController) {
+  async gotoStudySessionPage(testController) {
     await testController.click('#study-session-list-nav');
   }
 }
