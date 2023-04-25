@@ -18,6 +18,7 @@ test('Test that landing page shows up', async (testController) => {
 });
 
 test('Test that calendar page shows up', async (testController) => {
+  await landingPage.isDisplayed(testController);
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.isLoggedIn(testController, credentials.username);
@@ -26,6 +27,7 @@ test('Test that calendar page shows up', async (testController) => {
 });
 
 test('Test that signin and signout work', async (testController) => {
+  await landingPage.isDisplayed(testController);
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.isLoggedIn(testController, credentials.username);
@@ -34,6 +36,7 @@ test('Test that signin and signout work', async (testController) => {
 });
 
 test.only('Test that user home page works', async (testController) => {
+  await landingPage.isDisplayed(testController);
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.isLoggedIn(testController, credentials.username);
