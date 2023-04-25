@@ -5,8 +5,8 @@ import { Profiles } from '../../api/profile/Profile';
 import { Feedbacks } from '../../api/feedback/Feedback';
 import { Report } from '../../api/report/Report';
 import { ReportDate } from '../../api/date/ReportDate';
-import { LoginLog } from '../../api/log/LoginLog'
-import { Points } from '../../api/points/Points';
+import { LoginLog } from '../../api/log/LoginLog';
+import { PointsCollection } from '../../api/points/Points';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
@@ -19,6 +19,8 @@ Meteor.publish('ReportDateData', () => ReportDate.find());
 Meteor.publish('ReportCollection', () => Report.find());
 
 Meteor.publish('LoginLogCollection', () => LoginLog.find());
+
+Meteor.publish('PointsCollection', () => PointsCollection.find());
 
 Meteor.publish(Sessions.userPublicationName, function () {
   if (this.userId) {
@@ -57,10 +59,6 @@ Meteor.publish(Feedbacks.adminPublicationName, function () {
     return Feedbacks.collection.find();
   }
   return this.ready();
-});
-
-Meteor.publish(Points.publicPublicationName, function () {
-  return Points.collection.find();
 });
 
 // alanning:roles publication

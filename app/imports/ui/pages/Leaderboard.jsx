@@ -3,24 +3,25 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Points } from '../../api/points/Points';
+import { PointsCollection } from '../../api/points/Points';
 import LoadingSpinner from '../components/LoadingSpinner';
 import PointsStuff from '../components/Points';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Leaderboard = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, points } = useTracker(() => {
+  const { ready, user } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Points.publicPublicationName);
+    const nameSubscription = Meteor.subscribe('PointsCollection');
     // Determine if the subscription is ready
-    const rdy = subscription.ready();
+    const rdy = nameSubscription.ready()
     // Get the Stuff documents
-    const stuffItems = Points.collection.find({}).fetch();
+    const name = PointsCollection.find().fetch();
+
     return {
-      points: stuffItems,
+      user: name,
       ready: rdy,
     };
   }, []);
@@ -35,6 +36,7 @@ const Leaderboard = () => {
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Points</th>
                 <th>Redeem</th>
                 {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                   <th>Remove</th>
@@ -42,7 +44,7 @@ const Leaderboard = () => {
               </tr>
             </thead>
             <tbody>
-              {points.map((point) => <PointsStuff key={points._id} point={point} collection={Points.collection} />)}
+              {user.map((point) => <PointsStuff key={point._id} points={point} collection={PointsCollection} />)}
             </tbody>
           </Table>
         </Col>

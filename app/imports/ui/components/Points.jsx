@@ -5,7 +5,6 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Button } from 'react-bootstrap';
 import { MdRedeem } from 'react-bootstrap-icons';
-// import { Points } from '../../api/points/Points';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const PointsStuff = ({ points, collection }) => {
