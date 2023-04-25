@@ -22,3 +22,11 @@ test('Test that signin and signout work', async (testController) => {
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
 });
+
+test('Test the List Stuff page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoListStuffPage(testController);
+  await listStuffPage.isDisplayed(testController);
+  await listStuffPage.hasTable(testController);
+});
