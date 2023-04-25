@@ -32,6 +32,7 @@ import AdminHomeReport from '../pages/admin/AdminHomeReport';
 import CreateReport from '../pages/CreateReport';
 import EditReport from '../pages/EditReport';
 import UserHomeJoin from '../pages/user/UserHomeJoin';
+import Leaderboard from '../pages/Leaderboard';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -59,7 +60,8 @@ const App = () => {
           <Route path="/user-home" element={<ProtectedRoute><UserHome /></ProtectedRoute>} />
           <Route path="/user-home-session" element={<ProtectedRoute><UserHomeSession /></ProtectedRoute>} />
           <Route path="/user-home-join" element={<ProtectedRoute><UserHomeJoin /></ProtectedRoute>} />
-          <Route path="/create-feedback" element={<CreateFeedback />} />
+          <Route path="/create-feedback" element={<ProtectedRoute><CreateFeedback /></ProtectedRoute>} />
+          <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
           <Route path="/create-report" element={<ProtectedRoute><CreateReport /></ProtectedRoute>} />
           <Route path="/edit-report/:owner" element={<ProtectedRoute><EditReport /></ProtectedRoute>} />
           <Route path="/feedback-list" element={<AdminProtectedRoute ready={ready}><FeedBacksList /></AdminProtectedRoute>} />

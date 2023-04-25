@@ -6,6 +6,7 @@ import { Button, Col, Container, Dropdown, DropdownButton, Row } from 'react-boo
 import { Trash } from 'react-bootstrap-icons';
 import swal from 'sweetalert';
 import { Sessions } from '../../api/session/Session';
+import { Profiles } from '../../api/profile/Profile';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const UserStudySession = ({ session, collection }) => {
@@ -13,6 +14,12 @@ const UserStudySession = ({ session, collection }) => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   const removeItem = (docID) => {
+    // for (const participants in docID.participant) {
+    //   if (participants !== docID.owner) {
+    //     participants
+    //   }
+    // }
+    // Profiles.collection.update(docID.participant.find(user => user));
     collection.remove(docID);
   };
 

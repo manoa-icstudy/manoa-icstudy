@@ -12,6 +12,9 @@ class ProfilesCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the list of ICS courses
     this.icsCourses = ['ICS 101', 'ICS 111', 'ICS 141', 'ICS 211', 'ICS 241', 'ICS 311'];
+    this.points = new SimpleSchema({
+      points: Number,
+    });
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       firstName: String,
