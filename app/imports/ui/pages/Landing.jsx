@@ -15,9 +15,9 @@ const Landing = () => (
         <Button variant="dark" href="#description">Learn More</Button>
         <Container id="container" className="ml-3 mt-4 align-middle justify-content-center">
           <Image src="https://manoa-icstudy.github.io/images/Login.png" />
+          <Image src="https://manoa-icstudy.github.io/images/StudySessions.png" />
           <Image src="https://manoa-icstudy.github.io/images/UserProfile.png" />
           <Image src="https://manoa-icstudy.github.io/images/Calendar.png" />
-          <Image src="https://manoa-icstudy.github.io/images/StudySessions.png" />
         </Container>
       </Col>
 

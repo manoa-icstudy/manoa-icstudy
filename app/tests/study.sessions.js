@@ -23,6 +23,18 @@ class StudySessions {
     const rowCount = Selector('tr').count;
     await testController.expect(rowCount).gte(2);
   }
+
+  async UserHomeSession(testController) {
+    await testController.click('#goto-user-home-session');
+  }
+
+  async UserHomeJoin(testController) {
+    await testController.click('#goto-user-home-join');
+  }
+
+  async UserHomeCreate(testController) {
+    await testController.click('#goto-create-study-session');
+  }
 }
 
 export const studySessions = new StudySessions();
