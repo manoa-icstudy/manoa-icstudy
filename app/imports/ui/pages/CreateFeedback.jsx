@@ -15,7 +15,7 @@ const formSchema = new SimpleSchema({
   },
   feedback: {
     type: String,
-    allowedValues: ['User Home Page', 'Create Study Seesion', 'Landing Page', 'Calendar', 'Study Session List'],
+    allowedValues: ['User Home Page', 'Create Study Session', 'Landing Page', 'Calendar', 'Study Session List'],
     defaultValue: 'User Home Page',
   },
   description: String,

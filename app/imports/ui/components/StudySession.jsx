@@ -7,6 +7,7 @@ import { Button, Col, Container, Dropdown, DropdownButton, Row } from 'react-boo
 import { Trash } from 'react-bootstrap-icons';
 import swal from 'sweetalert';
 import { Sessions } from '../../api/session/Session';
+import { Points } from '../../api/points/Points';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const StudySession = ({ session, collection }) => {
@@ -24,6 +25,8 @@ const StudySession = ({ session, collection }) => {
       const newParticipant = doc.participant;
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
       swal('Success', 'Join success', 'success');
+      const newPoint = Points.collection.find({ user: currentUser });
+      Points.collection.update(currentUser, { $set: { pointCount: (newPoint.pointCount++) } });
     } else if ((doc.participant.find(user => user === currentUser)) && (currentUser !== doc.owner)) {
       const index = doc.participant.indexOf(currentUser);
       if (index > -1) {
@@ -32,6 +35,8 @@ const StudySession = ({ session, collection }) => {
       const newParticipant = doc.participant;
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
       swal('Success', 'Quit success', 'success');
+      const newPoint = Points.collection.find({ user: currentUser });
+      Points.collection.update(currentUser, { $set: { pointCount: (newPoint.pointCount--) } });
     } else {
       swal('Error', 'You own this Session', 'error');
     }
