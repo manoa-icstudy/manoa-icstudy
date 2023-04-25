@@ -6,6 +6,7 @@ import { userHomePage } from './userhome.page';
 import { navBar } from './navbar.component';
 import { studySessions } from './study.sessions';
 import { createStudySessions } from './create.study.sessions';
+import { createFeedbackPage } from './create.feedback.page';
 
 /* global fixture:false, test:false */
 
@@ -68,6 +69,11 @@ test('Test that Admin signin and signout work', async (testController) => {
   await navBar.isLoggedIn(testController, adminCredentials.username);
   await navBar.logout(testController);
   await signoutPage.isDisplayed(testController);
+});
+
+test('Test that create feedback works', async (testController) => {
+  await navBar.gotoFeedbackPage(testController);
+  await createFeedbackPage.createFeedbackPage(testController);
 });
 
 test('Test the Admin Create Study Session and Study Sessions page', async (testController) => {
