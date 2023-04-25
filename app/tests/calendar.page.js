@@ -1,13 +1,9 @@
 import { Selector } from 'testcafe';
 
-class LandingPage {
+class CalendarPage {
   constructor() {
-    this.pageId = '#landing-page';
+    this.pageId = '#calendar-page';
     this.pageSelector = Selector(this.pageId);
-  }
-
-  async startYourJourney(testController) {
-    await testController.click('#mainIntro');
   }
 
   /** Asserts that this page is currently displayed. */
@@ -17,4 +13,4 @@ class LandingPage {
   }
 }
 
-export const landingPage = new LandingPage();
+export const calendarPage = new CalendarPage();
