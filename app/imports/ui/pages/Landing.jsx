@@ -11,8 +11,7 @@ const Landing = () => (
     <Row className="align-middle text-center">
       <Col className="justify-content-center pb-5 mt-5" id="landing-1">
         <h1 style={{ fontSize: '70px' }}>Welcome to ICStudy</h1>
-        <p>Description</p>
-        <Button variant="dark" href="#description">Learn More</Button>
+        <Button variant="dark" href="/feature-guide">Learn More</Button>
         <Container id="container" className="ml-3 mt-4 align-middle justify-content-center">
           <Image src="https://manoa-icstudy.github.io/images/Login.png" />
           <Image src="https://manoa-icstudy.github.io/images/UserProfile.png" />
