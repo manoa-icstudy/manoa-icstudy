@@ -1,7 +1,6 @@
 import { Selector } from 'testcafe';
 
 class NavBar {
-
   /** If someone is logged in, then log them out, otherwise do nothing. */
   async ensureLogout(testController) {
     const loggedInUser = await Selector('#navbar-current-user').exists;
@@ -55,6 +54,15 @@ class NavBar {
 
   async gotoStudySessionPage(testController) {
     await testController.click('#study-session-list-nav');
+  }
+
+  /** Go to calendar page. */
+  async gotoCalendarPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#calendar-nav');
   }
 }
 
