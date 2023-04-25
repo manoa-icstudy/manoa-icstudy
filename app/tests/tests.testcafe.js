@@ -4,6 +4,7 @@ import { signoutPage } from './signout.page';
 import { calendarPage } from './calendar.page';
 import { navBar } from './navbar.component';
 import { studySessions } from './study.sessions';
+import { createStudySessions } from './create.study.sessions';
 
 /* global fixture:false, test:false */
 
@@ -33,10 +34,15 @@ test('Test that signin and signout work', async (testController) => {
   await signoutPage.isDisplayed(testController);
 });
 
-test('Test the List Stuff page', async (testController) => {
+test('Test the Create Study Session and Study Sessions page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoStudySessionPage(testController);
   await studySessions.isDisplayed(testController);
   await studySessions.hasTable(testController);
+  await navBar.gotoCreateStudySessionPage(testController);
+  await createStudySessions.create(testController);
+  await navBar.gotoStudySessionPage(testController);
+  await studySessions.isDisplayed(testController);
+  await studySessions.hasTableAfterCrate(testController);
 });

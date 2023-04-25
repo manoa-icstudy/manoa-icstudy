@@ -56,6 +56,10 @@ class NavBar {
     await testController.click('#study-session-list-nav');
   }
 
+  async gotoCreateStudySessionPage(testController) {
+    await testController.click('#create-session-nav');
+  }
+
   /** Go to calendar page. */
   async gotoCalendarPage(testController) {
     const visible = await Selector('#basic-navbar-nav').visible;
