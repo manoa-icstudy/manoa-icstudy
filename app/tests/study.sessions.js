@@ -24,6 +24,16 @@ class StudySessions {
     await testController.expect(rowCount).gte(2);
   }
 
+  async createReportPage(testController) {
+    await this.isDisplayed(testController);
+    await testController.click('#create-report');
+    await testController.typeText('#name-field', 'John');
+    await testController.typeText('#report-user-field', 'Joe');
+    await testController.typeText('#description-field', 'test');
+    await testController.click('#submit-field input.btn.btn-primary');
+    await testController.click(Selector('button').withText('OK'));
+  }
+
   async UserHomeSession(testController) {
     await testController.click('#goto-user-home-session');
   }

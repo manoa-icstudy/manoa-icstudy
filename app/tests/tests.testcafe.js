@@ -76,6 +76,13 @@ test('Test that create feedback works', async (testController) => {
   await createFeedbackPage.createFeedbackPage(testController);
 });
 
+test('Test that create report works', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoStudySessionPage(testController);
+  await studySessions.createReportPage(testController);
+});
+
 test('Test the Admin Create Study Session and Study Sessions page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
