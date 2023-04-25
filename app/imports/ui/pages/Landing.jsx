@@ -200,9 +200,9 @@ const Landing = () => (
                   <Button variant="outline-dark" size="sm" className="m-2">ICS 699</Button>
                 </Col>
               </Col>
-              <Row className="p-4">
-                <Col><Button variant="outline-dark">View All</Button></Col>
-              </Row>
+              {/*<Row className="p-4">*/}
+              {/*  <Col><Button variant="outline-dark">View All</Button></Col>*/}
+              {/*</Row>*/}
             </Row>
           </Col>
 
