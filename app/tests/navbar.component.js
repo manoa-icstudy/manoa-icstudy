@@ -52,6 +52,16 @@ class NavBar {
     await testController.click('#login-dropdown-sign-up');
   }
 
+  /** Pull down login menu, go to profile page. */
+  async gotoProfilePage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#navbar-current-user');
+    await testController.click('#navbar-current-user-profile');
+  }
+
   /** Go to calendar page. */
   async gotoCalendarPage(testController) {
     const visible = await Selector('#basic-navbar-nav').visible;
