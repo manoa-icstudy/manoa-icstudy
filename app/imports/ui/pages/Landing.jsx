@@ -220,17 +220,17 @@ const Landing = () => (
           </Col>
         </Row>
 
-        <Row className="justify-content-center p-3 reveal fade-left">
-          <Col md={8}>
-            <Image src="/images/meteor-logo.png" style={{ marginRight: '20px' }} width={500} />
-            <Image src="/images/meteor-logo.png" width={500} />
-          </Col>
-          <Col md={1}>
-            <h1>Reward</h1>
-            <p>Get rewarded for helping</p>
-            <Button variant="dark">Exchange</Button>
-          </Col>
-        </Row>
+        {/*<Row className="justify-content-center p-3 reveal fade-left">*/}
+        {/*  <Col md={8}>*/}
+        {/*    <Image src="/images/meteor-logo.png" style={{ marginRight: '20px' }} width={500} />*/}
+        {/*    <Image src="/images/meteor-logo.png" width={500} />*/}
+        {/*  </Col>*/}
+        {/*  <Col md={1}>*/}
+        {/*    <h1>Reward</h1>*/}
+        {/*    <p>Get rewarded for helping</p>*/}
+        {/*    <Button variant="dark">Exchange</Button>*/}
+        {/*  </Col>*/}
+        {/*</Row>*/}
 
       </Row>
 
