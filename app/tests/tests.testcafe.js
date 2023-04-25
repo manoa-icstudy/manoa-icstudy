@@ -2,6 +2,7 @@ import { landingPage } from './landing.page';
 import { signinPage } from './signin.page';
 import { signoutPage } from './signout.page';
 import { calendarPage } from './calendar.page';
+import { userHomePage } from './userhome.page';
 import { navBar } from './navbar.component';
 import { studySessions } from './study.sessions';
 import { createStudySessions } from './create.study.sessions';
@@ -45,4 +46,26 @@ test('Test the Create Study Session and Study Sessions page', async (testControl
   await navBar.gotoStudySessionPage(testController);
   await studySessions.isDisplayed(testController);
   await studySessions.hasTableAfterCrate(testController);
+});
+
+test.only('Test that user home page works', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.isLoggedIn(testController, credentials.username);
+  await navBar.gotoProfilePage(testController);
+  await userHomePage.isDisplayed(testController);
+  await userHomePage.editProfile(
+    testController,
+    'Phillip',
+    'Johnson',
+    'https://avatars.githubusercontent.com/u/290288?v=4',
+    ['ICS 101', 'ICS 211'],
+    ['ICS 111', 'ICS 141', 'ICS 211', 'ICS 311'],
+  );
+  await userHomePage.hasProfile(
+    testController,
+    'Phillip',
+    'Johnson',
+    'https://avatars.githubusercontent.com/u/290288?v=4',
+  );
 });

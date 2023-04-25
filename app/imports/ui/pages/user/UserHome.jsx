@@ -39,7 +39,7 @@ const UserHome = () => {
   };
 
   return (ready ? (
-    <Container fluid>
+    <Container fluid id="user-home-page">
       <Row width="100%" className="py-2" style={{ backgroundColor: 'gray' }}>
         <Col className="m-3">
           <Container>
@@ -87,7 +87,7 @@ const UserHome = () => {
                       <span>{profile.firstName}</span>
                       <span> {profile.lastName}</span>
                     </h5>
-                    <Button onClick={() => setIsEditing(!isEditing)}>
+                    <Button id="edit-profile" onClick={() => setIsEditing(!isEditing)}>
                       { isEditing
                         ? <span><X />Cancel</span>
                         : <span><PencilFill /> Edit Profile</span> }
@@ -105,8 +105,8 @@ const UserHome = () => {
                         </Col>
                         <Col>
                           { isEditing
-                            ? <TextField name="firstName" labelClassName="d-none" />
-                            : <p>{profile.firstName}</p> }
+                            ? <TextField id="firstName-field" name="firstName" labelClassName="d-none" />
+                            : <p id="firstName">{profile.firstName}</p> }
                         </Col>
                       </Row>
                       <Row>
@@ -115,8 +115,8 @@ const UserHome = () => {
                         </Col>
                         <Col>
                           { isEditing
-                            ? <TextField name="lastName" labelClassName="d-none" />
-                            : <p>{profile.lastName}</p> }
+                            ? <TextField id="lastName-field" name="lastName" labelClassName="d-none" />
+                            : <p id="lastName">{profile.lastName}</p> }
                         </Col>
                       </Row>
                       <Row>
@@ -125,8 +125,8 @@ const UserHome = () => {
                         </Col>
                         <Col>
                           { isEditing
-                            ? <TextField name="email" labelClassName="d-none" disabled />
-                            : <p>{profile.email}</p> }
+                            ? <TextField id="email-field" name="email" labelClassName="d-none" disabled />
+                            : <p id="email">{profile.email}</p> }
                         </Col>
                       </Row>
                       { isEditing && (
@@ -135,7 +135,7 @@ const UserHome = () => {
                             <b>Picture URL</b>
                           </Col>
                           <Col>
-                            <TextField name="picture" labelClassName="d-none" />
+                            <TextField id="picture-field" name="picture" labelClassName="d-none" />
                           </Col>
                         </Row>
                       )}
@@ -146,10 +146,10 @@ const UserHome = () => {
                         <Col>
                           <p>
                             { isEditing
-                              ? <SelectField name="currentCourses" labelClassName="d-none" />
+                              ? <SelectField id="currentCourses-field" name="currentCourses" labelClassName="d-none" />
                               : (!Object.hasOwn(profile, 'currentCourses') || profile.currentCourses.length === 0)
                                 ? <i>None</i>
-                                : profile.currentCourses.map(course => <Badge className="me-1" key={course}>{course}</Badge>) }
+                                : profile.currentCourses.map(course => <Badge className="me-1" id={course} key={course}>{course}</Badge>) }
                           </p>
                         </Col>
                       </Row>
@@ -160,10 +160,10 @@ const UserHome = () => {
                         <Col>
                           <p>
                             { isEditing
-                              ? <SelectField name="mentorCourses" labelClassName="d-none" />
+                              ? <SelectField id="mentorCourses-field" name="mentorCourses" labelClassName="d-none" />
                               : (!Object.hasOwn(profile, 'mentorCourses') || profile.mentorCourses.length === 0)
                                 ? <i>None</i>
-                                : profile.mentorCourses.map(course => <Badge className="me-1" key={course}>{course}</Badge>) }
+                                : profile.mentorCourses.map(course => <Badge className="me-1" id={course} key={course}>{course}</Badge>) }
                           </p>
                         </Col>
                       </Row>
