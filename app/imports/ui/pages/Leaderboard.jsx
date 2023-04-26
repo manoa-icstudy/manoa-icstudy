@@ -16,7 +16,7 @@ const Leaderboard = () => {
     // Get access to Stuff documents.
     const nameSubscription = Meteor.subscribe('PointsCollection');
     // Determine if the subscription is ready
-    const rdy = nameSubscription.ready()
+    const rdy = nameSubscription.ready();
     // Get the Stuff documents
     const name = PointsCollection.find().fetch();
 
