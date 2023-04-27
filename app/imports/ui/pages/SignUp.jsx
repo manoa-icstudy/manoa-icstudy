@@ -9,7 +9,7 @@ import { AutoForm, ErrorsField, SubmitField, SelectField, TextField } from 'unif
 import swal from 'sweetalert';
 import { Profiles } from '../../api/profile/Profile';
 import { LoginLog } from '../../api/log/LoginLog';
-import { PointsCollection } from '../../api/points/Points';
+import { Points } from '../../api/points/Points';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -52,9 +52,8 @@ const SignUp = ({ location }) => {
     const date = new Date();
     const owner = email;
     LoginLog.insert({ owner, date });
-    PointsCollection.insert({ owner: owner, pointCount: '100' });
-    console.log(owner);
-    console.log(email);
+    const pointCount = 0;
+    Points.collection.insert({ owner, pointCount });
     Profiles.collection.insert(
       { firstName, lastName, email, picture, currentCourses, mentorCourses, owner: email },
       (err) => {

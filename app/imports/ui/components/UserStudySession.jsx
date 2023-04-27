@@ -6,7 +6,6 @@ import { Button, Col, Container, Dropdown, DropdownButton, Row } from 'react-boo
 import { Trash } from 'react-bootstrap-icons';
 import swal from 'sweetalert';
 import { Sessions } from '../../api/session/Session';
-import { Profiles } from '../../api/profile/Profile';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const UserStudySession = ({ session, collection }) => {

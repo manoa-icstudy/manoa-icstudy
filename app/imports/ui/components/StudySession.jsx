@@ -7,29 +7,32 @@ import { Button, Col, Container, Dropdown, DropdownButton, Row } from 'react-boo
 import { Trash } from 'react-bootstrap-icons';
 import swal from 'sweetalert';
 import { Sessions } from '../../api/session/Session';
-import { PointsCollection } from '../../api/points/Points';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const StudySession = ({ session, collection }) => {
+const StudySession = ({ session, collection, point }) => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
+
   const removeItem = (docID) => {
     collection.remove(docID);
   };
 
-  const join = (doc) => {
+  const join = (doc, pointDoc) => {
     if (!(doc.participant.find(user => user === currentUser))) {
+      const data = pointDoc.findOne({ owner: currentUser });
+      pointDoc.update(data._id, { $inc: { pointCount: 1 } });
+
       console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
       doc.participant.push(currentUser);
       const newParticipant = doc.participant;
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
       swal('Success', 'Join success', 'success');
-      const newPoint = PointsCollection.find({ owner: currentUser });
-      console.log(newPoint);
-      const pointUpdate = newPoint.pointCount++;
-      PointsCollection.update(currentUser, { $set: { pointCount: pointUpdate } });
     } else if ((doc.participant.find(user => user === currentUser)) && (currentUser !== doc.owner)) {
+
+      const data = pointDoc.findOne({ owner: currentUser });
+      pointDoc.update(data._id, { $inc: { pointCount: -1 } });
+
       const index = doc.participant.indexOf(currentUser);
       if (index > -1) {
         doc.participant.splice(index, 1);
@@ -37,9 +40,6 @@ const StudySession = ({ session, collection }) => {
       const newParticipant = doc.participant;
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
       swal('Success', 'Quit success', 'success');
-      const newPoint = PointsCollection.find({ user: currentUser });
-      const pointUpdate = newPoint.pointCount--;
-      PointsCollection.update(currentUser, { $set: { pointCount: pointUpdate } });
     } else {
       swal('Error', 'You own this Session', 'error');
     }
@@ -66,7 +66,7 @@ const StudySession = ({ session, collection }) => {
       <td>
         <Container>
           <Row>
-            <Col style={{ paddingRight: '0' }}><Button variant="info" onClick={() => join(session)}>Join/Leave</Button></Col>
+            <Col style={{ paddingRight: '0' }}><Button variant="info" onClick={() => join(session, point)}>Join/Leave</Button></Col>
             <Col style={{ paddingLeft: '0' }}>
               <DropdownButton variant="info">
                 <Dropdown.ItemText>Participant:</Dropdown.ItemText>
@@ -97,6 +97,8 @@ StudySession.propTypes = {
   }).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   collection: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  point: PropTypes.object.isRequired,
 };
 
 export default StudySession;

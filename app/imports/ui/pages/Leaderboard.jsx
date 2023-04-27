@@ -1,27 +1,33 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
-import { Col, Container, Row, Table } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import { PointsCollection } from '../../api/points/Points';
+import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Points } from '../../api/points/Points';
 import LoadingSpinner from '../components/LoadingSpinner';
 import PointsStuff from '../components/Points';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Leaderboard = () => {
+  const { currentUser } = useTracker(() => ({
+    currentUser: Meteor.user() ? Meteor.user().username : '',
+  }), []);
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, user } = useTracker(() => {
+  const { ready, user, currUser } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
-    const nameSubscription = Meteor.subscribe('PointsCollection');
+    const nameSubscription = Meteor.subscribe(Points.publicPublicationName);
     // Determine if the subscription is ready
     const rdy = nameSubscription.ready();
     // Get the Stuff documents
-    const name = PointsCollection.find().fetch();
-
+    const name = Points.collection.find({}).fetch();
+    const userData = Points.collection.findOne({ owner: currentUser });
+    console.log(userData);
+    const currPoints = userData.pointCount;
+    console.log(name);
     return {
       user: name,
+      currUser: currPoints,
       ready: rdy,
     };
   }, []);
@@ -31,20 +37,17 @@ const Leaderboard = () => {
         <Col>
           <Col className="text-center">
             <h2>Leaderboard</h2>
+            <h4>You points: {currUser}</h4>
           </Col>
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Points</th>
-                <th>Redeem</th>
-                {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                  <th>Remove</th>
-                ) : ''}
               </tr>
             </thead>
             <tbody>
-              {user.map((point) => <PointsStuff key={point._id} points={point} collection={PointsCollection} />)}
+              {user.map((point) => <PointsStuff key={point._id} points={point} />)}
             </tbody>
           </Table>
         </Col>

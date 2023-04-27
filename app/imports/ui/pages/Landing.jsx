@@ -218,8 +218,6 @@ const Landing = () => (
           </Col>
         </Row>
 
-
-
       </Row>
 
       <Col className="justify-content-center p-4 mb-5 mt-5 reveal fade-bottom " style={{ backgroundColor: 'white' }}>
