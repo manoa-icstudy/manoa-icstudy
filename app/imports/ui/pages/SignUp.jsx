@@ -9,6 +9,7 @@ import { AutoForm, ErrorsField, SubmitField, SelectField, TextField } from 'unif
 import swal from 'sweetalert';
 import { Profiles } from '../../api/profile/Profile';
 import { LoginLog } from '../../api/log/LoginLog';
+import { icsCourses } from '../../api/course/courses';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -16,7 +17,6 @@ import { LoginLog } from '../../api/log/LoginLog';
 const SignUp = ({ location }) => {
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
-  const icsCourses = ['ICS 101', 'ICS 111', 'ICS 141', 'ICS 211', 'ICS 241', 'ICS 311'];
   const schema = new SimpleSchema({
     firstName: String,
     lastName: String,

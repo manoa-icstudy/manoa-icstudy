@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { icsCourses } from '../course/courses';
 
 /**
  * The SessionsCollection. It encapsulates state and variable values for stuff.
@@ -21,7 +22,7 @@ class SessionsCollection {
       createDate: Date,
       icsclass: {
         type: String,
-        allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
+        allowedValues: icsCourses,
         defaultValue: 'ICS 101',
       },
       participant: Array,

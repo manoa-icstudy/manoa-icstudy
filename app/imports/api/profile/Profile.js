@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { icsCourses } from '../course/courses';
 
 /**
  * The ProfilesCollection. It encapsulates state and variable values for a profile.
@@ -10,8 +11,6 @@ class ProfilesCollection {
     this.name = 'ProfilesCollection';
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
-    // Define the list of ICS courses
-    this.icsCourses = ['ICS 101', 'ICS 111', 'ICS 141', 'ICS 211', 'ICS 241', 'ICS 311'];
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       firstName: String,
@@ -22,12 +21,12 @@ class ProfilesCollection {
       currentCourses: { type: Array, optional: true },
       'currentCourses.$': {
         type: String,
-        allowedValues: this.icsCourses,
+        allowedValues: icsCourses,
       },
       mentorCourses: { type: Array, optional: true },
       'mentorCourses.$': {
         type: String,
-        allowedValues: this.icsCourses,
+        allowedValues: icsCourses,
       },
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
