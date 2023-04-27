@@ -52,8 +52,9 @@ const SignUp = ({ location }) => {
     const date = new Date();
     const owner = email;
     LoginLog.insert({ owner, date });
-    const points = 0;
-    PointsCollection.insert({ email, points });
+    PointsCollection.insert({ owner: owner, pointCount: '100' });
+    console.log(owner);
+    console.log(email);
     Profiles.collection.insert(
       { firstName, lastName, email, picture, currentCourses, mentorCourses, owner: email },
       (err) => {

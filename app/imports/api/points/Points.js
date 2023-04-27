@@ -4,8 +4,8 @@ import SimpleSchema from 'simpl-schema';
 const PointsCollection = new Mongo.Collection('PointsCollectionData');
 
 const PointsCollectionDataSchema = new SimpleSchema({
-  user: String,
-  pointCount: Number,
+  owner: String,
+  pointCount: String,
 });
 
 PointsCollection.attachSchema(PointsCollectionDataSchema);

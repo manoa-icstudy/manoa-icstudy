@@ -25,8 +25,10 @@ const StudySession = ({ session, collection }) => {
       const newParticipant = doc.participant;
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
       swal('Success', 'Join success', 'success');
-      const newPoint = PointsCollection.find({ user: currentUser });
-      PointsCollection.update(currentUser, { $set: { pointCount: (newPoint.pointCount++) } });
+      const newPoint = PointsCollection.find({ owner: currentUser });
+      console.log(newPoint);
+      const pointUpdate = newPoint.pointCount++;
+      PointsCollection.update(currentUser, { $set: { pointCount: pointUpdate } });
     } else if ((doc.participant.find(user => user === currentUser)) && (currentUser !== doc.owner)) {
       const index = doc.participant.indexOf(currentUser);
       if (index > -1) {
@@ -36,7 +38,8 @@ const StudySession = ({ session, collection }) => {
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
       swal('Success', 'Quit success', 'success');
       const newPoint = PointsCollection.find({ user: currentUser });
-      PointsCollection.update(currentUser, { $set: { pointCount: (newPoint.pointCount--) } });
+      const pointUpdate = newPoint.pointCount--;
+      PointsCollection.update(currentUser, { $set: { pointCount: pointUpdate } });
     } else {
       swal('Error', 'You own this Session', 'error');
     }

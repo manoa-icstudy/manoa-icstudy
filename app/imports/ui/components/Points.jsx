@@ -30,7 +30,7 @@ const PointsStuff = ({ points, collection }) => {
 PointsStuff.propTypes = {
   points: PropTypes.shape({
     name: PropTypes.string,
-    pointCount: PropTypes.number,
+    pointCount: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
