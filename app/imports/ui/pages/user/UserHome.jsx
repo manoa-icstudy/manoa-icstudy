@@ -80,7 +80,7 @@ const UserHome = () => {
               <Col md={3}>
                 <Card>
                   <Card.Body className="d-flex flex-column align-items-center">
-                    { !Object.hasOwn(profile, 'picture' || profile.picture.length === 0)
+                    { (!Object.hasOwn(profile, 'picture') || profile.picture.length === 0)
                       ? <Person size="lg" />
                       : <Image width="75%" className="m-3" roundedCircle src={profile.picture} />}
                     <h5>

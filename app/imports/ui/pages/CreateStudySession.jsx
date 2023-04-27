@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Sessions } from '../../api/session/Session';
+import { icsCourses } from '../../api/course/courses';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -17,7 +18,7 @@ const formSchema = new SimpleSchema({
   },
   icsclass: {
     type: String,
-    allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
+    allowedValues: icsCourses,
     defaultValue: 'ICS 101',
   },
   description: String,
