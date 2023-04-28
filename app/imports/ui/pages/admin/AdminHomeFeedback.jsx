@@ -30,16 +30,16 @@ const AdminHomeFeedback = () => {
 
   return (ready ? (
     <>
-      <Row className="py-2" style={{ backgroundColor: 'gray' }}>
+      <Row className="py-2 m-0" style={{ backgroundColor: 'gray' }}>
         <Col className="m-3">
           <Container>
             <h1><PersonFillLock /> Admin Manage List</h1>
           </Container>
         </Col>
       </Row>
-      <Container id="allUserHome" fluid className="mx-5">
+      <Container id="allUserHome" fluid className="vh-100">
         <Row className="my-4 justify-content-start">
-          <Col md={2}>
+          <Col md="auto" className="mx-5 position-fixed">
             <ListGroup>
               <ListGroup.Item>
                 <Link to="/admin-home"><h5>Home</h5></Link>
@@ -63,7 +63,7 @@ const AdminHomeFeedback = () => {
             </ListGroup>
           </Col>
 
-          <Col>
+          <Col style={{ marginLeft: '300px' }}>
             <Container className="py-3">
               <Row className="justify-content-center">
                 <Col md={10}>
@@ -71,7 +71,7 @@ const AdminHomeFeedback = () => {
                     <h2>Feedback List</h2>
                     <h5>Status: {num} feedbacks available</h5>
                   </Col>
-                  <Table striped bordered hover>
+                  <Table striped bordered hover style={{ backgroundColor: 'white' }}>
                     <thead>
                       <tr>
                         <th>Experience</th>

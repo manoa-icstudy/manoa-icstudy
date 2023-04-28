@@ -5,17 +5,30 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Button, Card, Col, ListGroup, Modal, Row } from 'react-bootstrap';
 import { Calendar2, Trash, PeopleFill, GeoAltFill } from 'react-bootstrap-icons';
-import swal from 'sweetalert';
 import { Sessions } from '../../api/session/Session';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const StudySession = ({ session, collection }) => {
+// eslint-disable-next-line react/prop-types
+const StudySession = ({ session, collection, joinText }) => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   const removeItem = (docID) => {
     collection.remove(docID);
   };
+
+  // eslint-disable-next-line react/prop-types
+  if (!(session.participant.find(user => user === currentUser))) {
+    // eslint-disable-next-line no-param-reassign
+    joinText = 'Join';
+    // eslint-disable-next-line react/prop-types
+  } else if ((session.participant.find(user => user === currentUser)) && (currentUser !== session.owner)) {
+    // eslint-disable-next-line no-param-reassign
+    joinText = 'Leave';
+  } else {
+    // eslint-disable-next-line no-param-reassign,no-unused-vars
+    joinText = 'Owner';
+  }
 
   const joinButtonText = (text) => {
     document.getElementById(session._id).textContent = text;
@@ -37,7 +50,7 @@ const StudySession = ({ session, collection }) => {
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
       joinButtonText('Join');
     } else {
-      swal('Error', 'You own this Session', 'error');
+      joinButtonText('Owner');
     }
   };
 
@@ -60,9 +73,9 @@ const StudySession = ({ session, collection }) => {
     <Card style={{ width: '25rem' }} className="p-0 m-2">
       <Card.Header>
         <Row>
-          <Col><Card.Title><h5 className="m-2">{session.icsclass}</h5></Card.Title></Col>
+          <Col><Card.Title><h5 className="m-2">{session.name}</h5></Card.Title></Col>
           <Col className="text-end">
-            <Button id="left-panel-link" href="/create-report" variant="warning" style={{ color: 'black' }}>Report</Button>
+            <Button id="left-panel-link" href="/create-report" variant="warning" style={{ color: 'black', marginRight: '5px' }}>Report</Button>
             {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
               <Button id="left-panel-link" variant="danger" onClick={() => removeItem(session._id)}><Trash /></Button>
             ) : ''}
@@ -71,7 +84,7 @@ const StudySession = ({ session, collection }) => {
       </Card.Header>
       <Card.Body>
         <ListGroup>
-          <ListGroup.Item><PeopleFill className="mx-1" /><Card.Text className="d-inline-block">{session.name}</Card.Text></ListGroup.Item>
+          <ListGroup.Item><PeopleFill className="mx-1" /><Card.Text className="d-inline-block">{session.icsclass}</Card.Text></ListGroup.Item>
           <ListGroup.Item><GeoAltFill className="mx-1" /><Card.Text className="d-inline-block">{session.location}</Card.Text></ListGroup.Item>
           <ListGroup.Item><Calendar2 className="mx-1" /><Card.Text className="d-inline-block">{new Intl.DateTimeFormat('en-US', options).format(session.date)}</Card.Text></ListGroup.Item>
         </ListGroup>
@@ -79,15 +92,17 @@ const StudySession = ({ session, collection }) => {
       <Card.Footer>
         <Row>
           <Col>
-            <Button id={session._id} variant="outline-success" onClick={() => join(session)}>Join</Button>
+            <Button id={session._id} variant="outline-success" onClick={() => join(session)}>{joinText}</Button>
           </Col>
           <Col className="text-end">
             <Button id="right-panel-link" onClick={handleShow}>Learn More</Button>
             <Modal show={show} onHide={handleClose} animation={false}>
               <Modal.Header closeButton>
-                <Modal.Title>{session.icsclass}</Modal.Title>
+                <Modal.Title>{session.name}</Modal.Title>
               </Modal.Header>
-              <Modal.Body>{session.description}</Modal.Body>
+              <Modal.Body><h6>Description:</h6>{session.description}</Modal.Body>
+              {/* eslint-disable-next-line react/prop-types */}
+              <Modal.Body><h6>Participant:</h6>{session.participant.map(user => <Col key={user}>-&nbsp;&nbsp; {user}</Col>)}</Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                   Close
