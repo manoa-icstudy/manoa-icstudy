@@ -6,17 +6,19 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Sessions } from '../../api/session/Session';
+import { icsCourses } from '../../api/course/courses';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   name: String,
+  location: String,
   date: {
     type: Date,
     defaultValue: new Date(),
   },
   icsclass: {
     type: String,
-    allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
+    allowedValues: icsCourses,
     defaultValue: 'ICS 101',
   },
   description: String,
@@ -30,10 +32,11 @@ const CreateStudySession = () => {
   // On submit, insert the data.
   const submit = (data, formRef) => {
     const currDate = new Date();
-    const { name, date, icsclass, description, createDate = currDate } = data;
+    const { name, location, date, icsclass, description, createDate = currDate } = data;
     const owner = Meteor.user().username;
+    const participant = [owner];
     Sessions.collection.insert(
-      { name, date, icsclass, description, createDate, owner },
+      { name, location, date, icsclass, description, createDate, owner, participant },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -48,18 +51,19 @@ const CreateStudySession = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container className="py-3" id="create-study-session">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create Study Session</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="name" />
-                <DateField name="date" showInlineError type="datetime-local" />
-                <SelectField name="icsclass" />
-                <LongTextField name="description" />
-                <SubmitField value="Submit" />
+                <TextField name="name" id="create-study-session-name" />
+                <TextField name="location" id="create-study-session-location" />
+                <DateField name="date" showInlineError type="datetime-local" id="create-study-session-date" />
+                <SelectField name="icsclass" id="create-study-session-icsclass" />
+                <LongTextField name="description" id="create-study-session-description" />
+                <SubmitField value="Submit" id="create-study-session-submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>

@@ -34,7 +34,7 @@ const TopNavBar = () => {
 
             {currentUser ? ([
               <NavDropdown id="navbar-current-user" title={currentUser}>
-                <NavDropdown.Item id="login-dropdown-sign-in" as={NavLink} to="/user-home">
+                <NavDropdown.Item id="navbar-current-user-profile" as={NavLink} to="/user-home">
                   <PersonFill />
                   {' '}
                   Profile

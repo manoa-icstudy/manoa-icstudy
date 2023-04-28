@@ -1,5 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
+import { icsCourses } from '../course/courses';
 
 /**
  * The SessionsCollection. It encapsulates state and variable values for stuff.
@@ -14,14 +15,19 @@ class SessionsCollection {
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
       name: String,
+      location: String,
       date: Date,
       owner: String,
       description: String,
       createDate: Date,
       icsclass: {
         type: String,
-        allowedValues: ['ICS 101', 'ICS 111', 'ICS 211', 'ICS 212', 'ICS 311'],
+        allowedValues: icsCourses,
         defaultValue: 'ICS 101',
+      },
+      participant: Array,
+      'participant.$': {
+        type: String,
       },
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.

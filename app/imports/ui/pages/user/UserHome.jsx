@@ -39,7 +39,7 @@ const UserHome = () => {
   };
 
   return (ready ? (
-    <Container fluid>
+    <Container fluid id="user-home-page">
       <Row width="100%" className="py-2" style={{ backgroundColor: 'gray' }}>
         <Col className="m-3">
           <Container>
@@ -47,9 +47,9 @@ const UserHome = () => {
           </Container>
         </Col>
       </Row>
-      <Container id="allUserHome">
-        <Row className="my-4">
-          <Col md={3}>
+      <Container id="allUserHome" fluid className="mx-5">
+        <Row className="my-4 justify-content-start">
+          <Col md={2}>
             <ListGroup>
               <ListGroup.Item>
                 <Link to="/user-home"><h5>Home</h5></Link>
@@ -57,8 +57,9 @@ const UserHome = () => {
 
               <ListGroup.Item>
                 <div><h5>Study Session</h5></div>
-                <div><Link to="/user-home-session">- My study session</Link></div>
-                <div><Link to="/create-study-session">- Create study session</Link></div>
+                <div><Link to="/user-home-session" id="goto-user-home-session">- My study session</Link></div>
+                <div><Link to="/user-home-join" id="goto-user-home-join">- My Joined session</Link></div>
+                <div><Link to="/create-study-session" id="goto-create-study-session">- Create study session</Link></div>
               </ListGroup.Item>
 
               <ListGroup.Item>
@@ -79,14 +80,14 @@ const UserHome = () => {
               <Col md={3}>
                 <Card>
                   <Card.Body className="d-flex flex-column align-items-center">
-                    { !Object.hasOwn(profile, 'picture' || profile.picture.length === 0)
+                    { (!Object.hasOwn(profile, 'picture') || profile.picture.length === 0)
                       ? <Person size="lg" />
                       : <Image width="75%" className="m-3" roundedCircle src={profile.picture} />}
                     <h5>
                       <span>{profile.firstName}</span>
                       <span> {profile.lastName}</span>
                     </h5>
-                    <Button onClick={() => setIsEditing(!isEditing)}>
+                    <Button id="edit-profile" onClick={() => setIsEditing(!isEditing)}>
                       { isEditing
                         ? <span><X />Cancel</span>
                         : <span><PencilFill /> Edit Profile</span> }
@@ -104,8 +105,8 @@ const UserHome = () => {
                         </Col>
                         <Col>
                           { isEditing
-                            ? <TextField name="firstName" labelClassName="d-none" />
-                            : <p>{profile.firstName}</p> }
+                            ? <TextField id="firstName-field" name="firstName" labelClassName="d-none" />
+                            : <p id="firstName">{profile.firstName}</p> }
                         </Col>
                       </Row>
                       <Row>
@@ -114,8 +115,8 @@ const UserHome = () => {
                         </Col>
                         <Col>
                           { isEditing
-                            ? <TextField name="lastName" labelClassName="d-none" />
-                            : <p>{profile.lastName}</p> }
+                            ? <TextField id="lastName-field" name="lastName" labelClassName="d-none" />
+                            : <p id="lastName">{profile.lastName}</p> }
                         </Col>
                       </Row>
                       <Row>
@@ -124,8 +125,8 @@ const UserHome = () => {
                         </Col>
                         <Col>
                           { isEditing
-                            ? <TextField name="email" labelClassName="d-none" disabled />
-                            : <p>{profile.email}</p> }
+                            ? <TextField id="email-field" name="email" labelClassName="d-none" disabled />
+                            : <p id="email">{profile.email}</p> }
                         </Col>
                       </Row>
                       { isEditing && (
@@ -134,7 +135,7 @@ const UserHome = () => {
                             <b>Picture URL</b>
                           </Col>
                           <Col>
-                            <TextField name="picture" labelClassName="d-none" />
+                            <TextField id="picture-field" name="picture" labelClassName="d-none" />
                           </Col>
                         </Row>
                       )}
@@ -145,10 +146,10 @@ const UserHome = () => {
                         <Col>
                           <p>
                             { isEditing
-                              ? <SelectField name="currentCourses" labelClassName="d-none" />
+                              ? <SelectField id="currentCourses-field" name="currentCourses" labelClassName="d-none" />
                               : (!Object.hasOwn(profile, 'currentCourses') || profile.currentCourses.length === 0)
                                 ? <i>None</i>
-                                : profile.currentCourses.map(course => <Badge className="me-1" key={course}>{course}</Badge>) }
+                                : profile.currentCourses.map(course => <Badge className="me-1" id={course} key={course}>{course}</Badge>) }
                           </p>
                         </Col>
                       </Row>
@@ -159,10 +160,10 @@ const UserHome = () => {
                         <Col>
                           <p>
                             { isEditing
-                              ? <SelectField name="mentorCourses" labelClassName="d-none" />
+                              ? <SelectField id="mentorCourses-field" name="mentorCourses" labelClassName="d-none" />
                               : (!Object.hasOwn(profile, 'mentorCourses') || profile.mentorCourses.length === 0)
                                 ? <i>None</i>
-                                : profile.mentorCourses.map(course => <Badge className="me-1" key={course}>{course}</Badge>) }
+                                : profile.mentorCourses.map(course => <Badge className="me-1" id={course} key={course}>{course}</Badge>) }
                           </p>
                         </Col>
                       </Row>

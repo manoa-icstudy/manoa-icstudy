@@ -7,6 +7,7 @@ import { Button, Card, Col, ListGroup, Modal, Row } from 'react-bootstrap';
 import { Calendar2, Trash, PeopleFill } from 'react-bootstrap-icons';
 import swal from 'sweetalert';
 import { Sessions } from '../../api/session/Session';
+
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const StudySession = ({ session, collection }) => {
   const { currentUser } = useTracker(() => ({
@@ -91,6 +92,7 @@ const StudySession = ({ session, collection }) => {
 StudySession.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
+    location: PropTypes.string,
     date: PropTypes.instanceOf(Date),
     icsclass: PropTypes.string,
     description: PropTypes.string,

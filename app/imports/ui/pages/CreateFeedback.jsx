@@ -45,17 +45,17 @@ const CreateFeedback = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container id="create-feedback" className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create Feedback</h2></Col>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <SelectField name="experience" />
-                <SelectField name="feedback" />
-                <LongTextField name="description" />
-                <SubmitField value="Submit" />
+                <SelectField id="experience-field" name="experience" />
+                <SelectField id="feedback-field" name="feedback" />
+                <LongTextField id="description-field" name="description" />
+                <SubmitField id="submit-field" value="Submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>

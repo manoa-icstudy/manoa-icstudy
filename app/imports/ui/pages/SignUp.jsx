@@ -8,6 +8,8 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, ErrorsField, SubmitField, SelectField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import { Profiles } from '../../api/profile/Profile';
+import { LoginLog } from '../../api/log/LoginLog';
+import { icsCourses } from '../../api/course/courses';
 
 /**
  * SignUp component is similar to signin component, but we create a new user instead.
@@ -15,7 +17,6 @@ import { Profiles } from '../../api/profile/Profile';
 const SignUp = ({ location }) => {
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToRef] = useState(false);
-  const icsCourses = ['ICS 101', 'ICS 111', 'ICS 141', 'ICS 211', 'ICS 241', 'ICS 311'];
   const schema = new SimpleSchema({
     firstName: String,
     lastName: String,
@@ -46,6 +47,11 @@ const SignUp = ({ location }) => {
         setRedirectToRef(true);
       }
     });
+
+    const date = new Date();
+    const owner = email;
+    LoginLog.insert({ owner, date });
+
     Profiles.collection.insert(
       { firstName, lastName, email, picture, currentCourses, mentorCourses, owner: email },
       (err) => {

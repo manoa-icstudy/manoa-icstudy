@@ -41,7 +41,7 @@ const CreateReport = () => {
   // Render the form. Use Uniforms: https://github.com/vazco/uniforms
   let fRef = null;
   return (
-    <Container className="py-3">
+    <Container id="create-report" className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create User Report</h2></Col>
@@ -51,11 +51,11 @@ const CreateReport = () => {
                 <Button href="/study-session-list" variant="primary">Back</Button>
               </Col>
               <Card.Body>
-                <TextField name="name" />
-                <DateField name="date" showInlineError type="datetime-local" />
-                <TextField name="reportUser" />
-                <LongTextField name="description" />
-                <SubmitField value="Submit" />
+                <TextField id="name-field" name="name" />
+                <DateField id="date-field" name="date" showInlineError type="datetime-local" />
+                <TextField id="report-user-field" name="reportUser" />
+                <LongTextField id="description-field" name="description" />
+                <SubmitField id="submit-field" value="Submit" />
                 <ErrorsField />
               </Card.Body>
             </Card>
