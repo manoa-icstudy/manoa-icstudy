@@ -50,7 +50,6 @@ body {
 
 
 #left-panel-link {
-  position: relative;
   left: 5%;
   color: white;
   font-size: 16px;
@@ -59,7 +58,6 @@ body {
   border-radius: 5px;
 }
 #right-panel-link {
-  position: absolute;
   right: 10%;
   background-color: #555;
   color: white;
