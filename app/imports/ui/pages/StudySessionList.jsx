@@ -5,6 +5,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Sessions } from '../../api/session/Session';
 import StudySession from '../components/StudySession';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { Points } from '../../api/points/Points';
 
 /* Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const StudySessionList = () => {
@@ -14,8 +15,9 @@ const StudySessionList = () => {
     // when your component is unmounted or deps change.
     // Get  access to Stuff documents.
     const subscription = Meteor.subscribe(Sessions.publicPublicationName);
+    const pointSubscription = Meteor.subscribe(Points.publicPublicationName);
     // Determine if the subscription is ready
-    const rdy = subscription.ready();
+    const rdy = subscription.ready() && pointSubscription.ready();
     // Get the Stuff documents
     const stuffItems = Sessions.collection.find({}).fetch();
     return {
@@ -31,7 +33,7 @@ const StudySessionList = () => {
             <h2>Study Sessions</h2>
           </Col>
           <Row xs={1} md={2} className="g-5">
-            {sessions.map((session) => <StudySession key={session._id} session={session} collection={Sessions.collection} />)}
+            {sessions.map((session) => <StudySession key={session._id} session={session} collection={Sessions.collection} point={Points.collection} />)}
           </Row>
         </Row>
       </Row>

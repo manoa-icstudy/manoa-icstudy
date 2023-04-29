@@ -19,5 +19,10 @@
 
   "defaultFeedback": [
     { "experience": "Good", "feedback": "User Home Page", "description": "Feedback Test"}
+  ],
+
+  "defaultPoints": [
+    { "owner":  "john@foo.com", "pointCount": 0 },
+    { "owner":  "admin@foo.com", "pointCount": 0 }
   ]
 }

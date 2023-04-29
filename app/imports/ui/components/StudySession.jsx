@@ -9,10 +9,11 @@ import { Sessions } from '../../api/session/Session';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 // eslint-disable-next-line react/prop-types
-const StudySession = ({ session, collection, joinText }) => {
+const StudySession = ({ session, collection, point, joinText }) => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
+
   const removeItem = (docID) => {
     collection.remove(docID);
   };
@@ -34,14 +35,21 @@ const StudySession = ({ session, collection, joinText }) => {
     document.getElementById(session._id).textContent = text;
   };
 
-  const join = (doc) => {
+  const join = (doc, pointDoc) => {
     if (!(doc.participant.find(user => user === currentUser))) {
+      const data = pointDoc.findOne({ owner: currentUser });
+      pointDoc.update(data._id, { $inc: { pointCount: 1 } });
+
       console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
       doc.participant.push(currentUser);
       const newParticipant = doc.participant;
       Sessions.collection.update(doc._id, { $set: { participant: newParticipant } });
       joinButtonText('Leave');
     } else if ((doc.participant.find(user => user === currentUser)) && (currentUser !== doc.owner)) {
+
+      const data = pointDoc.findOne({ owner: currentUser });
+      pointDoc.update(data._id, { $inc: { pointCount: -1 } });
+
       const index = doc.participant.indexOf(currentUser);
       if (index > -1) {
         doc.participant.splice(index, 1);
@@ -92,7 +100,7 @@ const StudySession = ({ session, collection, joinText }) => {
       <Card.Footer>
         <Row>
           <Col>
-            <Button id={session._id} variant="outline-success" onClick={() => join(session)}>{joinText}</Button>
+            <Button id={session._id} variant="outline-success" onClick={() => join(session, point)}>{joinText}</Button>
           </Col>
           <Col className="text-end">
             <Button id="right-panel-link" onClick={handleShow}>Learn More</Button>
@@ -128,6 +136,8 @@ StudySession.propTypes = {
   }).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   collection: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  point: PropTypes.object.isRequired,
 };
 
 export default StudySession;
