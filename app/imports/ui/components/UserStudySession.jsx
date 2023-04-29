@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 import { Button, Card, Col, ListGroup, Modal, Row } from 'react-bootstrap';
 import { Calendar2, Trash, PeopleFill, GeoAltFill } from 'react-bootstrap-icons';
 import { Sessions } from '../../api/session/Session';
