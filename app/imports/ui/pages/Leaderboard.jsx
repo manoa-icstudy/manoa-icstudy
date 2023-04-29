@@ -1,8 +1,10 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row, Table, Button } from 'react-bootstrap';
 import { Roles } from 'meteor/alanning:roles';
+import { Archive } from 'react-bootstrap-icons';
+import swal from 'sweetalert';
 import { Points } from '../../api/points/Points';
 import LoadingSpinner from '../components/LoadingSpinner';
 import PointsStuff from '../components/Points';
@@ -30,13 +32,81 @@ const Leaderboard = () => {
       ready: rdy,
     };
   }, []);
+
+  const redeem = () => {
+    const userData = Points.collection.findOne({ owner: currentUser });
+    swal({
+      title: 'Redeem a reward?',
+      text: 'This will cost 5 points and can be redeemed at the Manoa bookstore',
+      icon: 'warning',
+      buttons: {
+        cancel: true,
+        gift_card: {
+          text: '$10 voucher',
+          value: 'gift_card',
+        },
+        item: {
+          text: 'Free item under $25',
+          value: 'item',
+        },
+      },
+    })
+      .then((value) => {
+        switch (value) {
+
+        case 'gift_card':
+          swal({
+            title: 'Redeem a $10 voucher?',
+            text: 'This will cost 5 points and can be redeemed at the Manoa bookstore',
+            icon: 'warning',
+            buttons: true,
+          })
+            .then((clicked) => {
+              if (clicked) {
+                if (userData.pointCount >= 5) {
+                  Points.collection.update(userData._id, { $inc: { pointCount: -5 } });
+                  swal('Success', 'Head to the bookstore to redeem your reward', 'success');
+                } else {
+                  swal('Error', 'You must have at least 5 points to redeem this', 'error');
+                }
+              } else {
+                // Transaction cancelled
+              }
+            });
+          break;
+        case 'item':
+          swal({
+            title: 'Redeem a free item under $25?',
+            text: 'This will cost 10 points and can be redeemed at the Manoa bookstore',
+            icon: 'warning',
+            buttons: true,
+          })
+            .then((clicked) => {
+              if (clicked) {
+                if (userData.pointCount >= 10) {
+                  Points.collection.update(userData._id, { $inc: { pointCount: -10 } });
+                  swal('Success', 'Head to the bookstore to redeem your reward', 'success');
+                } else {
+                  swal('Error', 'You must have at least 10 points to redeem this', 'error');
+                }
+              } else {
+                // Transaction cancelled
+              }
+            });
+          break;
+        default:
+
+        }
+      });
+  };
+
   return (ready ? (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
             <h2>Leaderboard</h2>
-            <h4>Your points: {currUser}</h4>
+            <h4>Your points: {currUser} <Button variant="info" onClick={() => redeem()}><Archive /></Button></h4>
           </Col>
           <Table striped bordered hover>
             <thead>
