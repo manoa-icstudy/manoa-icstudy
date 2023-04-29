@@ -76,9 +76,7 @@ const UserStudySession = ({ session, collection, joinText }) => {
           <Col><Card.Title><h5 className="m-2">{session.name}</h5></Card.Title></Col>
           <Col className="text-end">
             <Button id="left-panel-link" href="/create-report" variant="warning" style={{ color: 'black', marginRight: '5px' }}>Report</Button>
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              <Button id="left-panel-link" variant="danger" onClick={() => removeItem(session._id)}><Trash /></Button>
-            ) : ''}
+            <Button id="left-panel-link" variant="danger" onClick={() => removeItem(session._id)}><Trash /></Button>
           </Col>
         </Row>
       </Card.Header>
