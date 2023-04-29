@@ -37,16 +37,16 @@ const Leaderboard = () => {
     const userData = Points.collection.findOne({ owner: currentUser });
     swal({
       title: 'Redeem a reward?',
-      text: 'This will cost 5 points and can be redeemed at the Manoa bookstore',
+      text: 'These can be redeemed at the UH Manoa bookstore',
       icon: 'warning',
       buttons: {
         cancel: true,
         gift_card: {
-          text: '$10 voucher',
+          text: '$10 voucher (5)',
           value: 'gift_card',
         },
         item: {
-          text: 'Free item under $25',
+          text: 'Free item under $25 (10)',
           value: 'item',
         },
       },
@@ -56,7 +56,7 @@ const Leaderboard = () => {
 
         case 'gift_card':
           swal({
-            title: 'Redeem a $10 voucher?',
+            title: 'Redeem a $10 voucher for 5 points?',
             text: 'This will cost 5 points and can be redeemed at the Manoa bookstore',
             icon: 'warning',
             buttons: true,
@@ -76,7 +76,7 @@ const Leaderboard = () => {
           break;
         case 'item':
           swal({
-            title: 'Redeem a free item under $25?',
+            title: 'Redeem a free item under $25 for 10 points?',
             text: 'This will cost 10 points and can be redeemed at the Manoa bookstore',
             icon: 'warning',
             buttons: true,
