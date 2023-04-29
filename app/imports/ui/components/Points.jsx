@@ -4,20 +4,24 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Button } from 'react-bootstrap';
-import { ArchiveFill } from 'react-bootstrap-icons';
+import { Trash } from 'react-bootstrap-icons';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const PointsStuff = ({ points }) => {
+const PointsStuff = ({ points, point }) => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
+
+  const discard = (pointData) => {
+    point.update(pointData, { $set: { pointCount: 0 } });
+  };
 
   return (
     <tr>
       <td>{points.owner}</td>
       <td>{points.pointCount}</td>
-      {Roles.userIsInRole(Meteor.user(), currentUser) ? (
-        <td><Button variant="danger"><ArchiveFill /></Button></td>
+      {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+        <td><Button variant="danger" onClick={() => discard(points._id)}><Trash /></Button></td>
       ) : ''}
     </tr>
   );
@@ -30,6 +34,8 @@ PointsStuff.propTypes = {
     pointCount: PropTypes.number,
     _id: PropTypes.string,
   }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  point: PropTypes.object.isRequired,
 };
 
 export default PointsStuff;

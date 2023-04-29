@@ -2,6 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Roles } from 'meteor/alanning:roles';
 import { Points } from '../../api/points/Points';
 import LoadingSpinner from '../components/LoadingSpinner';
 import PointsStuff from '../components/Points';
@@ -22,9 +23,7 @@ const Leaderboard = () => {
     // Get the Stuff documents
     const name = Points.collection.find({}).fetch();
     const userData = Points.collection.findOne({ owner: currentUser });
-    console.log(userData);
     const currPoints = userData.pointCount;
-    console.log(name);
     return {
       user: name,
       currUser: currPoints,
@@ -37,17 +36,20 @@ const Leaderboard = () => {
         <Col>
           <Col className="text-center">
             <h2>Leaderboard</h2>
-            <h4>You points: {currUser}</h4>
+            <h4>Your points: {currUser}</h4>
           </Col>
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Name</th>
                 <th>Points</th>
+                {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                  <th>Remove</th>
+                ) : ''}
               </tr>
             </thead>
             <tbody>
-              {user.map((point) => <PointsStuff key={point._id} points={point} />)}
+              {user.map((point) => <PointsStuff key={point._id} points={point} point={Points.collection} />)}
             </tbody>
           </Table>
         </Col>

@@ -13,12 +13,6 @@ const UserStudySession = ({ session, collection }) => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   const removeItem = (docID) => {
-    // for (const participants in docID.participant) {
-    //   if (participants !== docID.owner) {
-    //     participants
-    //   }
-    // }
-    // Profiles.collection.update(docID.participant.find(user => user));
     collection.remove(docID);
   };
 

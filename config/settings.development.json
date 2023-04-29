@@ -22,6 +22,7 @@
   ],
 
   "defaultPoints": [
-    { "owner":  "john@foo.com", "pointCount": 100 }
+    { "owner":  "john@foo.com", "pointCount": 0 },
+    { "owner":  "admin@foo.com", "pointCount": 0 }
   ]
 }
