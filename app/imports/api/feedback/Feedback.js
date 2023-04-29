@@ -19,8 +19,9 @@ class FeedbackCollection {
       },
       feedback: {
         type: String,
-        allowedValues: ['User Home Page', 'Create Study Seesion', 'Landing Page', 'Calendar', 'Study Session List'],
-        defaultValue: 'User Home Page',
+        allowedValues: ['Landing Page', 'Creating Study Session Page', 'Study Session List', 'Calendar Page', 'Leaderboard Page', 'Redeeming A Reward',
+          'User Home Page', 'Feature Guide', 'Feedback Page', 'Sign-In Page', 'Sign-Up Page', 'Sign-Out Page', 'Other'],
+        defaultValue: 'Landing Page',
       },
       description: String,
     });

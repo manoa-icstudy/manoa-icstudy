@@ -217,6 +217,18 @@ const Landing = () => (
           </Col>
         </Row>
 
+        <Row className="justify-content-center p-3 reveal fade-left">
+          <Col md={8}>
+            <Image src="https://manoa-icstudy.github.io/images/Leaderboard.png" style={{ marginRight: '20px' }} width={500} />
+            <Image src="https://manoa-icstudy.github.io/images/Redeem.png" width={500} />
+          </Col>
+          <Col md={1}>
+            <h1>Rewards</h1>
+            <p>Get rewarded for helping</p>
+            <Button variant="dark">Leaderboard</Button>
+          </Col>
+        </Row>
+
       </Row>
 
       <Col className="justify-content-center p-4 mb-5 mt-5 reveal fade-bottom " style={{ backgroundColor: 'white' }}>
