@@ -60,7 +60,7 @@ const UserStudySession = ({ session, collection, joinText }) => {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-    timeZone: 'Pacific/Honolulu',
+    timeZone: '',
 
   };
 
@@ -83,7 +83,7 @@ const UserStudySession = ({ session, collection, joinText }) => {
         <ListGroup>
           <ListGroup.Item><PeopleFill className="mx-1" /><Card.Text className="d-inline-block">{session.icsclass}</Card.Text></ListGroup.Item>
           <ListGroup.Item><GeoAltFill className="mx-1" /><Card.Text className="d-inline-block">{session.location}</Card.Text></ListGroup.Item>
-          <ListGroup.Item><Calendar2 className="mx-1" /><Card.Text className="d-inline-block">{new Intl.DateTimeFormat('en-US', options).format(session.date)}</Card.Text></ListGroup.Item>
+          <ListGroup.Item><Calendar2 className="mx-1" /><Card.Text className="d-inline-block">{new Intl.DateTimeFormat('en-US', options).format(session.date)} UTC</Card.Text></ListGroup.Item>
         </ListGroup>
       </Card.Body>
       <Card.Footer>
