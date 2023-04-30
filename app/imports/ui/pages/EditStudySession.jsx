@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import swal from 'sweetalert';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { AutoForm, DateField, ErrorsField, HiddenField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
@@ -6,12 +6,14 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import { useParams } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import { Sessions } from '../../api/session/Session';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const bridge = new SimpleSchema2Bridge(Sessions.schema);
 
 const EditStudySession = () => {
+  const [redirectToReferer, setRedirectToRef] = useState(false);
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { owner: _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -33,17 +35,25 @@ const EditStudySession = () => {
     const { name, location, date, icsclass, description } = data;
     Sessions.collection.update(
       _id,
-      { $set: name, location, date, icsclass, description },
+      { $set: { name, location, date, icsclass, description } },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Session added successfully', 'success');
+          swal('Success', 'Session Edited Successfully', 'success');
           formRef.reset();
+          setRedirectToRef(true);
         }
       },
     );
   };
+
+  /* Display the signup form. Redirect to add page after successful registration and login. */
+  const { from } = { from: { pathname: '/study-session-list' } };
+  // if correct authentication, redirect to from: page instead of signup screen
+  if (redirectToReferer) {
+    return <Navigate to={from} />;
+  }
 
   let fRef = null;
   return ready ? (
