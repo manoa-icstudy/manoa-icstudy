@@ -12,18 +12,14 @@ class FeedbackCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
+      name: String,
       experience: {
         type: String,
         allowedValues: ['Good', 'Bad', 'Neutral'],
         defaultValue: 'Good',
       },
-      feedback: {
-        type: String,
-        allowedValues: ['Landing Page', 'Creating Study Session Page', 'Study Session List', 'Calendar Page', 'Leaderboard Page', 'Redeeming A Reward',
-          'User Home Page', 'Feature Guide', 'Feedback Page', 'Sign-In Page', 'Sign-Up Page', 'Sign-Out Page', 'Other'],
-        defaultValue: 'Landing Page',
-      },
       description: String,
+      overallThoughts: String,
     });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.
     this.collection.attachSchema(this.schema);

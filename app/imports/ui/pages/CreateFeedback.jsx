@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, ErrorsField, LongTextField, SelectField, SubmitField } from 'uniforms-bootstrap5';
+import { AutoForm, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import swal from 'sweetalert';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
@@ -8,18 +8,14 @@ import { Feedbacks } from '../../api/feedback/Feedback';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
+  name: String,
   experience: {
     type: String,
     allowedValues: ['Good', 'Bad', 'Neutral'],
     defaultValue: 'Good',
   },
-  feedback: {
-    type: String,
-    allowedValues: ['Landing Page', 'Creating Study Session Page', 'Study Session List', 'Calendar Page', 'Leaderboard Page', 'Redeeming A Reward',
-      'User Home Page', 'Feature Guide', 'Feedback Page', 'Sign-In Page', 'Sign-Up Page', 'Sign-Out Page', 'Other'],
-    defaultValue: 'Landing Page',
-  },
-  description: String,
+  description: { type: String, label: 'Feedback' },
+  overallThoughts: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -29,9 +25,9 @@ const CreateFeedback = () => {
 
   // On submit, insert the data.
   const submit = (data, formRef) => {
-    const { experience, feedback, description } = data;
+    const { name, experience, description, overallThoughts } = data;
     Feedbacks.collection.insert(
-      { experience, feedback, description },
+      { name, experience, description, overallThoughts },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -53,9 +49,10 @@ const CreateFeedback = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
+                <TextField id="name-field" name="name" />
                 <SelectField id="experience-field" name="experience" />
-                <SelectField id="feedback-field" name="feedback" />
-                <LongTextField id="description-field" name="description" />
+                <LongTextField id="description-field" name="description" help="Any areas for improvement?" />
+                <LongTextField id="overall-thoughts-field" name="overallThoughts" help="Tell us about your overall experience using Manoa ICStudy." />
                 <SubmitField id="submit-field" value="Submit" />
                 <ErrorsField />
               </Card.Body>
