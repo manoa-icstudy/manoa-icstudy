@@ -1,6 +1,5 @@
 import { landingPage } from './landing.page';
 import { signinPage } from './signin.page';
-import { signoutPage } from './signout.page';
 import { calendarPage } from './calendar.page';
 import { userHomePage } from './userhome.page';
 import { navBar } from './navbar.component';
