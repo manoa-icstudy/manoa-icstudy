@@ -7,6 +7,7 @@ import { PersonFill } from 'react-bootstrap-icons';
 import { Sessions } from '../../../api/session/Session';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StudySession from '../../components/StudySession';
+import { Notes } from '../../../api/note/Notes';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
 const UserHomeJoin = () => {
@@ -14,18 +15,21 @@ const UserHomeJoin = () => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
 
-  const { ready, sessions } = useTracker(() => {
+  const { ready, sessions, notes } = useTracker(() => {
   // Note that this subscription will get cleaned up
   // when your component is unmounted or deps change.
   // Get access to Stuff documents.
     const subscription = Meteor.subscribe(Sessions.publicPublicationName);
+    const noteSub = Meteor.subscribe(Notes.userPublicationName);
     console.log(subscription);
     // Determine if the subscription is ready
-    const rdy = subscription.ready();
+    const rdy = subscription.ready() && noteSub.ready();
     // Get the Stuff documents
     const stuffItems = Sessions.collection.find({ participant: currentUser }).fetch();
+    const noteItems = Notes.collection.find({}).fetch();
     return {
       sessions: stuffItems,
+      notes: noteItems,
       ready: rdy,
     };
   }, []);
@@ -75,7 +79,7 @@ const UserHomeJoin = () => {
                       <h2>My Joined List</h2>
                     </Col>
                     <Row xs={1} md={2} className="g-5">
-                      {sessions.map((session) => <StudySession key={session._id} session={session} />)}
+                      {sessions.map((session) => <StudySession key={session._id} session={session} notes={notes.filter(note => (note.sessionId === session._id))} />)}
                     </Row>
                   </Row>
                 </Row>
