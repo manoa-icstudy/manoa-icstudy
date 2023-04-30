@@ -67,7 +67,7 @@ const UserHomeSession = () => {
                 <Row className="justify-content-center">
                   <Row md={10}>
                     <Col className="text-center">
-                      <h2>Joined List</h2>
+                      <h2>My Session List</h2>
                     </Col>
                     <Row xs={1} md={2} className="g-5">
                       {sessions.map((session) => <UserStudySession key={session._id} session={session} collection={Sessions.collection} />)}
