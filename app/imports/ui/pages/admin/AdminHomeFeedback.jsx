@@ -71,12 +71,13 @@ const AdminHomeFeedback = () => {
                     <h2>Feedback List</h2>
                     <h5>Status: {num} feedbacks available</h5>
                   </Col>
-                  <Table striped bordered hover style={{ backgroundColor: 'white' }}>
+                  <Table striped bordered style={{ tableLayout: 'fixed', backgroundColor: 'white', width: '100%', overflowWrap: 'break-word' }}>
                     <thead>
                       <tr>
+                        <th>Name</th>
                         <th>Experience</th>
-                        <th>Feedback of</th>
                         <th>Description</th>
+                        <th>Overall Thoughts</th>
                       </tr>
                     </thead>
                     <tbody>

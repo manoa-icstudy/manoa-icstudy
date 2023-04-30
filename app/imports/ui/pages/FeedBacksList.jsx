@@ -33,9 +33,10 @@ const FeedBacksList = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
+                <th>Name</th>
                 <th>Experience</th>
-                <th>Feedback of</th>
                 <th>Description</th>
+                <th>Overall Thoughts</th>
               </tr>
             </thead>
             <tbody>

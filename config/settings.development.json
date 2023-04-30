@@ -18,7 +18,7 @@
   ],
 
   "defaultFeedback": [
-    { "experience": "Good", "feedback": "User Home Page", "description": "Feedback Test"}
+    { "name": "John", "experience": "Good", "description": "Feedback Test", "overallThoughts":  "Overall Thoughts Test"}
   ],
 
   "defaultPoints": [
