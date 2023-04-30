@@ -33,6 +33,7 @@ import CreateReport from '../pages/CreateReport';
 import EditReport from '../pages/EditReport';
 import UserHomeJoin from '../pages/user/UserHomeJoin';
 import FeatureGuide from '../pages/FeatureGuide';
+import EditStudySession from '../pages/EditStudySession';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -63,6 +64,7 @@ const App = () => {
           <Route path="/create-feedback" element={<CreateFeedback />} />
           <Route path="/feature-guide" element={<FeatureGuide />} />
           <Route path="/create-report" element={<ProtectedRoute><CreateReport /></ProtectedRoute>} />
+          <Route path="/edit-study-session/:owner" element={<ProtectedRoute><EditStudySession /></ProtectedRoute>} />
           <Route path="/edit-report/:owner" element={<ProtectedRoute><EditReport /></ProtectedRoute>} />
           <Route path="/feedback-list" element={<AdminProtectedRoute ready={ready}><FeedBacksList /></AdminProtectedRoute>} />
           <Route path="/admin-home" element={<AdminProtectedRoute ready={ready}><AdminHome /></AdminProtectedRoute>} />

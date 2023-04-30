@@ -70,6 +70,7 @@ const StudySession = ({ session, collection }) => {
         </Container>
       </td>
       <td><Button href="/create-report" variant="warning" style={{ color: 'black' }} id="create-report">Report it</Button></td>
+      <td><Button href={`/edit-study-session/${session._id}`} style={{ color: 'black' }} id="edit-study-session">Edit Session</Button></td>
       {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
         <td><Button variant="danger" onClick={() => removeItem(session._id)} id={session._id}><Trash /></Button></td>
       ) : ''}

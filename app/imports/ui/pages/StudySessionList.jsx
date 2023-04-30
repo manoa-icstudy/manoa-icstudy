@@ -41,6 +41,7 @@ const StudySessionList = () => {
                 <th>Date</th>
                 <th>Join Session</th>
                 <th>Report Session</th>
+                <th>Edit Session</th>
                 {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                   <th>Remove</th>
                 ) : ''}
