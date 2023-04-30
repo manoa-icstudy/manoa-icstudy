@@ -1,7 +1,7 @@
 import React from 'react';
 import swal from 'sweetalert';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-import { AutoForm, DateField, ErrorsField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
+import { AutoForm, DateField, ErrorsField, HiddenField, LongTextField, SelectField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -64,6 +64,9 @@ const EditStudySession = () => {
                 <LongTextField name="description" id="edit-study-session-description" />
                 <SubmitField value="Submit" id="edit-study-session-submit" />
                 <ErrorsField />
+                <HiddenField name="createDate" />
+                <HiddenField name="owner" />
+                <HiddenField name="participant" />
               </Card.Body>
             </Card>
           </AutoForm>
