@@ -111,6 +111,7 @@ const StudySession = ({ session, collection, joinText, notes, point }) => {
         <Row>
           <Col>
             <Button id={session._id} variant="outline-success" onClick={() => join(session, point)}>{joinText}</Button>
+            { currentUser === session.owner && <Button href={`/edit-study-session/${session._id}`} className="ms-2" variant="outline-success" id="edit-study-session">Edit</Button> }
           </Col>
           <Col className="text-end">
             <Button id="right-panel-link" onClick={handleShow}>Learn More</Button>
