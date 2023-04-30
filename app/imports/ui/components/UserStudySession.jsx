@@ -60,7 +60,7 @@ const UserStudySession = ({ session, collection, joinText }) => {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-    timeZone: '',
+    timeZone: 'UTC',
 
   };
 
