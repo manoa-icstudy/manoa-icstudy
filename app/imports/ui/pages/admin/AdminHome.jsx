@@ -49,7 +49,7 @@ const AdminHome = () => {
       </Row>
       <Container id="allUserHome" fluid className="vh-100">
         <Row className="my-4 justify-content-start">
-          <Col md="auto" className="mx-5 position-fixed">
+          <Col md="auto" className="position-fixed">
             <ListGroup>
               <ListGroup.Item>
                 <Link to="/admin-home"><h5>Home</h5></Link>
