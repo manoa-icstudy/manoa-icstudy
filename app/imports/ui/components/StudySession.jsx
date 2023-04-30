@@ -133,7 +133,7 @@ const StudySession = ({ session, collection, joinText, notes, point }) => {
                     <ListGroup>
                       {notes.map((note) => <Note key={note._id} note={note} collection={Notes.collection} />)}
                     </ListGroup>
-                    <AddNote owner={session.owner} sessionId={session._id} />
+                    <AddNote owner={currentUser} sessionId={session._id} />
                     <Link to={`/edit/${session._id}`}>Edit</Link>
                   </Tab>
                 </Tabs>
