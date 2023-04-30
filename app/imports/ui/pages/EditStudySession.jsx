@@ -13,7 +13,7 @@ const bridge = new SimpleSchema2Bridge(Sessions.schema);
 
 const EditStudySession = () => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const { _id } = useParams();
+  const { owner: _id } = useParams();
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, doc } = useTracker(() => {
     // Get access to Stuff documents.
@@ -30,11 +30,10 @@ const EditStudySession = () => {
 
   // On successful submit, insert the data.
   const submit = (data, formRef) => {
-    const { name, location, date, icsclass, description, createDate, participant } = data;
-    const owner = Meteor.user().username;
+    const { name, location, date, icsclass, description } = data;
     Sessions.collection.update(
       _id,
-      { $set: name, location, date, icsclass, description, createDate, owner, participant },
+      { $set: name, location, date, icsclass, description },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
