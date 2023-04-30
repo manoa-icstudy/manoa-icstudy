@@ -40,16 +40,16 @@ const UserHome = () => {
 
   return (ready ? (
     <Container fluid id="user-home-page">
-      <Row width="100%" className="py-2" style={{ backgroundColor: 'gray' }}>
+      <Row width="100%" className="py-2 m-0" style={{ backgroundColor: 'gray' }}>
         <Col className="m-3">
           <Container>
             <h1><PersonFill /> Manage Account</h1>
           </Container>
         </Col>
       </Row>
-      <Container id="allUserHome" fluid className="mx-5">
+      <Container id="allUserHome" fluid className="vh-100">
         <Row className="my-4 justify-content-start">
-          <Col md={2}>
+          <Col md="auto" className="position-fixed">
             <ListGroup>
               <ListGroup.Item>
                 <Link to="/user-home"><h5>Home</h5></Link>
@@ -74,7 +74,7 @@ const UserHome = () => {
             </ListGroup>
           </Col>
 
-          <Col md={8}>
+          <Col md={8} style={{ marginLeft: '300px' }}>
             <h3>My Profile</h3>
             <Row>
               <Col md={3}>

@@ -6,6 +6,8 @@ import { Feedbacks } from '../../api/feedback/Feedback';
 import { Report } from '../../api/report/Report';
 import { ReportDate } from '../../api/date/ReportDate';
 import { LoginLog } from '../../api/log/LoginLog';
+import { Points } from '../../api/points/Points';
+import { Notes } from '../../api/note/Notes';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
@@ -19,6 +21,10 @@ Meteor.publish('ReportCollection', () => Report.find());
 
 Meteor.publish('LoginLogCollection', () => LoginLog.find());
 
+Meteor.publish(Points.publicPublicationName, function () {
+  return Points.collection.find();
+});
+
 Meteor.publish(Sessions.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
@@ -31,6 +37,13 @@ Meteor.publish(Profiles.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
     return Profiles.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
+Meteor.publish(Notes.userPublicationName, function () {
+  if (this.userId) {
+    return Notes.collection.find({});
   }
   return this.ready();
 });
@@ -54,6 +67,13 @@ Meteor.publish(Profiles.adminPublicationName, function () {
 Meteor.publish(Feedbacks.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Feedbacks.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Notes.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Notes.collection.find();
   }
   return this.ready();
 });

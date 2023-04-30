@@ -34,6 +34,7 @@ import EditReport from '../pages/EditReport';
 import UserHomeJoin from '../pages/user/UserHomeJoin';
 import FeatureGuide from '../pages/FeatureGuide';
 import EditStudySession from '../pages/EditStudySession';
+import Leaderboard from '../pages/Leaderboard';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
@@ -63,6 +64,8 @@ const App = () => {
           <Route path="/user-home-join" element={<ProtectedRoute><UserHomeJoin /></ProtectedRoute>} />
           <Route path="/create-feedback" element={<CreateFeedback />} />
           <Route path="/feature-guide" element={<FeatureGuide />} />
+          <Route path="/create-feedback" element={<ProtectedRoute><CreateFeedback /></ProtectedRoute>} />
+          <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
           <Route path="/create-report" element={<ProtectedRoute><CreateReport /></ProtectedRoute>} />
           <Route path="/edit-study-session/:owner" element={<ProtectedRoute><EditStudySession /></ProtectedRoute>} />
           <Route path="/edit-report/:owner" element={<ProtectedRoute><EditReport /></ProtectedRoute>} />
