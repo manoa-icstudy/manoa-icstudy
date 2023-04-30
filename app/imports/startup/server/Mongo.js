@@ -3,6 +3,7 @@ import { Sessions } from '../../api/session/Session.js';
 import { ReportDate } from '../../api/date/ReportDate';
 import { Feedbacks } from '../../api/feedback/Feedback';
 import { Profiles } from '../../api/profile/Profile';
+import { Points } from '../../api/points/Points';
 
 /* eslint-disable no-console */
 
@@ -40,6 +41,18 @@ if (Feedbacks.collection.find().count() === 0) {
   if (Meteor.settings.defaultFeedback) {
     console.log('Creating default feedback.');
     Meteor.settings.defaultFeedback.forEach(data => addFeedback(data));
+  }
+}
+
+const addPoints = (data) => {
+  console.log(`  Adding: ${data.name} (${data.owner})`);
+  Points.collection.insert(data);
+};
+
+if (Points.collection.find().count() === 0) {
+  if (Meteor.settings.defaultPoints) {
+    console.log('Creating default points.');
+    Meteor.settings.defaultPoints.forEach(data => addPoints(data));
   }
 }
 
