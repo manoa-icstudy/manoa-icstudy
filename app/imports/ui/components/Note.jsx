@@ -17,13 +17,13 @@ const Note = ({ note, collection }) => {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
-    timeZone: 'Pacific/Honolulu',
+    timeZone: 'UTC',
 
   };
 
   return (
     <ListGroup.Item>
-      <p className="fw-bold">{note.owner}: {new Intl.DateTimeFormat('en-US', options).format(note.createdAt)}</p>
+      <p className="fw-bold">{note.owner}: {new Intl.DateTimeFormat('en-US', options).format(note.createdAt)} UTC</p>
       <p>- {note.chat}
         <Col className="text-end">
           {Roles.userIsInRole(Meteor.userId(), 'admin') ? (

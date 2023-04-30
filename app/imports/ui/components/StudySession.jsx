@@ -14,12 +14,6 @@ import { Notes } from '../../api/note/Notes';
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 // eslint-disable-next-line react/prop-types
 const StudySession = ({ session, collection, joinText, notes, point }) => {
-  const subNote = Meteor.subscribe(Notes.userPublicationName);
-  // eslint-disable-next-line no-unused-vars
-  const rdy = subNote.ready();
-  // eslint-disable-next-line no-param-reassign
-  notes = Notes.collection.find({}).fetch();
-
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
