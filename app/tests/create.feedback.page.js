@@ -16,7 +16,6 @@ class CreateFeedbackPage {
     await this.isDisplayed(testController);
     await testController.typeText('#description-field', 'test');
     await testController.typeText('#overall-thoughts-field', 'test');
-    await testController.click(Selector('button').withText('OK'));
   }
 }
 
