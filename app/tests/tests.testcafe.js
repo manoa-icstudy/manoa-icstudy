@@ -34,7 +34,7 @@ test('Test that signin and signout work', async (testController) => {
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.logout(testController);
-  await signoutPage.isDisplayed(testController);
+  await landingPage.isDisplayed(testController);
 });
 
 test('Test the Create Study Session and Study Sessions page', async (testController) => {
@@ -68,7 +68,7 @@ test('Test that Admin signin and signout work', async (testController) => {
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.isLoggedIn(testController, adminCredentials.username);
   await navBar.logout(testController);
-  await signoutPage.isDisplayed(testController);
+  await landingPage.isDisplayed(testController);
 });
 
 test('Test that create feedback works', async (testController) => {
