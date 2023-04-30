@@ -7,6 +7,7 @@ import { Report } from '../../api/report/Report';
 import { ReportDate } from '../../api/date/ReportDate';
 import { LoginLog } from '../../api/log/LoginLog';
 import { Points } from '../../api/points/Points';
+import { Notes } from '../../api/note/Notes';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
@@ -40,6 +41,13 @@ Meteor.publish(Profiles.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Notes.userPublicationName, function () {
+  if (this.userId) {
+    return Notes.collection.find({});
+  }
+  return this.ready();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise publish nothing.
 Meteor.publish(Sessions.adminPublicationName, function () {
@@ -59,6 +67,13 @@ Meteor.publish(Profiles.adminPublicationName, function () {
 Meteor.publish(Feedbacks.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Feedbacks.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Notes.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Notes.collection.find();
   }
   return this.ready();
 });
