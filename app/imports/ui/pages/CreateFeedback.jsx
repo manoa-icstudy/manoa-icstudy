@@ -49,11 +49,17 @@ const CreateFeedback = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField id="name-field" name="name" />
-                <SelectField id="experience-field" name="experience" />
-                <LongTextField id="description-field" name="description" help="Any areas for improvement?" />
-                <LongTextField id="overall-thoughts-field" name="overallThoughts" help="Tell us about your overall experience using Manoa ICStudy." />
-                <SubmitField id="submit-field" value="Submit" />
+                <Row>
+                  <Col>
+                    <TextField id="name-field" name="name" />
+                  </Col>
+                  <Col>
+                    <SelectField id="experience-field" name="experience" />
+                  </Col>
+                </Row>
+                <Row><LongTextField id="description-field" name="description" help="Any areas for improvement?" /></Row>
+                <Row><LongTextField id="overall-thoughts-field" name="overallThoughts" help="Tell us about your overall experience using Manoa ICStudy." /></Row>
+                <Row><SubmitField id="submit-field" value="Submit" /></Row>
                 <ErrorsField />
               </Card.Body>
             </Card>

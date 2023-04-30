@@ -51,11 +51,17 @@ const CreateReport = () => {
                 <Button href="/study-session-list" variant="primary">Back</Button>
               </Col>
               <Card.Body>
-                <TextField id="name-field" name="name" />
-                <DateField id="date-field" name="date" showInlineError type="datetime-local" />
-                <TextField id="report-user-field" name="reportUser" />
-                <LongTextField id="description-field" name="description" />
-                <SubmitField id="submit-field" value="Submit" />
+                <Row><TextField id="name-field" name="name" /></Row>
+                <Row>
+                  <Col>
+                    <DateField id="date-field" name="date" showInlineError type="datetime-local" />
+                  </Col>
+                  <Col>
+                    <Row><TextField id="report-user-field" name="reportUser" /></Row>
+                  </Col>
+                </Row>
+                <Row><LongTextField id="description-field" name="description" /></Row>
+                <Row><SubmitField id="submit-field" value="Submit" /></Row>
                 <ErrorsField />
               </Card.Body>
             </Card>

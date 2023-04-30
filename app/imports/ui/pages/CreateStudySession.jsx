@@ -60,12 +60,18 @@ const CreateStudySession = () => {
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Card>
               <Card.Body>
-                <TextField name="name" id="create-study-session-name" />
-                <TextField name="location" id="create-study-session-location" />
-                <DateField name="date" showInlineError type="datetime-local" id="create-study-session-date" />
-                <SelectField name="icsclass" id="create-study-session-icsclass" />
-                <LongTextField name="description" id="create-study-session-description" help="Give more information about your study session" showInlineError />
-                <SubmitField value="Submit" id="create-study-session-submit" />
+                <Row><TextField name="name" id="create-study-session-name" /></Row>
+                <Row><TextField name="location" id="create-study-session-location" /></Row>
+                <Row>
+                  <Col>
+                    <DateField name="date" showInlineError type="datetime-local" id="create-study-session-date" />
+                  </Col>
+                  <Col>
+                    <SelectField name="icsclass" id="create-study-session-icsclass" />
+                  </Col>
+                </Row>
+                <Row><LongTextField name="description" id="create-study-session-description" help="Give more information about your study session" showInlineError /></Row>
+                <Row><SubmitField value="Submit" id="create-study-session-submit" /></Row>
                 <ErrorsField />
               </Card.Body>
             </Card>
