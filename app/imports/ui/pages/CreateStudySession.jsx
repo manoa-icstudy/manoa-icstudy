@@ -10,18 +10,20 @@ import { icsCourses } from '../../api/course/courses';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  name: String,
+  name: { type: String, label: 'Study Session Name' },
   location: String,
   date: {
     type: Date,
+    label: 'Date and Time',
     defaultValue: new Date(),
   },
   icsclass: {
     type: String,
+    label: 'ICS Class',
     allowedValues: icsCourses,
     defaultValue: 'ICS 101',
   },
-  description: String,
+  description: { type: String, label: 'Description' },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -62,7 +64,7 @@ const CreateStudySession = () => {
                 <TextField name="location" id="create-study-session-location" />
                 <DateField name="date" showInlineError type="datetime-local" id="create-study-session-date" />
                 <SelectField name="icsclass" id="create-study-session-icsclass" />
-                <LongTextField name="description" id="create-study-session-description" />
+                <LongTextField name="description" id="create-study-session-description" help="Give more information about your study session" showInlineError />
                 <SubmitField value="Submit" id="create-study-session-submit" />
                 <ErrorsField />
               </Card.Body>

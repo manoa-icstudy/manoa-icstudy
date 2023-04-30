@@ -1,7 +1,8 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
+import { Plus } from 'react-bootstrap-icons';
 import { Sessions } from '../../api/session/Session';
 import StudySession from '../components/StudySession';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -31,6 +32,7 @@ const StudySessionList = () => {
         <Row md={10}>
           <Col className="text-center">
             <h2>Study Sessions</h2>
+            <Button id="create-study-session" href="/create-study-session" variant="dark"><Plus className="my-1 me-1" size={30} />Create Study Session</Button>
           </Col>
           <Row xs={1} md={2} className="g-5">
             {sessions.map((session) => <StudySession key={session._id} session={session} collection={Sessions.collection} point={Points.collection} />)}
