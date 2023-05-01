@@ -43,7 +43,16 @@ const StudySessionList = () => {
             <Button id="create-study-session" href="/create-study-session" variant="dark"><Plus className="my-1 me-1" size={30} />Create Study Session</Button>
           </Col>
           <Row xs={1} md={2} className="g-5">
-            {sessions.map((session) => <StudySession key={session._id} session={session} collection={Sessions.collection} point={Points.collection} notes={notes.filter(note => (note.sessionId === session._id))} profiles={profiles} />)}
+            {sessions.map((session) => (
+              <StudySession
+                key={session._id}
+                session={session}
+                collection={Sessions.collection}
+                point={Points.collection}
+                notes={notes.filter(note => (note.sessionId === session._id))}
+                profiles={profiles}
+              />
+            ))}
           </Row>
         </Row>
       </Row>

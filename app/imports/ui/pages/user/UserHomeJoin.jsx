@@ -9,6 +9,7 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import StudySession from '../../components/StudySession';
 import { Notes } from '../../../api/note/Notes';
 import { Points } from '../../../api/points/Points';
+import { Profiles } from '../../../api/profile/Profile';
 
 /* After the user clicks the "SignOut" link in the NavBar, log them out and display this page. */
 const UserHomeJoin = () => {
@@ -16,22 +17,24 @@ const UserHomeJoin = () => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
 
-  const { ready, sessions, notes } = useTracker(() => {
+  const { ready, sessions, notes, profiles } = useTracker(() => {
   // Note that this subscription will get cleaned up
   // when your component is unmounted or deps change.
   // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Sessions.publicPublicationName);
-    const pointSubscription = Meteor.subscribe(Points.publicPublicationName);
-    const noteSub = Meteor.subscribe(Notes.userPublicationName);
-    console.log(subscription);
+    const subscription1 = Meteor.subscribe(Sessions.publicPublicationName);
+    const subscription2 = Meteor.subscribe(Points.publicPublicationName);
+    const subscription3 = Meteor.subscribe(Notes.userPublicationName);
+    const subscription4 = Meteor.subscribe(Profiles.publicPublicationName);
     // Determine if the subscription is ready
-    const rdy = subscription.ready() && pointSubscription.ready() && noteSub.ready();
+    const rdy = subscription1.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
     // Get the Stuff documents
     const stuffItems = Sessions.collection.find({ participant: currentUser }).fetch();
     const noteItems = Notes.collection.find({}).fetch();
+    const profileItems = Profiles.collection.find({}).fetch();
     return {
       sessions: stuffItems,
       notes: noteItems,
+      profiles: profileItems,
       ready: rdy,
     };
   }, []);
@@ -81,7 +84,16 @@ const UserHomeJoin = () => {
                       <h2>My Joined List</h2>
                     </Col>
                     <Row xs={1} md={2} className="g-5">
-                      {sessions.map((session) => <StudySession key={session._id} session={session} point={Points.collection} notes={notes.filter(note => (note.sessionId === session._id))} />)}
+                      {sessions.map((session) => (
+                        <StudySession
+                          key={session._id}
+                          session={session}
+                          collection={Sessions.collection}
+                          point={Points.collection}
+                          notes={notes.filter(note => (note.sessionId === session._id))}
+                          profiles={profiles}
+                        />
+                      ))}
                     </Row>
                   </Row>
                 </Row>
