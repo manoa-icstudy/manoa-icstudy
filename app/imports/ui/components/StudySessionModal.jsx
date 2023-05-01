@@ -4,7 +4,6 @@ import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Button, Modal, ListGroup, Card, Tab, Tabs, Row, Col } from 'react-bootstrap';
 import { Calendar2, GeoAltFill, InfoCircle, PeopleFill } from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
 import { Sessions } from '../../api/session/Session';
 import ParticipantProfile from './ParticipantProfile';
 import Note from './Note';

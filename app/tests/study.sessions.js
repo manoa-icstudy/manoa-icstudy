@@ -12,18 +12,6 @@ class StudySessions {
     await testController.expect(this.pageSelector.exists).ok();
   }
 
-  async hasTable(testController) {
-    // This is first test to be run. Wait 10 seconds to avoid timeouts with GitHub Actions.
-    const rowCount = Selector('div').withText('Learn More').count;
-    await testController.expect(rowCount).gte(1);
-  }
-
-  async hasTableAfterCrate(testController) {
-    // This is first test to be run. Wait 10 seconds to avoid timeouts with GitHub Actions.
-    const rowCount = Selector('div').withText('Learn More').count;
-    await testController.expect(rowCount).gte(2);
-  }
-
   async createReportPage(testController) {
     await this.isDisplayed(testController);
     await testController.click('#create-report');

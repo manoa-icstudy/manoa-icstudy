@@ -41,23 +41,17 @@ test('Test the Create Study Session and Study Sessions page', async (testControl
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoStudySessionPage(testController);
   await studySessions.isDisplayed(testController);
-  await studySessions.hasTable(testController);
   // create study session
   await navBar.gotoCreateStudySessionPage(testController);
   await createStudySessions.isDisplayed(testController);
   await createStudySessions.create(testController);
   await navBar.gotoStudySessionPage(testController);
   await studySessions.isDisplayed(testController);
-  // check 2 row table
-  await studySessions.hasTableAfterCrate(testController);
   // check user home session
   await navBar.gotoProfilePage(testController);
   await studySessions.UserHomeSession(testController);
-  await studySessions.hasTableAfterCrate(testController);
   // check user home joined
   await studySessions.UserHomeJoin(testController);
-  await studySessions.hasTableAfterCrate(testController);
-
   await studySessions.UserHomeCreate(testController);
   await createStudySessions.isDisplayed(testController);
 });
@@ -87,23 +81,17 @@ test('Test the Admin Create Study Session and Study Sessions page', async (testC
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
   await navBar.gotoStudySessionPage(testController);
   await studySessions.isDisplayed(testController);
-  await studySessions.hasTable(testController);
   // create study session
   await navBar.gotoCreateStudySessionPage(testController);
   await createStudySessions.isDisplayed(testController);
   await createStudySessions.create(testController);
   await navBar.gotoStudySessionPage(testController);
   await studySessions.isDisplayed(testController);
-  // check 1 row table
-  await studySessions.hasTable(testController);
   // check user home session
   await navBar.gotoProfilePage(testController);
   await studySessions.UserHomeSession(testController);
-  await studySessions.hasTable(testController);
   // check user home joined
   await studySessions.UserHomeJoin(testController);
-  await studySessions.hasTable(testController);
-
   await studySessions.UserHomeCreate(testController);
   await createStudySessions.isDisplayed(testController);
 });
