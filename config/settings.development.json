@@ -24,5 +24,9 @@
   "defaultPoints": [
     { "owner":  "john@foo.com", "pointCount": 0 },
     { "owner":  "admin@foo.com", "pointCount": 0 }
+  ],
+
+  "defaultNotes": [
+    { "chat":  "test chat", "sessionId": "test", "owner": "john@foo.com", "createdAt": "2023-04-18T04:29:28.835Z" }
   ]
 }

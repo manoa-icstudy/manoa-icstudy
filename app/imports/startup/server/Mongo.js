@@ -4,6 +4,7 @@ import { ReportDate } from '../../api/date/ReportDate';
 import { Feedbacks } from '../../api/feedback/Feedback';
 import { Profiles } from '../../api/profile/Profile';
 import { Points } from '../../api/points/Points';
+import { Notes } from '../../api/note/Notes';
 
 /* eslint-disable no-console */
 
@@ -53,6 +54,21 @@ if (Points.collection.find().count() === 0) {
   if (Meteor.settings.defaultPoints) {
     console.log('Creating default points.');
     Meteor.settings.defaultPoints.forEach(data => addPoints(data));
+  }
+}
+
+const addNotes = (data) => {
+  console.log(`  Adding: ${data.name} (${data.owner})`);
+  Notes.collection.insert(data);
+};
+
+if (Notes.collection.find().count() === 0) {
+  if (Meteor.settings.defaultNotes) {
+    console.log('Creating default notes.');
+    Meteor.settings.defaultNotes.forEach(data => addNotes(data));
+    const sessionData = Sessions.collection.findOne();
+    const noteData = Notes.collection.findOne();
+    Notes.collection.update(noteData._id, { $set: { sessionId: sessionData._id } });
   }
 }
 
