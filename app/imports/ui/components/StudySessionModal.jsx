@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Button, Modal, ListGroup, Card, Tab, Tabs } from 'react-bootstrap';
+import { Button, Modal, ListGroup, Card, Tab, Tabs, Row, Col } from 'react-bootstrap';
 import { Calendar2, GeoAltFill, InfoCircle, PeopleFill } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 import { Sessions } from '../../api/session/Session';
+import ParticipantProfile from './ParticipantProfile';
+import Note from './Note';
+import { Notes } from '../../api/note/Notes';
+import AddNote from '../pages/AddNote';
 
-const StudySessionModal = ({ session, points, show, handleClose }) => {
+const StudySessionModal = ({ session, points, profiles, notes, show, handleClose }) => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
@@ -53,6 +58,12 @@ const StudySessionModal = ({ session, points, show, handleClose }) => {
     }
   };
 
+  const participantIsMentor = (participant) => {
+    // eslint-disable-next-line react/prop-types
+    const participantProfile = profiles.find(profile => profile.owner === participant);
+    return participantProfile.mentorCourses.includes(session.icsclass);
+  };
+
   const options = {
     hour: 'numeric',
     minute: 'numeric',
@@ -81,10 +92,38 @@ const StudySessionModal = ({ session, points, show, handleClose }) => {
 
           <Tab eventKey="participants" title="Participants">
             <br />
-            <ul>
-              {session.participant.map(participant => <li key={participant}>{participant}</li>)}
-            </ul>
+            <Row>
+              <Col>
+                <b>Mentors</b>
+                <ul>
+                  {session.participant.filter(participant => participantIsMentor(participant, profiles)).map(participant => (
+                    <li key={participant}>
+                      <ParticipantProfile profiles={profiles} participant={participant} />
+                    </li>
+                  ))}
+                </ul>
+              </Col>
+              <Col>
+                <b>Students</b>
+                <ul>
+                  {session.participant.filter(participant => !participantIsMentor(participant, profiles)).map(participant => (
+                    <li key={participant}>
+                      <ParticipantProfile profiles={profiles} participant={participant} />
+                    </li>
+                  ))}
+                </ul>
+              </Col>
+            </Row>
           </Tab>
+
+          <Tab eventKey="chat" title="Chat">
+            <br />
+            <ListGroup>
+              {notes.map((note) => <Note key={note._id} note={note} collection={Notes.collection} />)}
+            </ListGroup>
+            <AddNote owner={currentUser} sessionId={session._id} />
+          </Tab>
+
         </Tabs>
       </Modal.Body>
       <Modal.Footer>
@@ -112,6 +151,22 @@ StudySessionModal.propTypes = {
     owner: PropTypes.string,
     pointCount: PropTypes.number,
   }).isRequired,
+  profiles: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    owner: PropTypes.string,
+    email: PropTypes.string,
+    picture: PropTypes.string,
+    currentCourses: PropTypes.arrayOf(String),
+    mentorCourses: PropTypes.arrayOf(String),
+  }).isRequired,
+  notes: PropTypes.arrayOf(PropTypes.shape({
+    chat: PropTypes.string,
+    sessionId: PropTypes.string,
+    owner: PropTypes.string,
+    createdAt: PropTypes.instanceOf(Date),
+    _id: PropTypes.string,
+  })).isRequired,
   show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
 };

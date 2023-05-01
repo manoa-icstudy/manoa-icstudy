@@ -12,7 +12,6 @@ class ProfilesCollection {
     // Define the Mongo collection.
     this.collection = new Mongo.Collection(this.name);
     // Define the list of ICS courses
-    this.icsCourses = ['ICS 101', 'ICS 111', 'ICS 141', 'ICS 211', 'ICS 241', 'ICS 311'];
     this.points = new SimpleSchema({
       points: Number,
     });
@@ -38,7 +37,7 @@ class ProfilesCollection {
     this.collection.attachSchema(this.schema);
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
-    this.adminPublicationName = `${this.name}.publication.admin`;
+    this.publicPublicationName = `${this.name}.publication.public`;
   }
 }
 

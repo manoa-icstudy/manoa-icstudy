@@ -7,20 +7,28 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Sessions } from '../../api/session/Session';
+import { Points } from '../../api/points/Points';
+import { Profiles } from '../../api/profile/Profile';
+import { Notes } from '../../api/note/Notes';
 import StudySessionModal from '../components/StudySessionModal';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Points } from '../../api/points/Points';
 
 const Calendar = () => {
-  const { ready, sessions, points } = useTracker(() => {
+  const { ready, sessions, points, profiles, notes } = useTracker(() => {
     const subscription1 = Meteor.subscribe(Sessions.publicPublicationName);
     const subscription2 = Meteor.subscribe(Points.publicPublicationName);
-    const rdy = subscription1.ready() && subscription2.ready();
+    const subscription3 = Meteor.subscribe(Profiles.publicPublicationName);
+    const subscription4 = Meteor.subscribe(Notes.userPublicationName);
+    const rdy = subscription1.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
     const sessionsItems = Sessions.collection.find({}).fetch();
     const pointsItems = Points.collection;
+    const profilesItems = Profiles.collection.find({}).fetch();
+    const noteItems = Notes.collection.find({}).fetch();
     return {
       sessions: sessionsItems,
       points: pointsItems,
+      profiles: profilesItems,
+      notes: noteItems,
       ready: rdy,
     };
   }, []);
@@ -41,7 +49,16 @@ const Calendar = () => {
 
   return (ready ? (
     <Container id="calendar-page" className="my-4 py-3" style={{ backgroundColor: 'white' }}>
-      { modal.show && <StudySessionModal session={modal.session} points={points} show={modal.show} handleClose={handleClose} /> }
+      { modal.show && (
+        <StudySessionModal
+          session={modal.session}
+          points={points}
+          profiles={profiles}
+          notes={notes.filter(note => (note.sessionId === modal.session._id))}
+          show={modal.show}
+          handleClose={handleClose}
+        />
+      )}
       <Fullcalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"

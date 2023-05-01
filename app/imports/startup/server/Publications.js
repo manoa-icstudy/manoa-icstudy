@@ -9,8 +9,8 @@ import { LoginLog } from '../../api/log/LoginLog';
 import { Points } from '../../api/points/Points';
 import { Notes } from '../../api/note/Notes';
 
-// User-level publication.
-// If logged in, then publish documents owned by this user. Otherwise publish nothing.
+// Public-level publication.
+// Publish all documents publicly
 Meteor.publish(Sessions.publicPublicationName, function () {
   return Sessions.collection.find();
 });
@@ -25,6 +25,12 @@ Meteor.publish(Points.publicPublicationName, function () {
   return Points.collection.find();
 });
 
+Meteor.publish(Profiles.publicPublicationName, function () {
+  return Profiles.collection.find();
+});
+
+// User-level publication
+// If logged in, then publish documents owned by this user. Otherwise publish nothing.
 Meteor.publish(Sessions.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
@@ -53,13 +59,6 @@ Meteor.publish(Notes.userPublicationName, function () {
 Meteor.publish(Sessions.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Sessions.collection.find();
-  }
-  return this.ready();
-});
-
-Meteor.publish(Profiles.adminPublicationName, function () {
-  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Profiles.collection.find();
   }
   return this.ready();
 });
