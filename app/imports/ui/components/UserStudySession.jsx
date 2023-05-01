@@ -4,15 +4,15 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Button, Card, Col, ListGroup, Modal, Row, Tabs, Tab } from 'react-bootstrap';
 import { Calendar2, Trash, PeopleFill, GeoAltFill } from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
 import { Sessions } from '../../api/session/Session';
 import Note from './Note';
 import AddNote from '../pages/AddNote';
 import { Notes } from '../../api/note/Notes';
+import ParticipantProfile from './ParticipantProfile';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 // eslint-disable-next-line react/prop-types
-const UserStudySession = ({ session, collection, joinText, notes, point }) => {
+const UserStudySession = ({ session, collection, joinText, notes, point, profiles }) => {
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
@@ -64,6 +64,12 @@ const UserStudySession = ({ session, collection, joinText, notes, point }) => {
     }
   };
 
+  const participantIsMentor = (participant) => {
+    // eslint-disable-next-line react/prop-types
+    const participantProfile = profiles.find(profile => profile.owner === participant);
+    return participantProfile.mentorCourses.includes(session.icsclass);
+  };
+
   const options = {
     hour: 'numeric',
     minute: 'numeric',
@@ -101,6 +107,7 @@ const UserStudySession = ({ session, collection, joinText, notes, point }) => {
         <Row>
           <Col>
             <Button id={session._id} variant="outline-success" onClick={() => join(session, point)}>{joinText}</Button>
+            { currentUser === session.owner && <Button href={`/edit-study-session/${session._id}`} className="ms-2" variant="outline-success" id="edit-study-session">Edit</Button> }
           </Col>
           <Col className="text-end">
             <Button id="right-panel-link" onClick={handleShow}>Learn More</Button>
@@ -111,20 +118,42 @@ const UserStudySession = ({ session, collection, joinText, notes, point }) => {
               <Modal.Body>
                 <Tabs>
                   <Tab eventKey="description" title="Description">
+                    <br />
                     {session.description}
                   </Tab>
 
-                  <Tab eventKey="participant" title="Participant">
-                    {/* eslint-disable-next-line react/prop-types */}
-                    <Modal.Body>{session.participant.map(user => <Col key={user}>-&nbsp;&nbsp; {user}</Col>)}</Modal.Body>
+                  <Tab eventKey="participants" title="Participants">
+                    <br />
+                    <Row>
+                      <Col>
+                        <b>Mentors</b>
+                        <ul>
+                          {session.participant.filter(participant => participantIsMentor(participant, profiles)).map(participant => (
+                            <li key={participant}>
+                              <ParticipantProfile profiles={profiles} participant={participant} />
+                            </li>
+                          ))}
+                        </ul>
+                      </Col>
+                      <Col>
+                        <b>Students</b>
+                        <ul>
+                          {session.participant.filter(participant => !participantIsMentor(participant, profiles)).map(participant => (
+                            <li key={participant}>
+                              <ParticipantProfile profiles={profiles} participant={participant} />
+                            </li>
+                          ))}
+                        </ul>
+                      </Col>
+                    </Row>
                   </Tab>
 
                   <Tab eventKey="chat" title="Chat">
+                    <br />
                     <ListGroup>
                       {notes.map((note) => <Note key={note._id} note={note} collection={Notes.collection} />)}
                     </ListGroup>
                     <AddNote owner={currentUser} sessionId={session._id} />
-                    <Link to={`/edit/${session._id}`}>Edit</Link>
                   </Tab>
                 </Tabs>
               </Modal.Body>
@@ -146,10 +175,12 @@ UserStudySession.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
     location: PropTypes.string,
+    owner: String,
     date: PropTypes.instanceOf(Date),
     icsclass: PropTypes.string,
     description: PropTypes.string,
     _id: PropTypes.string,
+    participant: PropTypes.arrayOf(String),
   }).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   collection: PropTypes.object.isRequired,

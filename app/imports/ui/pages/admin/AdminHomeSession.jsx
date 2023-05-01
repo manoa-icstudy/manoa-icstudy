@@ -31,6 +31,7 @@ const AdminHomeSession = () => {
     return {
       sessions: stuffItems,
       notes: noteItems,
+      profiles: profileItems,
       num: numSession,
       ready: rdy,
     };

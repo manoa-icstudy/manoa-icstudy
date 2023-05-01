@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Button, Col, ListGroup } from 'react-bootstrap';
@@ -7,6 +8,10 @@ import { Trash } from 'react-bootstrap-icons';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const Note = ({ note, collection }) => {
+  const { currentUser } = useTracker(() => ({
+    currentUser: Meteor.user() ? Meteor.user().username : '',
+  }), []);
+
   const removeItem = (docID) => {
     collection.remove(docID);
   };
@@ -27,6 +32,9 @@ const Note = ({ note, collection }) => {
       <p>- {note.chat}
         <Col className="text-end">
           {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+            <Button variant="danger" onClick={() => removeItem(note._id)}><Trash /></Button>
+          ) : ''}
+          {currentUser === note.owner && !Roles.userIsInRole(Meteor.userId(), 'admin') ? (
             <Button variant="danger" onClick={() => removeItem(note._id)}><Trash /></Button>
           ) : ''}
         </Col>
