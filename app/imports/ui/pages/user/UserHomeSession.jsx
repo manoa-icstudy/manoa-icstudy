@@ -18,7 +18,7 @@ const UserHomeSession = () => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get  access to Stuff documents.
-    const subscription1 = Meteor.subscribe(Sessions.publicPublicationName);
+    const subscription1 = Meteor.subscribe(Sessions.userPublicationName);
     const subscription2 = Meteor.subscribe(Points.publicPublicationName);
     const subscription3 = Meteor.subscribe(Notes.userPublicationName);
     const subscription4 = Meteor.subscribe(Profiles.publicPublicationName);
