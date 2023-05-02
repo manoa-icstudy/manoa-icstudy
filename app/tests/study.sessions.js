@@ -38,6 +38,15 @@ class StudySessions {
     await testController.click('#goto-user-home-session');
   }
 
+  async editStudySessionPage(testController) {
+    await this.isDisplayed(testController);
+    await testController.click('#edit-study-session');
+    await testController.typeText('#edit-study-session-name', 'john', { replace: true });
+    await testController.typeText('#edit-study-session-description', 'test', { replace: true });
+    await testController.click('#edit-study-session-submit input.btn.btn-primary');
+    await testController.click(Selector('button').withText('OK'));
+  }
+
   async UserHomeJoin(testController) {
     await testController.click('#goto-user-home-join');
   }
