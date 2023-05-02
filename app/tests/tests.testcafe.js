@@ -90,7 +90,7 @@ test('Test that create report works', async (testController) => {
   await studySessions.createReportPage(testController);
 });
 
-test.only('Test that edit report works', async (testController) => {
+test('Test that edit report works', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.gotoStudySessionPage(testController);
