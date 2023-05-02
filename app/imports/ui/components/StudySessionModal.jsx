@@ -72,7 +72,7 @@ const StudySessionModal = ({ session, points, profiles, notes, show, handleClose
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-    timeZone: 'Pacific/Honolulu',
+    timeZone: 'UTC',
   };
 
   return (

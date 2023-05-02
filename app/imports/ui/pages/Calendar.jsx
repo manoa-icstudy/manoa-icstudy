@@ -72,6 +72,7 @@ const Calendar = () => {
         eventClick={(info) => {
           displayStudySessionModal(info.event.groupId);
         }}
+        timeZone="UTC"
       />
     </Container>
   ) : <LoadingSpinner />);

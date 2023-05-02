@@ -8,6 +8,11 @@ import SimpleSchema from 'simpl-schema';
 import { Sessions } from '../../api/session/Session';
 import { icsCourses } from '../../api/course/courses';
 
+const getLocalTime = () => {
+  const d = new Date();
+  return new Date(d.setHours(d.getHours() - 10));
+};
+
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   name: { type: String, label: 'Study Session Name' },
@@ -15,7 +20,7 @@ const formSchema = new SimpleSchema({
   date: {
     type: Date,
     label: 'Date and Time',
-    defaultValue: new Date(),
+    defaultValue: getLocalTime(),
   },
   icsclass: {
     type: String,
