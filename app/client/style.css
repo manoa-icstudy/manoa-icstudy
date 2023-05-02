@@ -70,3 +70,26 @@ body {
 .footerLine {
   border-bottom: solid gray;
 }
+
+table {
+  border-collapse: collapse;
+  overflow-x: scroll;
+}
+
+thead {
+  display: block;
+}
+tbody {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: block;
+  height: 75vh;
+}
+td, th {
+  min-width: 269px;
+  height: 25px;
+  border: dashed 1px lightblue;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  max-width: 269px;
+}

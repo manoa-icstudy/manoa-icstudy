@@ -30,19 +30,21 @@ const FeedBacksList = () => {
           <Col className="text-center">
             <h2>Feedback List</h2>
           </Col>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Experience</th>
-                <th>Description</th>
-                <th>Overall Thoughts</th>
-              </tr>
-            </thead>
-            <tbody>
-              {feedbacks.map((feedback) => <FeedBacks key={feedback._id} feedback={feedback} />)}
-            </tbody>
-          </Table>
+          <Container>
+            <Table striped bordered hover className="table-responsive">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Experience</th>
+                  <th>Description</th>
+                  <th>Overall Thoughts</th>
+                </tr>
+              </thead>
+              <tbody>
+                {feedbacks.map((feedback) => <FeedBacks key={feedback._id} feedback={feedback} />)}
+              </tbody>
+            </Table>
+          </Container>
         </Col>
       </Row>
     </Container>
