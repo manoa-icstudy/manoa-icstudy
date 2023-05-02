@@ -67,8 +67,10 @@ const StudySession = ({ session, collection, joinText, notes, point, profiles })
   };
 
   const participantIsMentor = (participant) => {
-    // eslint-disable-next-line react/prop-types
     const participantProfile = profiles.find(profile => profile.owner === participant);
+    if (!Object.hasOwn(participantProfile, 'mentorCourses')) {
+      return false;
+    }
     return participantProfile.mentorCourses.includes(session.icsclass);
   };
 
@@ -190,6 +192,15 @@ StudySession.propTypes = {
   collection: PropTypes.object.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   point: PropTypes.object.isRequired,
+  profiles: PropTypes.arrayOf(PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    owner: PropTypes.string,
+    email: PropTypes.string,
+    picture: PropTypes.string,
+    currentCourses: PropTypes.arrayOf(String),
+    mentorCourses: PropTypes.arrayOf(String),
+  })).isRequired,
   notes: PropTypes.arrayOf(PropTypes.shape({
     chat: PropTypes.string,
     sessionId: PropTypes.string,

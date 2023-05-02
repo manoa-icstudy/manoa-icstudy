@@ -58,8 +58,10 @@ const StudySessionModal = ({ session, points, profiles, notes, show, handleClose
   };
 
   const participantIsMentor = (participant) => {
-    // eslint-disable-next-line react/prop-types
     const participantProfile = profiles.find(profile => profile.owner === participant);
+    if (!Object.hasOwn(participantProfile, 'mentorCourses')) {
+      return false;
+    }
     return participantProfile.mentorCourses.includes(session.icsclass);
   };
 
@@ -150,7 +152,7 @@ StudySessionModal.propTypes = {
     owner: PropTypes.string,
     pointCount: PropTypes.number,
   }).isRequired,
-  profiles: PropTypes.shape({
+  profiles: PropTypes.arrayOf(PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     owner: PropTypes.string,
@@ -158,7 +160,7 @@ StudySessionModal.propTypes = {
     picture: PropTypes.string,
     currentCourses: PropTypes.arrayOf(String),
     mentorCourses: PropTypes.arrayOf(String),
-  }).isRequired,
+  })).isRequired,
   notes: PropTypes.arrayOf(PropTypes.shape({
     chat: PropTypes.string,
     sessionId: PropTypes.string,

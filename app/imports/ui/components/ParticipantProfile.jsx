@@ -21,7 +21,7 @@ const ParticipantProfile = ({ profiles, participant }) => {
 };
 
 ParticipantProfile.propTypes = {
-  profiles: PropTypes.shape({
+  profiles: PropTypes.arrayOf(PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     owner: PropTypes.string,
@@ -29,7 +29,7 @@ ParticipantProfile.propTypes = {
     picture: PropTypes.string,
     currentCourses: PropTypes.arrayOf(String),
     mentorCourses: PropTypes.arrayOf(String),
-  }).isRequired,
+  })).isRequired,
   participant: PropTypes.string.isRequired,
 };
 

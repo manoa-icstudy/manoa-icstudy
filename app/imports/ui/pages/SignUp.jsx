@@ -96,7 +96,12 @@ const SignUp = ({ location }) => {
                     <TextField name="password" placeholder="Password" type="password" />
                   </Col>
                 </Row>
-                <TextField name="picture" placeholder="URL to profile picture" />
+                <TextField
+                  name="picture"
+                  placeholder="URL to profile picture"
+                  help="Paste a link to an image (optional)"
+                  showInlineError
+                />
                 <Row>
                   <Col>
                     <SelectField

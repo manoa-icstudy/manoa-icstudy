@@ -57,7 +57,7 @@ const CreateStudySession = () => {
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Create Study Session</h2></Col>
-          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)} >
             <Card>
               <Card.Body>
                 <Row><TextField name="name" id="create-study-session-name" /></Row>
