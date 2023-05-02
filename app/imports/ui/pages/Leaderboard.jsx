@@ -24,8 +24,9 @@ const Leaderboard = () => {
     const rdy = nameSubscription.ready();
     // Get the Stuff documents
     const name = Points.collection.find({}).fetch();
-    const userData = Points.collection.findOne({ owner: currentUser });
+    const userData = Points.collection.find({ owner: currentUser });
     const currPoints = userData.pointCount;
+    console.log(currPoints);
     return {
       user: name,
       currUser: currPoints,
