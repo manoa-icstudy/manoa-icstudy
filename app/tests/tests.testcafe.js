@@ -6,6 +6,7 @@ import { navBar } from './navbar.component';
 import { studySessions } from './study.sessions';
 import { createStudySessions } from './create.study.sessions';
 import { createFeedbackPage } from './create.feedback.page';
+import { leaderboardPage } from './leaderboard.page';
 
 /* global fixture:false, test:false */
 
@@ -42,6 +43,14 @@ test('Test that signin and signout work', async (testController) => {
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.logout(testController);
   await landingPage.isDisplayed(testController);
+});
+
+test('Test that leaderboard works', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
+  await navBar.gotoLeaderboardPage(testController);
+  await leaderboardPage.isDisplayed(testController);
+  await leaderboardPage.tryRewards(testController);
 });
 
 test('Test the Create Study Session and Study Sessions page', async (testController) => {
@@ -97,13 +106,6 @@ test('Test that edit report works', async (testController) => {
   await studySessions.editReportPage(testController);
 });
 
-test('Test that edit study session works', async (testController) => {
-  await navBar.gotoSignInPage(testController);
-  await signinPage.signin(testController, credentials.username, credentials.password);
-  await navBar.gotoStudySessionPage(testController);
-  await studySessions.editStudySessionPage(testController);
-});
-
 test('Test the Admin Create Study Session and Study Sessions page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, adminCredentials.username, adminCredentials.password);
@@ -128,6 +130,13 @@ test('Test the Admin Create Study Session and Study Sessions page', async (testC
 
   await studySessions.UserHomeCreate(testController);
   await createStudySessions.isDisplayed(testController);
+});
+
+test('Test that edit study session works', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoStudySessionPage(testController);
+  await studySessions.editStudySessionPage(testController);
 });
 
 test('Test that user home page works', async (testController) => {

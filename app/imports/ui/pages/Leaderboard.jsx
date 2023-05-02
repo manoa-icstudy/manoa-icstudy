@@ -104,12 +104,12 @@ const Leaderboard = () => {
   };
 
   return (ready ? (
-    <Container className="py-3">
+    <Container className="py-3" id="leaderboard-page">
       <Row className="justify-content-center">
         <Col>
           <Col className="text-center">
             <h2>Leaderboard</h2>
-            <h4>Your points: {displayedPoints} <Button variant="info" onClick={() => redeem()}><Archive /></Button></h4>
+            <h4>Your points: {displayedPoints} <Button id="leaderboard-button" variant="info" onClick={() => redeem()}><Archive /></Button></h4>
           </Col>
           <Table striped bordered hover>
             <thead>

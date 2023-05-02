@@ -70,6 +70,10 @@ class NavBar {
     await testController.click('#study-session-list-nav');
   }
 
+  async gotoLeaderboardPage(testController) {
+    await testController.click('#leaderboard-nav');
+  }
+
   async gotoStudySessionPage(testController) {
     await testController.click('#study-session-list-nav');
   }
