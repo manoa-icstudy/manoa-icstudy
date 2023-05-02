@@ -10,7 +10,7 @@
   ],
 
   "defaultSession": [
-    { "name": "John", "location": "Hamilton Library", "date": "2023-04-18T04:29:28.835Z", "owner": "john@foo.com", "icsclass":  "ICS 311", "description": "Homework 12", "createDate": "2023-04-18T04:29:28.835Z", "participant": ["john@foo.com"] }
+    { "name": "Final Exam Review", "location": "Hamilton Library", "date": "2023-05-11T04:29:28.835Z", "owner": "admin@foo.com", "icsclass":  "ICS 314", "description": "I need help with my professional portfolio for the final exam.", "createDate": "2023-04-18T04:29:28.835Z", "participant": ["admin@foo.com"] }
   ],
 
   "defaultReport": [

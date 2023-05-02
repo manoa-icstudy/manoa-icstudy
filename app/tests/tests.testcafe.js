@@ -20,12 +20,20 @@ test('Test that landing page shows up', async (testController) => {
   await landingPage.isDisplayed(testController);
 });
 
-test('Test that calendar page shows up', async (testController) => {
+test.only('Test the functionality of events in the calendar page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.isLoggedIn(testController, credentials.username);
   await navBar.gotoCalendarPage(testController);
   await calendarPage.isDisplayed(testController);
+  await calendarPage.gotoMonthYearBackwards(testController, 'May 2023');
+  await calendarPage.openEvent(testController);
+  await calendarPage.joinStudySession(testController);
+  await calendarPage.viewParticipants(testController);
+  await calendarPage.hasParticipant(testController, 'John Doe');
+  await calendarPage.leaveStudySession(testController);
+  await calendarPage.chat(testController);
+  await calendarPage.closeEvent(testController);
 });
 
 test('Test that signin and signout work', async (testController) => {
