@@ -20,7 +20,7 @@ test('Test that landing page shows up', async (testController) => {
   await landingPage.isDisplayed(testController);
 });
 
-test.only('Test the functionality of events in the calendar page', async (testController) => {
+test('Test the functionality of events in the calendar page', async (testController) => {
   await navBar.gotoSignInPage(testController);
   await signinPage.signin(testController, credentials.username, credentials.password);
   await navBar.isLoggedIn(testController, credentials.username);
