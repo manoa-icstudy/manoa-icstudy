@@ -15,7 +15,7 @@ const Leaderboard = () => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, user, displayedPoints } = useTracker(() => {
+  const { ready, points } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
@@ -23,15 +23,9 @@ const Leaderboard = () => {
     // Determine if the subscription is ready
     const rdy = nameSubscription.ready();
     // Get the Stuff documents
-    const name = Points.collection.find({}).fetch();
-    const userData = Points.collection.find({ owner: currentUser });
-    const currPoints = userData.pointCount;
-    const givenPoints = Points.collection.findOne({ owner: currentUser }).pointCount;
-    console.log(currPoints);
+    const pointsItems = Points.collection.find({}).fetch();
     return {
-      user: name,
-      currUser: currPoints,
-      displayedPoints: givenPoints,
+      points: pointsItems,
       ready: rdy,
     };
   }, []);
@@ -109,7 +103,7 @@ const Leaderboard = () => {
         <Col>
           <Col className="text-center">
             <h2>Leaderboard</h2>
-            <h4>Your points: {displayedPoints} <Button id="leaderboard-button" variant="info" onClick={() => redeem()}><Archive /></Button></h4>
+            <h4>Your points: {points.find(point => point.owner === currentUser).pointCount} <Button id="leaderboard-button" variant="info" onClick={() => redeem()}><Archive /></Button></h4>
           </Col>
           <Table striped bordered hover>
             <thead>
@@ -122,7 +116,7 @@ const Leaderboard = () => {
               </tr>
             </thead>
             <tbody>
-              {user.map((point) => <PointsStuff key={point._id} points={point} point={Points.collection} />)}
+              {points.map((point) => <PointsStuff key={point._id} points={point} point={Points.collection} />)}
             </tbody>
           </Table>
         </Col>

@@ -207,8 +207,8 @@ const Landing = () => (
 
         <Row className="justify-content-center p-3 reveal fade-right">
           <Col md={1}>
-            <h1>Post</h1>
-            <p>Post or join a session</p>
+            <h1>Study Sessions</h1>
+            <p>Create or join a session</p>
             <Button href="/create-study-session" variant="dark">Create Now</Button>
           </Col>
           <Col md={8}>

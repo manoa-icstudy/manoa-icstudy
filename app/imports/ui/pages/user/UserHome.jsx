@@ -40,7 +40,7 @@ const UserHome = () => {
 
   return (ready ? (
     <Container fluid id="user-home-page">
-      <Row width="100%" className="py-2 m-0" style={{ backgroundColor: 'gray' }}>
+      <Row width="100%" className="py-2" style={{ backgroundColor: 'gray' }}>
         <Col className="m-3">
           <Container>
             <h1><PersonFill /> Manage Account</h1>
