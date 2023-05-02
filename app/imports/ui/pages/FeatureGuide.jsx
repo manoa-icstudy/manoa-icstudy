@@ -12,6 +12,10 @@ const Calendar = () => (
     <Image src="https://manoa-icstudy.github.io/images/CreateStudySessions.png" width="1000" />
     <p>This is where you can view all study sessions:</p>
     <Image src="https://manoa-icstudy.github.io/images/StudySessions.png" width="1000" />
+    <p>You will get a point if you choose to join a session:</p>
+    <Image src="https://manoa-icstudy.github.io/images/Leaderboard.png" width="1000" />
+    <p>And can redeem it for something at the UHM Bookstore:</p>
+    <Image src="https://manoa-icstudy.github.io/images/Redeem.png" width="1000" />
     <p>Check out and edit you user profile:</p>
     <Image src="https://manoa-icstudy.github.io/images/UserProfile.png" width="1000" />
     <p>Take a look here at the calendar:</p>
