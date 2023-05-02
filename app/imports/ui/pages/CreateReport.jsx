@@ -68,7 +68,7 @@ const CreateReport = () => {
           </AutoForm>
           {emailState ? (
             <Alert className="py-2">
-              <a href={`/edit-report/${emailState}`}>Edit this report</a>
+              <a href={`/edit-report/${emailState}`} id="edit-report-link">Edit this report</a>
             </Alert>
           ) : ''}
         </Col>
