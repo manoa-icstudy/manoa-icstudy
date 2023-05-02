@@ -71,16 +71,16 @@ const AdminHomeFeedback = () => {
                     <h2>Feedback List</h2>
                     <h5>Status: {num} feedbacks available</h5>
                   </Col>
-                  <Table striped bordered style={{ tableLayout: 'fixed', backgroundColor: 'white', width: '100%', overflowWrap: 'break-word' }}>
-                    <thead>
+                  <Table striped bordered style={{ backgroundColor: 'white', overflowWrap: 'break-word' }}>
+                    <thead style={{ display: 'block' }}>
                       <tr>
-                        <th>Name</th>
-                        <th>Experience</th>
-                        <th>Description</th>
-                        <th>Overall Thoughts</th>
+                        <th style={{ minWidth: '269px', height: '25px', border: 'dashed 1px lightblue', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '269px' }}>Name</th>
+                        <th style={{ minWidth: '269px', height: '25px', border: 'dashed 1px lightblue', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '269px' }}>Experience</th>
+                        <th style={{ minWidth: '269px', height: '25px', border: 'dashed 1px lightblue', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '269px' }}>Description</th>
+                        <th style={{ minWidth: '269px', height: '25px', border: 'dashed 1px lightblue', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '269px' }}>Overall Thoughts</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{ display: 'block', overflowX: 'hidden', overflowY: 'scroll', height: '75vh' }}>
                       {feedbacks.map((feedback) => <FeedBacks key={feedback._id} feedback={feedback} />)}
                     </tbody>
                   </Table>

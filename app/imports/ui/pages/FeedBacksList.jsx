@@ -31,16 +31,16 @@ const FeedBacksList = () => {
             <h2>Feedback List</h2>
           </Col>
           <Container>
-            <Table striped bordered hover className="table-responsive">
-              <thead>
+            <Table striped bordered hover style={{ borderCollapse: 'collapse', overflowX: 'scroll' }}>
+              <thead style={{ display: 'block' }}>
                 <tr>
-                  <th>Name</th>
-                  <th>Experience</th>
-                  <th>Description</th>
-                  <th>Overall Thoughts</th>
+                  <th style={{ minWidth: '269px', height: '25px', border: 'dashed 1px lightblue', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '269px' }}>Name</th>
+                  <th style={{ minWidth: '269px', height: '25px', border: 'dashed 1px lightblue', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '269px' }}>Experience</th>
+                  <th style={{ minWidth: '269px', height: '25px', border: 'dashed 1px lightblue', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '269px' }}>Description</th>
+                  <th style={{ minWidth: '269px', height: '25px', border: 'dashed 1px lightblue', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '269px' }}>Overall Thoughts</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody style={{ display: 'block', overflowX: 'hidden', overflowY: 'scroll', height: '75vh' }}>
                 {feedbacks.map((feedback) => <FeedBacks key={feedback._id} feedback={feedback} />)}
               </tbody>
             </Table>
