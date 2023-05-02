@@ -225,7 +225,7 @@ const Landing = () => (
           <Col md={1}>
             <h1>Rewards</h1>
             <p>Get rewarded for helping</p>
-            <Button variant="dark">Leaderboard</Button>
+            <Button href="/leaderboard" variant="dark">Leaderboard</Button>
           </Col>
         </Row>
 

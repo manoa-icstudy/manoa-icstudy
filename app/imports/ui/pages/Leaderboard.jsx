@@ -15,7 +15,7 @@ const Leaderboard = () => {
     currentUser: Meteor.user() ? Meteor.user().username : '',
   }), []);
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { ready, user, currUser } = useTracker(() => {
+  const { ready, user, displayedPoints } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
@@ -26,10 +26,12 @@ const Leaderboard = () => {
     const name = Points.collection.find({}).fetch();
     const userData = Points.collection.find({ owner: currentUser });
     const currPoints = userData.pointCount;
+    const givenPoints = Points.collection.findOne({ owner: currentUser }).pointCount;
     console.log(currPoints);
     return {
       user: name,
       currUser: currPoints,
+      displayedPoints: givenPoints,
       ready: rdy,
     };
   }, []);
@@ -107,7 +109,7 @@ const Leaderboard = () => {
         <Col>
           <Col className="text-center">
             <h2>Leaderboard</h2>
-            <h4>Your points: {currUser} <Button variant="info" onClick={() => redeem()}><Archive /></Button></h4>
+            <h4>Your points: {displayedPoints} <Button variant="info" onClick={() => redeem()}><Archive /></Button></h4>
           </Col>
           <Table striped bordered hover>
             <thead>

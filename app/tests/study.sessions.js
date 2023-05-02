@@ -34,6 +34,22 @@ class StudySessions {
     await testController.click(Selector('button').withText('OK'));
   }
 
+  async editReportPage(testController) {
+    await this.isDisplayed(testController);
+    await testController.click('#create-report');
+    await testController.typeText('#name-field', 'John');
+    await testController.typeText('#report-user-field', 'Joe');
+    await testController.typeText('#description-field', 'test');
+    await testController.click('#submit-field input.btn.btn-primary');
+    await testController.click(Selector('button').withText('OK'));
+    await testController.click(Selector('a').withText('Edit this report'));
+    await testController.typeText('#name-field', 'Alex', { replace: true });
+    await testController.typeText('#report-user-field', 'john', { replace: true });
+    await testController.typeText('#description-field', 'test 2', { replace: true });
+    await testController.click('#submit-field input.btn.btn-primary');
+    await testController.click(Selector('button').withText('OK'));
+  }
+
   async UserHomeSession(testController) {
     await testController.click('#goto-user-home-session');
   }
