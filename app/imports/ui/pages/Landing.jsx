@@ -233,7 +233,6 @@ const Landing = () => (
 
       <Col className="justify-content-center p-4 mb-5 mt-5 reveal fade-bottom " style={{ backgroundColor: 'white' }}>
         <h1>The ICStudy Team</h1>
-        <p>Description</p>
         <Row id="team-github">
           <Col>
             <Image src="https://github.com/alexander-hung.png" width={400} className="pt-3 pb-3" />
