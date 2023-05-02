@@ -39,7 +39,7 @@ const AdminHomeReport = () => {
           </Container>
         </Col>
       </Row>
-      <Container id="allUserHome" fluid className="vh-100">
+      <Container id="allUserHome" fluid className="h-100">
         <Row className="my-4 justify-content-start">
           <Col md="auto" className="position-fixed">
             <ListGroup>
